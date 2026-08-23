@@ -6,11 +6,7 @@
 
 ### **Introduction & Consent**
 
-**Interviewer:** So, good afternoon. My name is Inseo Park, majoring in Interaction Design. Before we begin our interview, can you introduce yourself? 
-
-**Interviewee:** I'm Kyle Shelman. 
-
-**Interviewer:** Okay, thank you. Would it be okay to record this interview for our research purposes? 
+**Interviewer:** Would it be okay to record this interview for our research purposes? 
 
 **Interviewee:** Yes. 
 
