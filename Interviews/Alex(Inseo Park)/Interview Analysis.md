@@ -1,11 +1,8 @@
 # Interview Analysis Report: UQ Campus Heritage & Student Belonging
 
-## 1. Participant Overview
-* **Participant:** Kyle Shelman (UQ Student)
-* **Interviewer:** Inseo Park (Master of Interaction Design)
 ---
 
-## 2. Qualitative Analysis by Domain
+## 1. Qualitative Analysis by Domain
 
 ### Q1: Physical Touchpoints & Awareness
 * **User Response:** Noticed natural and architectural spaces like the lab building’s skylight area with rocks and plants, but didn't recall specific historical markers or statues.
@@ -25,7 +22,7 @@
 
 ---
 
-## 3. Interaction Design Recommendations
+## 2. Interaction Design Recommendations
 1. **Phygital Story Triggers:** Place physical interaction points (buttons, NFC, or audio triggers) at key transit areas.
 2. **Audio-First Micro-Content:** Keep stories short (under 30 seconds) to accommodate busy student schedules.
 3. **Context-Aware Installations:** Integrate cultural narratives directly into well-frequented natural and lab spaces.
