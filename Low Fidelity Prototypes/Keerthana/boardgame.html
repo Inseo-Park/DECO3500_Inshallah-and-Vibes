@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UQ: The Board Game</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root{
+  --sandstone: #cdb185;
+  --sandstone-dark: #a8875c;
+  --sandstone-shadow: #7a5f3f;
+  --purple: #3f2361;
+  --purple-deep: #2b1743;
+  --jacaranda: #9c8bd4;
+  --jacaranda-soft: #d9d0f2;
+  --parchment: #f4ecd8;
+  --parchment-dark: #e7dabf;
+  --ink: #2a2115;
+  --brass: #a9793a;
+  --good: #3f6b4a;
+  --bad: #8a3a2e;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-data: 'Barlow Condensed', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:
+    radial-gradient(ellipse at top, #4a2d6e 0%, #241333 55%, #180d20 100%);
+  color:var(--ink);
+  font-family:var(--font-body);
+  min-height:100vh;
+  padding:18px;
+}
+
+.wrap{max-width:1180px;margin:0 auto;}
+
+/* ---------- Header ---------- */
+.masthead{
+  text-align:center;
+  color:var(--parchment);
+  padding:6px 0 20px;
+}
+.masthead-hero{
+  position:relative;
+  border-radius:10px;
+  overflow:hidden;
+  min-height:190px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:28px 20px;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(156,139,212,.30), transparent 55%),
+    radial-gradient(circle at 88% 78%, rgba(169,121,58,.22), transparent 50%),
+    linear-gradient(160deg, #4a2d6e 0%, #2b1743 60%, #180d20 100%);
+  box-shadow:0 14px 40px rgba(0,0,0,.5), inset 0 0 0 1px rgba(217,208,242,.18);
+}
+.masthead-hero::before{
+  content:"🏛️";
+  position:absolute;
+  font-size:170px;
+  line-height:1;
+  opacity:.09;
+  right:-16px;
+  bottom:-44px;
+  pointer-events:none;
+}
+.masthead-hero::after{
+  content:"🌸";
+  position:absolute;
+  font-size:90px;
+  line-height:1;
+  opacity:.12;
+  left:-6px;
+  top:-24px;
+  pointer-events:none;
+}
+.masthead-hero > *{position:relative;z-index:1;}
+.masthead .eyebrow{
+  font-family:var(--font-data);
+  letter-spacing:.35em;
+  font-size:11px;
+  text-transform:uppercase;
+  color:var(--jacaranda-soft);
+  opacity:.9;
+}
+.masthead h1{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(34px,5vw,54px);
+  margin:4px 0 2px;
+  letter-spacing:.02em;
+  text-shadow:0 2px 10px rgba(0,0,0,.6);
+}
+.masthead .tag{
+  font-style:italic;
+  font-family:var(--font-display);
+  font-size:18px;
+  color:var(--parchment-dark);
+  opacity:.95;
+  text-shadow:0 1px 6px rgba(0,0,0,.5);
+}
+/* ---------- Cards / panels ---------- */
+.panel{
+  background:var(--parchment);
+  border:1px solid var(--sandstone-dark);
+  border-radius:6px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  position:relative;
+}
+.panel::before{
+  content:"";
+  position:absolute; inset:6px;
+  border:1px solid rgba(122,95,63,.35);
+  border-radius:3px;
+  pointer-events:none;
+}
+
+/* ---------- Setup screen ---------- */
+#setup-screen .panel{padding:0 0 28px;overflow:hidden;}
+#setup-screen .panel-inner{padding:24px 26px 0;}
+.setup-hero{
+  height:110px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(160deg, var(--sandstone) 0%, var(--sandstone-dark) 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:52px;
+  gap:14px;
+}
+.setup-hero span{filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));}
+.setup-section{margin-bottom:22px;}
+.setup-section h2{
+  font-family:var(--font-display);
+  font-size:22px;
+  color:var(--purple-deep);
+  margin:0 0 10px;
+  border-bottom:2px solid var(--brass);
+  display:inline-block;
+  padding-bottom:2px;
+}
+.choice-row{display:flex;gap:10px;flex-wrap:wrap;}
+.pill-btn{
+  font-family:var(--font-data);
+  font-size:17px;
+  letter-spacing:.03em;
+  padding:9px 18px;
+  border-radius:20px;
+  border:2px solid var(--purple);
+  background:transparent;
+  color:var(--purple);
+  cursor:pointer;
+  transition:.15s;
+}
+.pill-btn.active, .pill-btn:hover{background:var(--purple);color:var(--parchment);}
+
+.player-rows{display:flex;flex-direction:column;gap:10px;margin-top:12px;}
+.player-row{display:flex;align-items:center;gap:10px;}
+.swatch{width:22px;height:22px;border-radius:50%;border:2px solid rgba(0,0,0,.35);flex:none;}
+.player-row input{
+  flex:1;font-family:var(--font-body);font-size:15px;
+  padding:8px 10px;border:1px solid var(--sandstone-dark);border-radius:4px;
+  background:#fffdf7;
+}
+
+.start-btn{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:22px;
+  padding:12px 34px;
+  border-radius:6px;
+  border:none;
+  background:linear-gradient(180deg,var(--purple),var(--purple-deep));
+  color:var(--parchment);
+  cursor:pointer;
+  box-shadow:0 4px 0 var(--purple-deep), 0 8px 16px rgba(0,0,0,.4);
+}
+.start-btn:hover{filter:brightness(1.08);}
+.start-btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--purple-deep);}
+.setup-foot{text-align:center;margin-top:6px;}
+.help{font-size:13px;color:#6b5a3f;font-style:italic;}
+
+/* ---------- Game screen layout ---------- */
+#game-screen{display:none;}
+.game-layout{display:flex;gap:18px;align-items:flex-start;}
+.board-col{flex:1 1 640px;min-width:0;}
+.side-col{flex:0 0 340px;display:flex;flex-direction:column;gap:14px;}
+
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--purple-deep);color:var(--parchment);
+  padding:10px 16px;border-radius:6px;margin-bottom:14px;
+  font-family:var(--font-data);letter-spacing:.02em;
+  flex-wrap:wrap;gap:8px;
+}
+.topbar .round-tag{font-size:15px;text-transform:uppercase;letter-spacing:.15em;opacity:.85;}
+.topbar .turn-banner{font-family:var(--font-display);font-size:22px;font-weight:700;}
+.topbar .turn-banner .dotc{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:middle;}
+.end-link{background:none;border:1px solid rgba(244,236,216,.5);color:var(--parchment);font-family:var(--font-data);
+  padding:6px 12px;border-radius:16px;cursor:pointer;font-size:13px;letter-spacing:.05em;}
+.end-link:hover{background:rgba(244,236,216,.15);}
+
+/* ---------- Board ---------- */
+.board-outer{
+  background:var(--sandstone-shadow);
+  padding:14px;border-radius:8px;
+  box-shadow:0 14px 40px rgba(0,0,0,.45);
+}
+.board{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  grid-template-rows:repeat(6,1fr);
+  gap:4px;
+  aspect-ratio:1/1;
+  background:var(--sandstone-dark);
+  border-radius:4px;
+  padding:4px;
+}
+.tile{
+  position:relative;
+  background:var(--sandstone);
+  border-radius:3px;
+  padding:5px 4px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  font-family:var(--font-data);
+  border:1px solid rgba(0,0,0,.15);
+}
+.tile .t-name{
+  font-size:11.5px;line-height:1.05;font-weight:600;color:var(--ink);
+  letter-spacing:.01em;
+}
+.tile .t-sub{font-size:9px;color:var(--sandstone-shadow);text-transform:uppercase;letter-spacing:.08em;margin-top:auto;}
+.tile.landmark{
+  background:linear-gradient(160deg,#e9d6ae 0%,#dcc49a 100%);
+}
+.tile.landmark .t-icon{font-size:19px;line-height:1;margin-bottom:2px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2));}
+.tile.event{background:linear-gradient(160deg,#e6ddf7 0%,var(--jacaranda-soft) 100%);}
+.tile.decision{background:linear-gradient(160deg,#f0e0ba 0%,#e7d3ae 100%);}
+.tile.corner{
+  background:linear-gradient(160deg,var(--purple) 0%,var(--purple-deep) 100%);
+  color:var(--parchment);
+  align-items:center;justify-content:center;text-align:center;
+}
+.tile.corner .t-name{color:var(--parchment);font-size:12px;}
+.tile.corner .t-icon{font-size:22px;line-height:1;margin-bottom:2px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.5));}
+.tile .price{font-family:var(--font-data);font-size:10px;color:var(--sandstone-shadow);}
+.tile.landmark.owned-glow{box-shadow:inset 0 0 0 2px rgba(255,255,255,.6);}
+.tile .owner-flag{
+  position:absolute;top:3px;right:3px;width:9px;height:9px;border-radius:50%;
+  border:1px solid rgba(0,0,0,.4);
+}
+.tokens{position:absolute;bottom:3px;left:3px;display:flex;gap:2px;flex-wrap:wrap;max-width:90%;}
+.token{
+  width:13px;height:13px;border-radius:50%;
+  border:1.5px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.5);
+  transition:transform .2s;
+}
+.token.moving{transform:scale(1.35);}
+
+.courtyard{
+  grid-column:2/6; grid-row:2/6;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.08), transparent 60%),
+    linear-gradient(160deg, var(--purple) 0%, var(--purple-deep) 100%);
+  border-radius:4px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:var(--parchment);text-align:center;
+  padding:14px;
+  border:3px double var(--brass);
+}
+.courtyard::before{
+  content:"🏛️";
+  position:absolute;
+  font-size:150px;
+  line-height:1;
+  opacity:.07;
+  right:-10px; bottom:-40px;
+  pointer-events:none;
+}
+.courtyard > *{position:relative;z-index:1;}
+.courtyard .cy-title{
+  font-family:var(--font-display);font-weight:700;font-size:clamp(20px,3vw,30px);
+  letter-spacing:.03em;
+}
+.courtyard .cy-sub{font-family:var(--font-data);letter-spacing:.15em;font-size:12px;color:var(--jacaranda-soft);text-transform:uppercase;margin-top:2px;}
+.courtyard .cy-fact{
+  margin-top:16px;font-family:var(--font-display);font-style:italic;font-size:15px;
+  max-width:92%;color:var(--parchment-dark);line-height:1.35;
+  min-height:60px;display:flex;align-items:center;justify-content:center;
+}
+.courtyard .cy-fact.empty{opacity:.5;font-style:italic;}
+
+/* ---------- Sidebar ---------- */
+.players-panel, .action-panel, .log-panel{padding:14px 16px;}
+.players-panel h3, .action-panel h3, .log-panel h3{
+  font-family:var(--font-display);color:var(--purple-deep);font-size:19px;margin:2px 0 10px;
+}
+.player-card{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 8px;border-radius:5px;margin-bottom:6px;
+  background:rgba(255,255,255,.5);
+  border-left:5px solid transparent;
+}
+.player-card.current{background:rgba(255,255,255,.9);box-shadow:0 0 0 1px var(--brass) inset;}
+.player-card .dot{width:16px;height:16px;border-radius:50%;flex:none;border:2px solid rgba(0,0,0,.3);}
+.player-card .pc-name{font-weight:600;font-size:14px;flex:1;}
+.player-card .pc-stats{font-family:var(--font-data);font-size:13px;text-align:right;line-height:1.2;}
+.player-card .pc-stats .kp{color:var(--purple-deep);font-weight:700;}
+.player-card .pc-stats .money{color:var(--sandstone-shadow);}
+.player-card .pc-flag{font-size:10px;color:var(--bad);font-family:var(--font-data);text-transform:uppercase;}
+.player-card .pc-artefacts{font-size:13px;margin-top:2px;line-height:1;}
+.player-card .pc-artefacts span{margin-right:3px;cursor:default;}
+
+.dice-row{display:flex;align-items:center;gap:14px;justify-content:center;margin:10px 0 6px;}
+.die{
+  width:52px;height:52px;background:#fffdf7;border:2px solid var(--ink);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:30px;
+  box-shadow:0 3px 0 rgba(0,0,0,.3);
+}
+.roll-btn, .adv-btn{
+  width:100%;font-family:var(--font-display);font-weight:700;font-size:19px;
+  padding:11px;border-radius:6px;border:none;cursor:pointer;
+  background:linear-gradient(180deg,var(--brass),#8a5f28);color:#fff8ea;
+  box-shadow:0 4px 0 #6e4a1f;
+}
+.roll-btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;}
+.roll-btn:active:not(:disabled){transform:translateY(3px);box-shadow:none;}
+.adv-btn{background:linear-gradient(180deg,var(--good),#28472f);box-shadow:0 4px 0 #1c331f;margin-top:8px;display:none;}
+.adv-btn.show{display:block;}
+.trade-btn{
+  width:100%;margin-top:8px;font-family:var(--font-data);font-size:14px;letter-spacing:.03em;
+  padding:9px;border-radius:6px;border:1.5px solid var(--purple);background:transparent;
+  color:var(--purple);cursor:pointer;
+}
+.trade-btn:hover:not(:disabled){background:var(--jacaranda-soft);}
+.trade-btn:disabled{opacity:.35;cursor:not-allowed;}
+.trade-label{
+  display:block;font-family:var(--font-data);font-size:11px;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--sandstone-shadow);margin:9px 0 3px;
+}
+.trade-select{
+  width:100%;padding:8px 9px;border:1.5px solid var(--sandstone-dark);border-radius:5px;
+  font-family:var(--font-body);font-size:13.5px;background:#fffdf7;
+}
+
+.action-panel{display:none;}
+.action-panel.show{display:block;}
+.action-panel .desc{font-size:13.5px;line-height:1.4;margin-bottom:10px;}
+.action-panel .fact{font-style:italic;color:var(--purple-deep);font-family:var(--font-display);font-size:15px;margin-bottom:10px;}
+.action-panel h3 .panel-icon{font-size:22px;margin-right:6px;vertical-align:middle;}
+.action-panel .trivia-q{
+  font-family:var(--font-display);font-style:italic;font-size:15px;color:var(--purple-deep);
+  background:var(--jacaranda-soft);border-radius:5px;padding:8px 10px;margin-bottom:10px;
+}
+.opt-btn{
+  display:block;width:100%;text-align:left;
+  background:#fffdf7;border:1.5px solid var(--sandstone-dark);border-radius:5px;
+  padding:9px 12px;margin-bottom:8px;cursor:pointer;font-family:var(--font-body);font-size:13.5px;
+}
+.opt-btn:hover{border-color:var(--purple);background:var(--jacaranda-soft);}
+.opt-btn b{display:block;font-family:var(--font-data);font-size:14.5px;color:var(--purple-deep);}
+.opt-btn .delta{font-family:var(--font-data);font-size:12.5px;color:var(--sandstone-shadow);}
+
+.log-panel{flex:1;min-height:150px;max-height:260px;overflow-y:auto;}
+.log-item{font-size:12.5px;line-height:1.4;padding:6px 0;border-bottom:1px dashed rgba(0,0,0,.12);}
+.log-item .who{font-weight:700;color:var(--purple-deep);}
+.log-item .what{color:var(--ink);}
+
+/* ---------- End screen ---------- */
+#end-screen{display:none;text-align:center;color:var(--parchment);}
+#end-screen .panel{padding:0 0 30px;color:var(--ink);max-width:560px;margin:0 auto;overflow:hidden;}
+.end-hero{
+  height:120px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(160deg, var(--purple) 0%, var(--purple-deep) 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:46px;
+  gap:16px;
+  margin-bottom:-6px;
+}
+.end-hero span{filter:drop-shadow(0 2px 3px rgba(0,0,0,.35));}
+.medal{font-size:52px;}
+.end-title{font-family:var(--font-display);font-weight:700;font-size:30px;color:var(--purple-deep);margin:6px 0 2px;}
+.winner-name{font-family:var(--font-display);font-style:italic;font-size:24px;color:var(--brass);margin-bottom:14px;}
+.final-row{display:flex;justify-content:space-between;padding:8px 4px;border-bottom:1px solid var(--sandstone-dark);font-family:var(--font-data);font-size:16px;}
+.final-row .rank{color:var(--sandstone-shadow);width:26px;}
+.restart-btn{margin-top:18px;}
+
+@media(max-width:880px){
+  .game-layout{flex-direction:column;}
+  .side-col{flex:1 1 auto;width:100%;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="masthead-hero">
+      <div class="eyebrow">A Pass-and-Play Campus Strategy Game</div>
+      <h1>UQ: The Board Game</h1>
+      <div class="tag">Own the Court. Learn the Story.</div>
+    </div>
+  </div>
+
+  <!-- ================= SETUP ================= -->
+  <div id="setup-screen">
+    <div class="panel">
+      <div class="setup-hero"><span>🏛️</span><span>🎓</span><span>🌸</span></div>
+      <div class="panel-inner">
+      <div class="setup-section">
+        <h2>How many students are playing?</h2>
+        <div class="choice-row" id="count-choices"></div>
+      </div>
+      <div class="setup-section">
+        <h2>Name your students</h2>
+        <div class="player-rows" id="player-rows"></div>
+      </div>
+      <div class="setup-section">
+        <h2>Game length</h2>
+        <div class="choice-row" id="round-choices"></div>
+        <div class="help">One round = every student takes one turn. A facilitator can also end the game early at any time.</div>
+      </div>
+      <div class="setup-foot">
+        <button class="start-btn" id="start-btn">Begin Orientation</button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= GAME ================= -->
+  <div id="game-screen">
+    <div class="topbar">
+      <div class="round-tag">Round <span id="round-num">1</span> / <span id="round-total">8</span></div>
+      <div class="turn-banner"><span class="dotc" id="turn-dot"></span><span id="turn-name">—</span>'s turn</div>
+      <button class="end-link" id="end-early-btn">End Game Now</button>
+    </div>
+
+    <div class="game-layout">
+      <div class="board-col">
+        <div class="board-outer">
+          <div class="board" id="board"></div>
+        </div>
+      </div>
+
+      <div class="side-col">
+        <div class="panel players-panel">
+          <h3>Students</h3>
+          <div id="players-list"></div>
+        </div>
+
+        <div class="panel">
+          <div style="padding:14px 16px;">
+            <div class="dice-row">
+              <div class="die" id="die1">🎲</div>
+              <div class="die" id="die2">🎲</div>
+            </div>
+            <button class="roll-btn" id="roll-btn">Roll the Dice</button>
+            <button class="adv-btn" id="adv-btn">End Turn →</button>
+            <button class="trade-btn" id="trade-btn">🔁 Trade Artefacts</button>
+          </div>
+          <div class="action-panel" id="action-panel"></div>
+        </div>
+
+        <div class="panel log-panel" id="log-panel">
+          <h3>Campus Chronicle</h3>
+          <div id="log-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= END ================= -->
+  <div id="end-screen">
+    <div class="panel">
+      <div class="end-hero"><span>🎓</span><span>📜</span><span>🏅</span></div>
+      <div style="padding:0 30px;">
+        <div class="medal">🏅</div>
+        <div class="end-title">Vice-Chancellor's Medal</div>
+        <div class="winner-name" id="winner-name">—</div>
+        <div id="final-list"></div>
+        <button class="start-btn restart-btn" id="restart-btn">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   DATA
+   ============================================================ */
+const COLORS = ['#c0392b','#2471a3','#1e8449','#b7950b','#7d3c98','#d35400'];
+
+const LAYOUT = {
+  0:{col:1,row:1}, 1:{col:2,row:1}, 2:{col:3,row:1}, 3:{col:4,row:1}, 4:{col:5,row:1}, 5:{col:6,row:1},
+  6:{col:6,row:2}, 7:{col:6,row:3}, 8:{col:6,row:4}, 9:{col:6,row:5},
+  10:{col:6,row:6}, 11:{col:5,row:6}, 12:{col:4,row:6}, 13:{col:3,row:6}, 14:{col:2,row:6},
+  15:{col:1,row:6}, 16:{col:1,row:5}, 17:{col:1,row:4}, 18:{col:1,row:3}, 19:{col:1,row:2}
+};
+
+const TILES = [
+  {id:0,  type:'corner',   name:'Orientation Day', icon:'🧭'},
+  {id:1,  type:'landmark', name:'The Great Court', cost:60, kp:12, icon:'🏛️',
+    desc:"The sandstone quadrangle at the heart of St Lucia, designed by architect Jack Hennessy and built up across the mid-20th century."},
+  {id:2,  type:'event',    name:'1909 Act of Parliament'},
+  {id:3,  type:'landmark', name:'Forgan Smith Building', cost:70, kp:14, icon:'🏢',
+    desc:"UQ's first St Lucia building, completed in 1939 and named for Premier William Forgan Smith, who championed its construction."},
+  {id:4,  type:'decision', name:'Guest Lecture or Casual Job?'},
+  {id:5,  type:'corner',   name:'Jacaranda Bloom', icon:'🌸'},
+  {id:6,  type:'landmark', name:'Duhig Tower & Library', cost:90, kp:16, icon:'📚',
+    desc:"Named for Archbishop Sir James Duhig, a major early benefactor, the tower anchors UQ's central library precinct."},
+  {id:7,  type:'event',    name:'First Lecture, 1911'},
+  {id:8,  type:'landmark', name:'UQ Art Museum', cost:50, kp:10, icon:'🖼️',
+    desc:"A public gallery on campus holding one of Queensland's most significant university art collections."},
+  {id:9,  type:'decision', name:'Study Group or Part-Time Research?'},
+  {id:10, type:'corner',   name:'Exam Period', icon:'📝'},
+  {id:11, type:'landmark', name:'Schonell Theatre', cost:55, kp:10, icon:'🎭',
+    desc:"UQ's on-campus cinema and performance venue, a long-running fixture of student life at St Lucia."},
+  {id:12, type:'event',    name:'Wartime Headquarters'},
+  {id:13, type:'landmark', name:'St Lucia Boathouse', cost:65, kp:12, icon:'🚣',
+    desc:"Home to UQ's rowing tradition on the Brisbane River, which curls around three sides of the campus."},
+  {id:14, type:'decision', name:'O-Week Volunteering or Library Marathon?'},
+  {id:15, type:'corner',   name:'Graduation Day', icon:'📜'},
+  {id:16, type:'landmark', name:'UQ Centre', cost:85, kp:15, icon:'🎓',
+    desc:"The university's largest indoor venue, used for graduation ceremonies, exams and major events alike."},
+  {id:17, type:'event',    name:'UQ Union Founded'},
+  {id:18, type:'landmark', name:'Global Change Institute', cost:95, kp:17, icon:'🌿',
+    desc:"A research building recognised for sustainable design, reflecting UQ's push into climate and sustainability research."},
+  {id:19, type:'decision', name:'Exchange Semester or Local Internship?'}
+];
+
+/* Trivia questions, keyed by landmark tile id. Answer correctly on first
+   landing and the landmark is yours for free, plus you pocket an artefact. */
+const TRIVIA = {
+  1:  {q:"Which architect designed the Great Court's sandstone buildings?",
+       options:["Jack Hennessy","Walter Burley Griffin","Robin Dods"], correct:0},
+  3:  {q:"What year was the Forgan Smith Building completed?",
+       options:["1911","1939","1961"], correct:1},
+  6:  {q:"Duhig Tower is named after which early UQ benefactor?",
+       options:["Premier Forgan Smith","James Mayne","Archbishop Sir James Duhig"], correct:2},
+  8:  {q:"What was the UQ Art Museum's collection originally called?",
+       options:["The Darnell Collection","The Story Collection","The Union Collection"], correct:0},
+  11: {q:"In what decade was the Schonell Theatre built?",
+       options:["1930s","1970s","2000s"], correct:1},
+  13: {q:"What river borders three sides of the St Lucia campus?",
+       options:["The Brisbane River","Moreton Bay","The Mary River"], correct:0},
+  16: {q:"What is the UQ Centre mainly used for today?",
+       options:["Staff parking","Graduation ceremonies & major events","First-year lectures only"], correct:1},
+  18: {q:"The Global Change Institute is best known for its focus on…",
+       options:["Rowing","Sustainable design & climate research","Rare manuscripts"], correct:1}
+};
+
+/* Collectible artefacts awarded for a correct trivia answer — tradeable between players */
+const ARTEFACTS = {
+  1:  {name:"Sandstone Keystone", icon:"🧱"},
+  3:  {name:"Founder's Blueprint", icon:"📐"},
+  6:  {name:"Rare First Edition", icon:"📖"},
+  8:  {name:"Miniature Sketch", icon:"🎨"},
+  11: {name:"Vintage Film Reel", icon:"🎞️"},
+  13: {name:"Oar Pennant", icon:"🚩"},
+  16: {name:"Graduation Sash", icon:"🎗️"},
+  18: {name:"Solar Sample Tile", icon:"☀️"}
+};
+
+const EVENTS_POOL = [
+  {title:'1909 Act of Parliament', kp:6,
+   fact:"Queensland's Parliament passed the act creating the university in December 1909, making it the state's first university."},
+  {title:'First Lecture, 1911', kp:6,
+   fact:"Teaching finally began in 1911 at Old Government House on George Street, with just three faculties and 83 students."},
+  {title:'The Mayne Gift', kp:8,
+   fact:"Siblings James and Mary Mayne funded the purchase of the St Lucia land in the 1920s, letting the university escape its cramped city site."},
+  {title:'Foundation Stone', kp:7,
+   fact:"Premier Forgan Smith laid the foundation stone for the sandstone Great Court in 1937, with construction starting the year after."},
+  {title:'Wartime Headquarters', kp:8,
+   fact:"Before it ever held a lecture, the newly finished Forgan Smith Building served as an Allied military headquarters during WWII."},
+  {title:'UQ Union Founded', kp:6,
+   fact:"Student representation began early: the University of Queensland Union was founded in 1911, the same year classes started."},
+  {title:'Sandstone Sibling', kp:6,
+   fact:"UQ is counted among Australia's six historic 'sandstone universities', the country's oldest group of institutions."},
+  {title:'Jacaranda Folklore', kp:6,
+   fact:"Every October the jacarandas around campus bloom purple right as exams approach — student folklore says it's nature's final warning to start studying."}
+];
+
+const DECISIONS_POOL = [
+  {title:'Guest Lecture or Casual Job?',
+   a:{label:'Attend the guest lecture', kp:8, money:0},
+   b:{label:'Pick up a casual shift instead', kp:2, money:25}},
+  {title:'Study Group or Part-Time Research?',
+   a:{label:'Join a study group', kp:6, money:5},
+   b:{label:'Take a part-time research post', kp:10, money:-15}},
+  {title:'O-Week Volunteering or Library Marathon?',
+   a:{label:'Volunteer for O-Week', kp:4, money:20},
+   b:{label:'Pull a library marathon', kp:9, money:0}},
+  {title:'Exchange Semester or Local Internship?',
+   a:{label:'Go on exchange', kp:15, money:-40},
+   b:{label:'Take a local internship', kp:5, money:20}}
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let state = null; // set on Begin
+
+function shuffled(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+/* ============================================================
+   SETUP SCREEN
+   ============================================================ */
+let chosenCount = 4;
+let chosenRounds = 8;
+
+function buildSetup(){
+  const countWrap = document.getElementById('count-choices');
+  countWrap.innerHTML = '';
+  for(let n=2;n<=6;n++){
+    const b = document.createElement('button');
+    b.className = 'pill-btn' + (n===chosenCount ? ' active':'');
+    b.textContent = n + ' players';
+    b.onclick = () => { chosenCount = n; buildSetup(); };
+    countWrap.appendChild(b);
+  }
+
+  const roundWrap = document.getElementById('round-choices');
+  roundWrap.innerHTML = '';
+  [5,8,12].forEach(n=>{
+    const b = document.createElement('button');
+    b.className = 'pill-btn' + (n===chosenRounds ? ' active':'');
+    b.textContent = n + ' rounds';
+    b.onclick = () => { chosenRounds = n; buildSetup(); };
+    roundWrap.appendChild(b);
+  });
+
+  const rows = document.getElementById('player-rows');
+  const existingNames = Array.from(rows.querySelectorAll('input')).map(i=>i.value);
+  rows.innerHTML = '';
+  for(let i=0;i<chosenCount;i++){
+    const row = document.createElement('div');
+    row.className = 'player-row';
+    const sw = document.createElement('div');
+    sw.className = 'swatch';
+    sw.style.background = COLORS[i];
+    const input = document.createElement('input');
+    input.placeholder = 'Student ' + (i+1) + ' name';
+    input.value = existingNames[i] || '';
+    row.appendChild(sw);
+    row.appendChild(input);
+    rows.appendChild(row);
+  }
+}
+buildSetup();
+
+document.getElementById('start-btn').onclick = () => {
+  const inputs = Array.from(document.querySelectorAll('#player-rows input'));
+  const players = inputs.map((inp,i)=>({
+    name: inp.value.trim() || ('Student ' + (i+1)),
+    color: COLORS[i],
+    pos: 0,
+    money: 300,
+    kp: 0,
+    landmarks: [],
+    artefacts: [],
+    skipNext: false
+  }));
+  startGame(players, chosenRounds);
+};
+
+/* ============================================================
+   GAME START
+   ============================================================ */
+function startGame(players, rounds){
+  state = {
+    players,
+    rounds,
+    round: 1,
+    current: 0,
+    ownership: {}, // tileId -> playerIndex
+    eventsQueue: shuffled(EVENTS_POOL),
+    decisionsQueue: shuffled(DECISIONS_POOL),
+    turnResolved: true, // must be true to allow rolling / ending
+    turnsTakenThisRound: 0
+  };
+  document.getElementById('setup-screen').style.display = 'none';
+  document.getElementById('end-screen').style.display = 'none';
+  document.getElementById('game-screen').style.display = 'block';
+  document.getElementById('round-total').textContent = rounds;
+  buildBoard();
+  renderAll();
+  logMsg(null, "Orientation Day begins. Welcome to campus.");
+}
+
+/* ============================================================
+   BOARD RENDER
+   ============================================================ */
+function buildBoard(){
+  const board = document.getElementById('board');
+  board.innerHTML = '';
+  const courtyard = document.createElement('div');
+  courtyard.className = 'courtyard';
+  courtyard.innerHTML = `
+    <div class="cy-title">Great Court</div>
+    <div class="cy-sub" id="cy-sub">St Lucia Campus</div>
+    <div class="cy-fact empty" id="cy-fact">The chronicle of your game will appear here.</div>
+  `;
+  board.appendChild(courtyard);
+
+  TILES.forEach(t=>{
+    const pos = LAYOUT[t.id];
+    const el = document.createElement('div');
+    el.className = 'tile ' + t.type;
+    el.style.gridColumn = pos.col;
+    el.style.gridRow = pos.row;
+    el.id = 'tile-' + t.id;
+
+    if(t.type === 'corner'){
+      el.innerHTML = `<div class="t-icon">${t.icon}</div><div class="t-name">${t.name}</div>`;
+    } else if(t.type === 'landmark'){
+      el.innerHTML = `<div class="t-icon">${t.icon}</div><div class="t-name">${t.name}</div><div class="price">$${t.cost} · +${t.kp}kp</div><div class="t-sub">Landmark</div>`;
+    } else if(t.type === 'event'){
+      el.innerHTML = `<div class="t-name">${t.name}</div><div class="t-sub">History</div>`;
+    } else if(t.type === 'decision'){
+      el.innerHTML = `<div class="t-name">${t.name}</div><div class="t-sub">Decision</div>`;
+    }
+    const tokLayer = document.createElement('div');
+    tokLayer.className = 'tokens';
+    tokLayer.id = 'tokens-' + t.id;
+    el.appendChild(tokLayer);
+    board.appendChild(el);
+  });
+}
+
+function renderTokens(){
+  TILES.forEach(t=>{
+    const layer = document.getElementById('tokens-' + t.id);
+    if(layer) layer.innerHTML = '';
+  });
+  state.players.forEach((p,i)=>{
+    const layer = document.getElementById('tokens-' + p.pos);
+    if(!layer) return;
+    const tok = document.createElement('div');
+    tok.className = 'token';
+    tok.style.background = p.color;
+    tok.title = p.name;
+    layer.appendChild(tok);
+  });
+  // ownership flags
+  TILES.filter(t=>t.type==='landmark').forEach(t=>{
+    const el = document.getElementById('tile-'+t.id);
+    let flag = el.querySelector('.owner-flag');
+    const ownerIdx = state.ownership[t.id];
+    if(ownerIdx !== undefined){
+      if(!flag){
+        flag = document.createElement('div');
+        flag.className = 'owner-flag';
+        el.appendChild(flag);
+      }
+      flag.style.background = state.players[ownerIdx].color;
+    } else if(flag){
+      flag.remove();
+    }
+  });
+}
+
+function renderPlayers(){
+  const list = document.getElementById('players-list');
+  list.innerHTML = '';
+  state.players.forEach((p,i)=>{
+    const card = document.createElement('div');
+    card.className = 'player-card' + (i===state.current ? ' current' : '');
+    card.style.borderLeftColor = p.color;
+    const artefactsHtml = p.artefacts.length
+      ? `<div class="pc-artefacts">${p.artefacts.map(a=>`<span title="${a.name}">${a.icon}</span>`).join('')}</div>`
+      : '';
+    card.innerHTML = `
+      <div class="dot" style="background:${p.color}"></div>
+      <div class="pc-name">${p.name}${p.skipNext ? '<div class="pc-flag">Cramming — skips next turn</div>' : ''}${artefactsHtml}</div>
+      <div class="pc-stats"><div class="kp">${p.kp} KP</div><div class="money">$${p.money}</div></div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+function renderTopbar(){
+  document.getElementById('round-num').textContent = Math.min(state.round, state.rounds);
+  const p = state.players[state.current];
+  document.getElementById('turn-name').textContent = p.name;
+  document.getElementById('turn-dot').style.background = p.color;
+}
+
+function renderAll(){
+  renderTokens();
+  renderPlayers();
+  renderTopbar();
+  document.getElementById('roll-btn').disabled = !state.turnResolved;
+  syncTradeBtn();
+}
+
+function syncTradeBtn(){
+  const btn = document.getElementById('trade-btn');
+  if(btn) btn.disabled = !state.turnResolved;
+}
+
+/* ============================================================
+   LOGGING
+   ============================================================ */
+function logMsg(player, text){
+  const list = document.getElementById('log-list');
+  const item = document.createElement('div');
+  item.className = 'log-item';
+  item.innerHTML = player
+    ? `<span class="who" style="color:${player.color}">${player.name}</span> <span class="what">${text}</span>`
+    : `<span class="what">${text}</span>`;
+  list.insertBefore(item, list.firstChild);
+}
+
+function showFact(title, fact){
+  const cy = document.getElementById('cy-fact');
+  cy.classList.remove('empty');
+  cy.innerHTML = `<b style="display:block;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--jacaranda-soft);margin-bottom:4px;">${title}</b>${fact}`;
+}
+
+/* ============================================================
+   DICE / MOVEMENT
+   ============================================================ */
+const DICE_FACES = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+
+document.getElementById('roll-btn').onclick = () => {
+  if(!state.turnResolved) return;
+  const p = state.players[state.current];
+
+  if(p.skipNext){
+    p.skipNext = false;
+    logMsg(p, "is buried in exam cramming and skips this turn.");
+    document.getElementById('roll-btn').disabled = true;
+    syncTradeBtn();
+    document.getElementById('adv-btn').classList.add('show');
+    return;
+  }
+
+  const d1 = 1 + Math.floor(Math.random()*6);
+  const d2 = 1 + Math.floor(Math.random()*6);
+  document.getElementById('die1').textContent = DICE_FACES[d1-1];
+  document.getElementById('die2').textContent = DICE_FACES[d2-1];
+  const steps = d1 + d2;
+  document.getElementById('roll-btn').disabled = true;
+  state.turnResolved = false;
+  syncTradeBtn();
+  animateMove(p, steps);
+};
+
+function animateMove(p, steps){
+  let remaining = steps;
+  const oldPos = p.pos;
+  function stepOnce(){
+    if(remaining <= 0){
+      finishMove(p, oldPos);
+      return;
+    }
+    p.pos = (p.pos + 1) % TILES.length;
+    remaining--;
+    renderTokens();
+    setTimeout(stepOnce, 140);
+  }
+  stepOnce();
+}
+
+function finishMove(p, oldPos){
+  // passing / landing on Orientation Day (tile 0)
+  if(p.pos === 0){
+    p.money += 60; p.kp += 5;
+    logMsg(p, "lands exactly on Orientation Day: +$60, +5 KP.");
+  } else if(p.pos < oldPos){
+    p.money += 30; p.kp += 2;
+    logMsg(p, "passes Orientation Day: +$30, +2 KP.");
+  }
+  resolveTile(p);
+}
+
+/* ============================================================
+   TILE RESOLUTION
+   ============================================================ */
+function resolveTile(p){
+  const tile = TILES[p.pos];
+  renderPlayers();
+
+  if(tile.type === 'corner' && tile.id !== 0){
+    resolveCorner(p, tile);
+  } else if(tile.type === 'landmark'){
+    resolveLandmark(p, tile);
+  } else if(tile.type === 'event'){
+    resolveEvent(p, tile);
+  } else if(tile.type === 'decision'){
+    resolveDecision(p, tile);
+  } else {
+    completeTurnAction();
+  }
+}
+
+function resolveCorner(p, tile){
+  if(tile.id === 5){ // Jacaranda Bloom
+    p.kp += 8; p.money += 10;
+    logMsg(p, "pauses under the blooming jacarandas: +8 KP, +$10.");
+    renderPlayers();
+    completeTurnAction();
+  } else if(tile.id === 15){ // Graduation Day
+    p.kp += 20; p.money += 70;
+    logMsg(p, "reaches Graduation Day: +20 KP, +$70.");
+    renderPlayers();
+    completeTurnAction();
+  } else if(tile.id === 10){ // Exam Period
+    showActionPanel(`
+      <h3>📚 Exam Period</h3>
+      <div class="desc">Stress is mounting on campus. Cram now, or take your chances.</div>
+      <button class="opt-btn" id="opt-cram"><b>Cram Session</b><span class="delta">−$35 now, no penalty next turn</span></button>
+      <button class="opt-btn" id="opt-risk"><b>Wing It</b><span class="delta">Free now, but skip your next turn</span></button>
+    `);
+    document.getElementById('opt-cram').onclick = () => {
+      p.money -= 35;
+      logMsg(p, "cracks open the textbooks for a cram session: −$35.");
+      renderPlayers();
+      hideActionPanel();
+      completeTurnAction();
+    };
+    document.getElementById('opt-risk').onclick = () => {
+      p.skipNext = true;
+      logMsg(p, "decides to wing exam period — risky.");
+      renderPlayers();
+      hideActionPanel();
+      completeTurnAction();
+    };
+  }
+}
+
+function resolveLandmark(p, tile){
+  const ownerIdx = state.ownership[tile.id];
+  if(ownerIdx === undefined){
+    if(TRIVIA[tile.id] && !tile.triviaUsed){
+      showTriviaPanel(p, tile);
+    } else {
+      showBuyPanel(p, tile);
+    }
+  } else if(ownerIdx === state.players.indexOf(p)){
+    p.kp += 5;
+    logMsg(p, `revisits their own ${tile.name}: +5 KP.`);
+    renderPlayers();
+    completeTurnAction();
+  } else {
+    const owner = state.players[ownerIdx];
+    const toll = Math.round(tile.cost * 0.25);
+    p.money -= toll; owner.money += toll;
+    p.kp += 3; owner.kp += 2;
+    logMsg(p, `tours ${owner.name}'s ${tile.name}: −$${toll} toll, +3 KP.`);
+    renderPlayers();
+    completeTurnAction();
+  }
+}
+
+function showBuyPanel(p, tile){
+  showActionPanel(`
+    <h3><span class="panel-icon">${tile.icon}</span>${tile.name}</h3>
+    <div class="desc">${tile.desc}</div>
+    <button class="opt-btn" id="opt-buy"><b>Acquire this landmark</b><span class="delta">−$${tile.cost}, +${tile.kp} KP</span></button>
+    <button class="opt-btn" id="opt-skip"><b>Leave it unclaimed</b><span class="delta">No change</span></button>
+  `);
+  document.getElementById('opt-buy').onclick = () => {
+    if(p.money < tile.cost){
+      logMsg(p, `wants to acquire ${tile.name} but can't afford it.`);
+    } else {
+      p.money -= tile.cost; p.kp += tile.kp;
+      state.ownership[tile.id] = state.players.indexOf(p);
+      p.landmarks.push(tile.id);
+      logMsg(p, `acquires <b>${tile.name}</b>: −$${tile.cost}, +${tile.kp} KP.`);
+    }
+    renderPlayers(); renderTokens();
+    hideActionPanel();
+    completeTurnAction();
+  };
+  document.getElementById('opt-skip').onclick = () => {
+    logMsg(p, `passes on ${tile.name} for now.`);
+    hideActionPanel();
+    completeTurnAction();
+  };
+}
+
+function showTriviaPanel(p, tile){
+  const q = TRIVIA[tile.id];
+  const optsHtml = q.options.map((opt,i)=>
+    `<button class="opt-btn trivia-opt" data-i="${i}"><b>${opt}</b></button>`
+  ).join('');
+  showActionPanel(`
+    <h3><span class="panel-icon">${tile.icon}</span>${tile.name}</h3>
+    <div class="desc">${tile.desc}</div>
+    <div class="trivia-q">🧠 ${q.q}</div>
+    ${optsHtml}
+  `);
+  document.querySelectorAll('.trivia-opt').forEach(btn=>{
+    btn.onclick = () => handleTriviaAnswer(p, tile, q, parseInt(btn.dataset.i, 10));
+  });
+}
+
+function handleTriviaAnswer(p, tile, q, chosenIdx){
+  tile.triviaUsed = true;
+  if(chosenIdx === q.correct){
+    state.ownership[tile.id] = state.players.indexOf(p);
+    p.landmarks.push(tile.id);
+    p.kp += tile.kp + 5;
+    const artefact = ARTEFACTS[tile.id];
+    if(artefact) p.artefacts.push(artefact);
+    logMsg(p, `answers correctly about <b>${tile.name}</b> — claims it for free (+${tile.kp+5} KP)` + (artefact ? ` and finds ${artefact.icon} <b>${artefact.name}</b>!` : '.'));
+    showActionPanel(`
+      <h3>🎉 Correct!</h3>
+      <div class="desc"><b>${tile.name}</b> is now yours, free of charge, plus a bonus for knowing your campus history.</div>
+      ${artefact ? `<div class="trivia-q">You picked up an artefact: ${artefact.icon} <b>${artefact.name}</b> — trade it with another student any time using the Trade button.</div>` : ''}
+    `);
+  } else {
+    logMsg(p, `answers incorrectly about ${tile.name}. Correct answer: "${q.options[q.correct]}".`);
+    showActionPanel(`
+      <h3>Not quite</h3>
+      <div class="desc">The correct answer was <b>${q.options[q.correct]}</b>. You can still acquire ${tile.name} the regular way.</div>
+      <button class="opt-btn" id="opt-buy-fallback"><b>Acquire this landmark</b><span class="delta">−$${tile.cost}, +${tile.kp} KP</span></button>
+      <button class="opt-btn" id="opt-skip-fallback"><b>Leave it unclaimed</b><span class="delta">No change</span></button>
+    `);
+    document.getElementById('opt-buy-fallback').onclick = () => {
+      if(p.money < tile.cost){
+        logMsg(p, `wants to acquire ${tile.name} but can't afford it.`);
+      } else {
+        p.money -= tile.cost; p.kp += tile.kp;
+        state.ownership[tile.id] = state.players.indexOf(p);
+        p.landmarks.push(tile.id);
+        logMsg(p, `acquires <b>${tile.name}</b>: −$${tile.cost}, +${tile.kp} KP.`);
+      }
+      renderPlayers(); renderTokens();
+      hideActionPanel();
+      completeTurnAction();
+    };
+    document.getElementById('opt-skip-fallback').onclick = () => {
+      logMsg(p, `passes on ${tile.name} for now.`);
+      hideActionPanel();
+      completeTurnAction();
+    };
+    renderPlayers();
+    return;
+  }
+  renderPlayers(); renderTokens();
+  completeTurnAction();
+}
+
+function resolveEvent(p, tile){
+  if(state.eventsQueue.length === 0) state.eventsQueue = shuffled(EVENTS_POOL);
+  const ev = state.eventsQueue.pop();
+  p.kp += ev.kp;
+  showFact(ev.title, ev.fact);
+  logMsg(p, `learns about <b>${ev.title}</b>: +${ev.kp} KP.`);
+  renderPlayers();
+  completeTurnAction();
+}
+
+function resolveDecision(p, tile){
+  if(state.decisionsQueue.length === 0) state.decisionsQueue = shuffled(DECISIONS_POOL);
+  const dec = state.decisionsQueue.pop();
+  showActionPanel(`
+    <h3>${dec.title}</h3>
+    <div class="desc">A strategic choice — pick your path.</div>
+    <button class="opt-btn" id="opt-a"><b>${dec.a.label}</b><span class="delta">${fmtDelta(dec.a)}</span></button>
+    <button class="opt-btn" id="opt-b"><b>${dec.b.label}</b><span class="delta">${fmtDelta(dec.b)}</span></button>
+  `);
+  document.getElementById('opt-a').onclick = () => applyDecision(p, dec.a, dec.title);
+  document.getElementById('opt-b').onclick = () => applyDecision(p, dec.b, dec.title);
+}
+
+function fmtDelta(opt){
+  const kpTxt = (opt.kp>=0?'+':'') + opt.kp + ' KP';
+  const moneyTxt = (opt.money>=0?'+$':'-$') + Math.abs(opt.money);
+  return kpTxt + ', ' + moneyTxt;
+}
+
+function applyDecision(p, opt, title){
+  p.kp += opt.kp; p.money += opt.money;
+  logMsg(p, `chooses "${opt.label}" for ${title}: ${fmtDelta(opt)}.`);
+  renderPlayers();
+  hideActionPanel();
+  completeTurnAction();
+}
+
+/* ============================================================
+   ACTION PANEL HELPERS
+   ============================================================ */
+function showActionPanel(html){
+  const panel = document.getElementById('action-panel');
+  panel.innerHTML = html;
+  panel.classList.add('show');
+}
+function hideActionPanel(){
+  const panel = document.getElementById('action-panel');
+  panel.classList.remove('show');
+  panel.innerHTML = '';
+}
+
+function completeTurnAction(){
+  state.turnResolved = true;
+  document.getElementById('adv-btn').classList.add('show');
+  document.getElementById('roll-btn').disabled = true;
+  syncTradeBtn();
+}
+
+/* ============================================================
+   TURN ADVANCE
+   ============================================================ */
+document.getElementById('adv-btn').onclick = () => {
+  document.getElementById('adv-btn').classList.remove('show');
+  hideActionPanel();
+  advanceTurn();
+};
+
+/* ============================================================
+   ARTEFACT TRADING
+   ============================================================ */
+document.getElementById('trade-btn').onclick = () => openTradePanel();
+
+function openTradePanel(){
+  const p = state.players[state.current];
+  if(p.artefacts.length === 0){
+    showActionPanel(`
+      <h3>🔁 Trade Artefacts</h3>
+      <div class="desc">${p.name} doesn't have any artefacts to trade yet. Answer a landmark's trivia question correctly to pick one up.</div>
+      <button class="opt-btn" id="trade-close"><b>Close</b></button>
+    `);
+    document.getElementById('trade-close').onclick = hideActionPanel;
+    return;
+  }
+  const others = state.players.filter(pl => pl !== p);
+  const giveOptions = p.artefacts.map((a,i)=>`<option value="${i}">${a.icon} ${a.name}</option>`).join('');
+  const partnerOptions = others.map(pl=>`<option value="${state.players.indexOf(pl)}">${pl.name}</option>`).join('');
+
+  showActionPanel(`
+    <h3>🔁 Trade Artefacts</h3>
+    <div class="desc">${p.name} offers an artefact to another student. Agree what comes back in person, then record it here.</div>
+    <label class="trade-label">You give</label>
+    <select id="trade-give" class="trade-select">${giveOptions}</select>
+    <label class="trade-label">Trade with</label>
+    <select id="trade-partner" class="trade-select">${partnerOptions}</select>
+    <label class="trade-label">You receive (optional)</label>
+    <select id="trade-receive" class="trade-select"></select>
+    <button class="opt-btn" id="trade-confirm" style="margin-top:10px;"><b>Complete Trade</b></button>
+    <button class="opt-btn" id="trade-cancel"><b>Cancel</b></button>
+  `);
+
+  function refreshReceiveOptions(){
+    const partnerIdx = parseInt(document.getElementById('trade-partner').value, 10);
+    const partner = state.players[partnerIdx];
+    const recvSel = document.getElementById('trade-receive');
+    const partnerItems = partner.artefacts.map((a,i)=>`<option value="${i}">${a.icon} ${a.name}</option>`).join('');
+    recvSel.innerHTML = `<option value="">Nothing — just a gift</option>${partnerItems}`;
+  }
+  document.getElementById('trade-partner').onchange = refreshReceiveOptions;
+  refreshReceiveOptions();
+
+  document.getElementById('trade-cancel').onclick = hideActionPanel;
+  document.getElementById('trade-confirm').onclick = () => {
+    const giveIdx = parseInt(document.getElementById('trade-give').value, 10);
+    const partnerIdx = parseInt(document.getElementById('trade-partner').value, 10);
+    const recvVal = document.getElementById('trade-receive').value;
+    const partner = state.players[partnerIdx];
+
+    const givenItem = p.artefacts.splice(giveIdx, 1)[0];
+    partner.artefacts.push(givenItem);
+    let msg = `trades ${givenItem.icon} <b>${givenItem.name}</b> to ${partner.name}`;
+    if(recvVal !== ''){
+      const recvIdx = parseInt(recvVal, 10);
+      const recvItem = partner.artefacts.splice(recvIdx, 1)[0];
+      p.artefacts.push(recvItem);
+      msg += ` in exchange for ${recvItem.icon} <b>${recvItem.name}</b>`;
+    }
+    logMsg(p, msg + '.');
+    renderPlayers();
+    hideActionPanel();
+  };
+}
+
+function advanceTurn(){
+  state.current++;
+  if(state.current >= state.players.length){
+    state.current = 0;
+    state.round++;
+  }
+  if(state.round > state.rounds){
+    endGame();
+    return;
+  }
+  state.turnResolved = true;
+  renderAll();
+  document.getElementById('roll-btn').disabled = false;
+}
+
+document.getElementById('end-early-btn').onclick = () => {
+  if(confirm("End the game now and see final scores?")) endGame();
+};
+
+/* ============================================================
+   END GAME
+   ============================================================ */
+function endGame(){
+  document.getElementById('game-screen').style.display = 'none';
+  document.getElementById('end-screen').style.display = 'block';
+  const ranked = state.players.slice().sort((a,b)=> b.kp - a.kp || b.money - a.money);
+  document.getElementById('winner-name').textContent = ranked[0].name;
+  const list = document.getElementById('final-list');
+  list.innerHTML = '';
+  ranked.forEach((p,i)=>{
+    const row = document.createElement('div');
+    row.className = 'final-row';
+    row.innerHTML = `<span class="rank">#${i+1}</span><span style="color:${p.color};font-weight:600;flex:1;text-align:left;padding-left:10px;">${p.name}</span><span>${p.kp} KP · $${p.money}</span>`;
+    list.appendChild(row);
+  });
+}
+
+document.getElementById('restart-btn').onclick = () => {
+  document.getElementById('end-screen').style.display = 'none';
+  document.getElementById('setup-screen').style.display = 'block';
+};
+</script>
+</body>
+</html>

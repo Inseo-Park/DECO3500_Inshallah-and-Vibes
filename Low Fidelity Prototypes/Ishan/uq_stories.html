@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Echoes - Multimedia Prototype</title>
+    <style>
+        /* Reset and Variables */
+        :root {
+            --primary: #51247A; /* UQ Purple */
+            --primary-light: #7E46B6;
+            --background: #F4F4F6;
+            --sidebar-bg: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --text-dark: #333333;
+            --text-muted: #666666;
+            --accent: #E0A800;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Tablet/Laptop Layout Container */
+        .app-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Left Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 20px;
+            z-index: 20;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.03);
+        }
+
+        .sidebar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            text-decoration: none;
+            background: none;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.2s;
+            margin-bottom: 8px;
+        }
+        
+        .nav-item:hover { background-color: #f8f5fb; }
+        .nav-item.active {
+            background-color: #f0e6fa;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        .nav-icon { font-size: 1.4rem; }
+
+        .sidebar-btn {
+            margin-top: auto;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(81, 36, 122, 0.3);
+            transition: transform 0.2s;
+        }
+        .sidebar-btn:hover { transform: translateY(-2px); }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: var(--background);
+        }
+
+        /* Top Header */
+        .header {
+            background-color: var(--card-bg);
+            padding: 24px 40px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .location-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .location-status {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4CAF50;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .location-status::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #4CAF50;
+        }
+
+        .location-name { font-size: 1.8rem; font-weight: bold; color: var(--text-dark); }
+
+        /* Filters */
+        .filters { display: flex; gap: 12px; }
+        
+        .chip {
+            padding: 8px 16px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .chip:hover { background-color: #e4e4e4; }
+        .chip.active { background-color: var(--primary); color: white; }
+
+        /* Feed Scroll Area */
+        .feed-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            display: none;
+        }
+        .feed-container.active { display: block; }
+
+        .feed-center { max-width: 700px; margin: 0 auto; }
+
+        /* Story Card */
+        .story-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 24px;
+            position: relative;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .perspective-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .tag-indigenous { background: #FFebee; color: #c62828; }
+        .tag-alumni { background: #e3f2fd; color: #1565c0; }
+        .tag-student { background: #e8f5e9; color: #2e7d32; }
+        .tag-personal { background: #f3e5f5; color: #6a1b9a; }
+
+        .story-header { display: flex; justify-content: space-between; align-items: flex-start; }
+
+        .save-btn {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .save-btn:hover { color: #bbb; }
+        .save-btn.saved { color: var(--accent); }
+
+        .story-author { font-size: 1.1rem; font-weight: bold; color: var(--text-dark); margin-bottom: 4px; }
+        .story-time { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
+
+        /* Media Elements */
+        .story-media {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #eee;
+        }
+
+        /* Audio Player */
+        .audio-player {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #eee;
+        }
+
+        .play-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.2s;
+        }
+        .play-btn:hover { background-color: var(--primary-light); }
+
+        .progress-container { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+        .progress-bar { width: 100%; height: 8px; background-color: #ddd; border-radius: 4px; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background-color: var(--primary); transition: width 0.1s linear; }
+        .time-display { font-size: 0.85rem; color: #666; display: flex; justify-content: space-between; }
+
+        .story-text { font-size: 1.05rem; line-height: 1.6; color: var(--text-dark); margin-bottom: 24px; }
+
+        /* Interaction Bar */
+        .interaction-bar {
+            display: flex;
+            gap: 24px;
+            border-top: 1px solid #eee;
+            padding-top: 16px;
+        }
+
+        .interaction-btn {
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+            padding: 6px 10px;
+            border-radius: 8px;
+        }
+        .interaction-btn:hover { background: #f5f5f5; }
+        .interaction-btn.active-heart { color: #e91e63; }
+        .interaction-btn.active-insight { color: #f57c00; }
+        .interaction-btn.active-comment { color: var(--primary); }
+
+        /* Comments Section */
+        .comments-section {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #eee;
+        }
+        
+        .comment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .comment-item {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+        }
+        
+        .comment-author { font-weight: bold; margin-bottom: 4px; display: block; }
+        .comment-text { color: var(--text-dark); line-height: 1.4; }
+
+        .add-comment-box { display: flex; gap: 12px; }
+        .add-comment-box input {
+            flex: 1; padding: 12px 16px; border: 1px solid #ddd; border-radius: 20px; font-size: 0.95rem; outline: none;
+        }
+        .add-comment-box input:focus { border-color: var(--primary); }
+        .add-comment-box button {
+            background: var(--primary); color: white; border: none; padding: 0 20px; border-radius: 20px; font-weight: bold; cursor: pointer;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 30;
+        }
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .close-btn { background: none; border: none; font-size: 2rem; color: var(--text-muted); cursor: pointer; }
+        
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-weight: bold; margin-bottom: 8px; color: var(--text-dark); font-size: 0.95rem; }
+        
+        textarea { width: 100%; height: 120px; border: 1px solid #ddd; border-radius: 12px; padding: 16px; font-size: 1rem; resize: none; outline: none; }
+        textarea:focus { border-color: var(--primary); }
+        
+        .media-input { width: 100%; padding: 14px 16px; border: 1px solid #ddd; border-radius: 12px; font-size: 1rem; outline: none; }
+        .media-input:focus { border-color: var(--primary); }
+        
+        .submit-btn { width: 100%; background-color: var(--primary); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
+
+        /* Empty States */
+        .placeholder-screen { text-align: center; color: var(--text-muted); padding: 60px 20px; }
+        .profile-header { text-align: center; padding: 30px; background: white; border-radius: 16px; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            🏛️ Campus Echoes
+        </div>
+        
+        <button class="nav-item active" onclick="switchTab('view-nearby', this)">
+            <span class="nav-icon">📍</span> Nearby Feed
+        </button>
+        <button class="nav-item" onclick="switchTab('view-saved', this)">
+            <span class="nav-icon">⭐</span> Saved Stories
+        </button>
+        <button class="nav-item" onclick="switchTab('view-profile', this)">
+            <span class="nav-icon">👤</span> My Profile
+        </button>
+
+        <button class="sidebar-btn" onclick="openModal()">+ Leave a Memory</button>
+    </nav>
+
+    <main class="main-content">
+        
+        <header class="header">
+            <div class="location-info">
+                <div class="location-status">Location Synced</div>
+                <div class="location-name">The Great Court</div>
+            </div>
+            
+            <div class="filters" id="filter-bar">
+                <div class="chip active" onclick="setFilter(this, 'all')">All Stories</div>
+                <div class="chip" onclick="setFilter(this, 'indigenous')">Indigenous</div>
+                <div class="chip" onclick="setFilter(this, 'alumni')">Alumni</div>
+                <div class="chip" onclick="setFilter(this, 'student')">Student Life</div>
+            </div>
+        </header>
+
+        <div class="feed-container active" id="view-nearby">
+            <div class="feed-center">
+                
+                <article class="story-card" data-category="indigenous" id="story-1">
+                    <div class="story-header">
+                        <span class="perspective-tag tag-indigenous">Indigenous Perspective</span>
+                        <button class="save-btn" onclick="toggleSave(this)" title="Save Story">★</button>
+                    </div>
+                    <div class="story-author">Aunty Mary (Turrbal Elder)</div>
+                    <div class="story-time">Recorded 2 months ago</div>
+                    
+                    <div class="audio-player">
+                        <button class="play-btn" onclick="toggleAudio(this)">▶</button>
+                        <div class="progress-container">
+                            <div class="progress-bar"><div class="progress-fill"></div></div>
+                            <div class="time-display"><span class="current-time">0:00</span><span>1:24</span></div>
+                        </div>
+                    </div>
+
+                    <p class="story-text">
+                        "Long before these sandstone buildings were placed here, this area near the river was a significant gathering space. The waterways provided not just sustenance, but connection between clans..."
+                    </p>
+
+                    <div class="interaction-bar">
+                        <button class="interaction-btn" onclick="toggleReaction(this, 'active-heart')">🤍 <span class="count">24</span></button>
+                        <button class="interaction-btn" onclick="toggleReaction(this, 'active-insight')">💡 <span class="count">8</span></button>
+                        <button class="interaction-btn" onclick="toggleComments(this)">💬 Comments (<span class="comment-count">1</span>)</button>
+                    </div>
+                    <div class="comments-section">
+                        <div class="comment-list">
+                            <div class="comment-item">
+                                <span class="comment-author">James (2nd Yr Arts)</span>
+                                <span class="comment-text">I never knew this area was a meeting place. It completely changes how I view sitting on the grass here.</span>
+                            </div>
+                        </div>
+                        <div class="add-comment-box">
+                            <input type="text" placeholder="Write a comment..." class="comment-input" onkeypress="handleEnter(event, this)">
+                            <button onclick="postComment(this)">Post</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="story-card" data-category="student" id="story-2">
+                    <div class="story-header">
+                        <span class="perspective-tag tag-student">Student Life</span>
+                        <button class="save-btn" onclick="toggleSave(this)" title="Save Story">★</button>
+                    </div>
+                    <div class="story-author">Sarah J. (3rd Yr Science)</div>
+                    <div class="story-time">Posted 2 days ago</div>
+                    
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Campus View" class="story-media">
+
+                    <p class="story-text">
+                        "Pro tip: If you come to the Great Court right at sunset during autumn, the sandstone practically glows orange. Best place on campus to de-stress after a rough lab session."
+                    </p>
+
+                    <div class="interaction-bar">
+                        <button class="interaction-btn" onclick="toggleReaction(this, 'active-heart')">🤍 <span class="count">45</span></button>
+                        <button class="interaction-btn" onclick="toggleReaction(this, 'active-insight')">💡 <span class="count">12</span></button>
+                        <button class="interaction-btn" onclick="toggleComments(this)">💬 Comments (<span class="comment-count">0</span>)</button>
+                    </div>
+                    <div class="comments-section">
+                        <div class="comment-list"></div>
+                        <div class="add-comment-box">
+                            <input type="text" placeholder="Write a comment..." class="comment-input" onkeypress="handleEnter(event, this)">
+                            <button onclick="postComment(this)">Post</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="feed-container" id="view-saved">
+            <div class="feed-center">
+                <div class="placeholder-screen" id="saved-empty-state">
+                    <h2 style="color: var(--primary); margin-bottom: 10px;">Saved Echoes</h2>
+                    <p>Stories you star will appear here so you can revisit them later.</p>
+                </div>
+                <div id="saved-feed"></div>
+            </div>
+        </div>
+
+        <div class="feed-container" id="view-profile">
+            <div class="feed-center">
+                <div class="profile-header">
+                    <h2 style="color: var(--primary); margin-bottom: 10px;">Your Contributions</h2>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">You have left <strong id="memory-count" style="color: var(--accent); font-size: 1.4rem;">0</strong> memories on campus.</p>
+                </div>
+                
+                <div id="profile-feed"></div>
+                
+                <div class="placeholder-screen" id="profile-empty-state">
+                    <p>Click "+ Leave a Memory" in the sidebar to add your voice to the campus.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="memoryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Leave a Memory</h2>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            
+            <div class="input-group">
+                <label for="memoryMedia">Attach a Photo (Optional)</label>
+                <input type="url" id="memoryMedia" placeholder="Paste an image link (e.g., https://.../photo.jpg)" class="media-input">
+            </div>
+
+            <div class="input-group">
+                <label for="memoryText">Your Story</label>
+                <textarea id="memoryText" placeholder="Share your experience, a piece of campus lore, or your own history..."></textarea>
+            </div>
+            
+            <button class="submit-btn" onclick="submitMemory()">Pin Memory Here</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Tab Navigation Logic
+    function switchTab(targetId, btnElement) {
+        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+        btnElement.classList.add('active');
+
+        document.querySelectorAll('.feed-container').forEach(el => el.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+
+        const filterBar = document.getElementById('filter-bar');
+        if (targetId === 'view-nearby') {
+            filterBar.style.display = 'flex';
+        } else {
+            filterBar.style.display = 'none';
+        }
+    }
+
+    // Filter Logic
+    function setFilter(clickedChip, category) {
+        document.querySelectorAll('.chip').forEach(chip => chip.classList.remove('active'));
+        clickedChip.classList.add('active');
+        
+        const stories = document.querySelectorAll('#view-nearby .story-card');
+        stories.forEach(story => {
+            if (category === 'all' || story.dataset.category === category) {
+                story.style.display = 'block';
+            } else {
+                story.style.display = 'none';
+            }
+        });
+    }
+
+    // Comment Logic
+    function toggleComments(btn) {
+        btn.classList.toggle('active-comment');
+        const card = btn.closest('.story-card');
+        const commentsSection = card.querySelector('.comments-section');
+        
+        if (commentsSection.style.display === 'block') {
+            commentsSection.style.display = 'none';
+        } else {
+            commentsSection.style.display = 'block';
+            commentsSection.querySelector('.comment-input').focus();
+        }
+    }
+
+    function handleEnter(e, inputElem) {
+        if (e.key === 'Enter') {
+            postComment(inputElem.nextElementSibling);
+        }
+    }
+
+    function postComment(btn) {
+        const input = btn.previousElementSibling;
+        const text = input.value.trim();
+        if (text === '') return;
+
+        const commentsList = btn.closest('.comments-section').querySelector('.comment-list');
+        const countSpan = btn.closest('.story-card').querySelector('.comment-count');
+
+        const newComment = document.createElement('div');
+        newComment.className = 'comment-item';
+        newComment.innerHTML = `<span class="comment-author">You (Just now)</span><span class="comment-text">${text}</span>`;
+        
+        commentsList.appendChild(newComment);
+        input.value = '';
+        countSpan.innerText = parseInt(countSpan.innerText) + 1;
+        commentsList.scrollTop = commentsList.scrollHeight;
+    }
+
+    // Save Logic
+    function toggleSave(btn) {
+        const originalCard = btn.closest('.story-card');
+        const storyId = originalCard.id;
+        const savedFeed = document.getElementById('saved-feed');
+        const emptyState = document.getElementById('saved-empty-state');
+        
+        btn.classList.toggle('saved');
+
+        if (btn.classList.contains('saved')) {
+            const clonedCard = originalCard.cloneNode(true);
+            clonedCard.id = 'saved-' + storyId;
+            const cloneBtn = clonedCard.querySelector('.save-btn');
+            cloneBtn.onclick = function() {
+                btn.classList.remove('saved');
+                clonedCard.remove();
+                checkSavedEmpty();
+            };
+            savedFeed.appendChild(clonedCard);
+            emptyState.style.display = 'none'; 
+        } else {
+            const savedItem = document.getElementById('saved-' + storyId);
+            if (savedItem) savedItem.remove();
+            checkSavedEmpty();
+        }
+    }
+
+    function checkSavedEmpty() {
+        const savedFeed = document.getElementById('saved-feed');
+        const emptyState = document.getElementById('saved-empty-state');
+        if (savedFeed.children.length === 0) emptyState.style.display = 'block';
+    }
+
+    // Audio Player Logic
+    let activePlayers = new Map();
+    function toggleAudio(btn) {
+        const playerContainer = btn.closest('.audio-player');
+        const progBar = playerContainer.querySelector('.progress-fill');
+        const timeDisplay = playerContainer.querySelector('.current-time');
+        let width = parseFloat(progBar.style.width) || 0;
+        let seconds = parseInt(progBar.dataset.seconds) || 0;
+
+        if (btn.innerText === '▶') {
+            btn.innerText = '⏸';
+            btn.style.backgroundColor = '#E0A800'; 
+            const intervalId = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(activePlayers.get(btn));
+                    btn.innerText = '▶';
+                    btn.style.backgroundColor = '#51247A';
+                    width = 0; seconds = 0;
+                } else {
+                    width += 1.5; seconds += 1;
+                }
+                progBar.style.width = width + '%';
+                progBar.dataset.seconds = seconds;
+                let secStr = seconds % 60;
+                let minStr = Math.floor(seconds / 60);
+                timeDisplay.innerText = `${minStr}:${secStr < 10 ? '0' : ''}${secStr}`;
+            }, 500);
+            activePlayers.set(btn, intervalId);
+        } else {
+            btn.innerText = '▶';
+            btn.style.backgroundColor = '#51247A';
+            clearInterval(activePlayers.get(btn));
+        }
+    }
+
+    // Reaction Toggle
+    function toggleReaction(btn, activeClass) {
+        const countSpan = btn.querySelector('.count');
+        let currentCount = parseInt(countSpan.innerText);
+        if (btn.classList.contains(activeClass)) {
+            btn.classList.remove(activeClass);
+            countSpan.innerText = currentCount - 1;
+            if(activeClass === 'active-heart') btn.innerHTML = `🤍 <span class="count">${currentCount - 1}</span>`;
+            if(activeClass === 'active-insight') btn.innerHTML = `💡 <span class="count">${currentCount - 1}</span>`;
+        } else {
+            btn.classList.add(activeClass);
+            countSpan.innerText = currentCount + 1;
+            if(activeClass === 'active-heart') btn.innerHTML = `❤️ <span class="count">${currentCount + 1}</span>`;
+            if(activeClass === 'active-insight') btn.innerHTML = `🌟 <span class="count">${currentCount + 1}</span>`;
+        }
+    }
+
+    // Modal Handling
+    const modal = document.getElementById('memoryModal');
+    function openModal() { modal.style.display = 'flex'; }
+    function closeModal() { 
+        modal.style.display = 'none'; 
+        document.getElementById('memoryText').value = ''; 
+        document.getElementById('memoryMedia').value = ''; 
+    }
+    window.onclick = function(event) { if (event.target === modal) closeModal(); }
+
+    // Submit Memory with Photo functionality
+    let memoryCount = 0;
+    
+    function submitMemory() {
+        const text = document.getElementById('memoryText').value;
+        const mediaUrl = document.getElementById('memoryMedia').value.trim();
+        
+        if(text.trim() === '' && mediaUrl === '') {
+            alert('Please add some text or an image URL before submitting.');
+            return;
+        }
+
+        memoryCount++;
+        document.getElementById('profile-empty-state').style.display = 'none';
+        document.getElementById('memory-count').innerText = memoryCount;
+        
+        // Dynamically build the media HTML block if a URL is provided
+        let mediaHTML = '';
+        if (mediaUrl !== '') {
+            // Using an onerror attribute to hide broken image links if user pastes a bad URL
+            mediaHTML = `<img src="${mediaUrl}" alt="User submitted photo" class="story-media" onerror="this.style.display='none'">`;
+        }
+
+        const profileFeed = document.getElementById('profile-feed');
+        const newMemory = document.createElement('article');
+        newMemory.className = 'story-card';
+        newMemory.innerHTML = `
+            <div class="story-header">
+                <span class="perspective-tag tag-personal">Your Memory</span>
+            </div>
+            <div class="story-time">Just now at The Great Court</div>
+            
+            ${mediaHTML}
+            
+            <p class="story-text">"${text}"</p>
+            <div class="interaction-bar">
+                <span style="color: #666; font-size: 0.9rem;">Your memory is now live for others to discover.</span>
+            </div>
+        `;
+        
+        profileFeed.insertBefore(newMemory, profileFeed.firstChild);
+        closeModal();
+        
+        const profileNavBtn = document.querySelectorAll('.nav-item')[2];
+        switchTab('view-profile', profileNavBtn);
+    }
+</script>
+
+</body>
+</html>
