@@ -1,59 +1,147 @@
-# ECHO — User Interview Quotes
+# ECHO User Testing — Interview Quotes
 
-## Purpose
+> **Source note:** The quotes below are extracted from the four user-testing interview transcripts supplied for ECHO. Minor punctuation and obvious transcription artefacts have been cleaned for readability; wording has otherwise been kept close to the transcript. Quotes should be checked against the original recordings before being used as formally verbatim evidence.
 
-This page collects important verbatim excerpts from our UQ student interviews. The quotes are presented without linking them to individual evidence categories or design decisions.
+## Interview 1
 
-The interviews explored belonging, campus history, cultural awareness, curiosity, time constraints, preferred learning formats, social interaction and students’ experiences of campus spaces.
+**Memory / connection**  
+“UQ was such a nice place to bring everyone around and connect people in general. So yeah, that was probably the best impression I had about UQ, which was bringing people together.”
 
-> **Overall observation:** The interviews suggest that students value meaningful, situated and human experiences, but engagement needs to remain brief, optional and comfortable rather than feeling compulsory or like additional coursework.
+**Engagement frequency**  
+“Honestly, probably once. I'll probably do it once, and then I'll forget about it and never do it ever again.”
 
----
+**Preferred format**  
+“Honestly, I would not listen to it, but I would read it.”
 
-## Participant 1
+**Preferred format**  
+“If it's words, I would like, for example, if it's a post… if it's like one passage, more like conclusions of stuff, I would take a look.”
 
-- “I don't get much time to be on campus when I'm not studying.”
-- “It's probably the communication with tutors, professor, and my friends, my classmates, and stuff.”
-- “Whenever I have time, I just get my earphones in and listen to music and go around the campus.”
-- “It's really beautiful campus. There's a lot of trees, a lot of green tree. I love it.”
+**Preferred format**  
+“Select text more than audios and videos.”
 
-## Participant 2
+**Preferred format**  
+“If you go to a museum… they have that description… a little thing… Takes like one minute to read, internalize, and then.”
 
-- “I would love to know more, but I really don't know that much.”
-- “I personally did it because I thought it was compulsory.”
-- “It's quite a lengthy course, so I'm pretty sure most students wouldn't have done it unless they were very interested in learning more about it.”
-- “There were a couple of videos, but it was mostly reading text, followed by a quiz.”
-- “Yeah, because there was a lot of reading.”
-- “I really liked how, in some places near the gardens, they've put up small information cards with pictures of different animals or plants and a little description about them.”
-- “Generally, whenever I go to a new place, I like learning about what that place is about, its heritage...”
-- “Every place has a story of its own.”
-- “Understanding that story basically makes you feel more involved in the place. It gives you a sense of home and comfort in it.”
-- “Not everyone is interested in it. Sometimes enforcing it on people might have a negative impact.”
-- “Some people might feel that because it's being forced on them, they might hate it even more.”
-- “Sometimes there could be a language barrier... Sometimes you might not find locals who can tell you about the place.”
+**Existing campus interpretation**  
+“They have this… bird sporting area… for all the birds or the history of that area. That was actually quite interesting.”
 
-## Participant 3
+**Comfortable place**  
+“My favourite spot… would be Great Court. That's because there's grass, the sun is out, and I feel very safe with everything surrounding me… And there's food, there's coffee.”
 
-- “I first come across something and I would just Wikipedia it or use ChatGPT… then I might find some YouTube videos...”
-- “...then I have a chat with some of my friends who are into history.”
-- “He takes a minute and explains some historical story or some context...”
-- “It wasn't just a quick reading. He took a moment, which made sense.”
-- “I kind of liked how significant UQ has been politically in Queensland and Australia, historically speaking.”
+**Campus use**  
+“It's a good hangout spot. Get some food, chill in the grass, and that's the whole lot.”
 
-## Participant 4
+## Interview 2
 
-- “Sometimes I do look up and think about the history, but I'm usually too busy.”
-- “I do look sometimes and think it's a bit dirty.”
+**Response to experience**  
+“It's very funny. In fact, I think it is about the history or culture about this school.”
 
-## Participant 5
+**Meaning of university**  
+“It's not the place you learn something or just… maybe create something or push against something.”
 
-- “It'd be interesting to understand the stories behind how architects have adapted over time.”
-- “When you have open spaces like this with Indigenous art and everything, it feels more than just a campus. It genuinely feels like a place you enjoy going to.”
-- “I wasn't just staring at a PDF document. I was actually explaining it to other people.”
-- “Free cheese toasties on Thursdays… it's a pretty good tradition.”
+**Visual appeal**  
+“The picture looks beautiful, and the book looks great.”
 
----
+**Technology preference**  
+“Because now we always have the electronic screen… I'm not really interested in it, so it is more like an entertainment way.”
 
-## Short Summary
+**Downtime**  
+“I always spend my time… sometimes sitting on the grass, enjoy my time just like this. Or sometimes I just [go] at home to do some entertainment.”
 
-The interviews show a range of engagement: some students want to explore campus history in greater depth, while others are interested only when the experience is quick, contextual and voluntary. Participants also described learning as more meaningful when it involved explanation, physical presence, cultural context or conversation with other people.
+**Exploration**  
+“Not yet.”
+
+**Motivation to explore**  
+“For more entertainment and new events or something like that, maybe I will go with my friends, start with some events.”
+
+## Interview 3
+
+**Accessibility**  
+“It's purely because of my listening comprehension that I need subtitles to engage with a video.”
+
+**Accessibility impact**  
+“For that reason, it probably didn't grab me, but purely because I'm bad without subtitles.”
+
+**Preferred format**  
+“I like both because if there's both, then there's subtitles.”
+
+**Experience**  
+“I like how it's set up like a game.”
+
+**Interface**  
+“The interface is really nice, and I like the aspect of leaving something to the next person.”
+
+**Curiosity**  
+“I probably wouldn't have taken the initiative myself. But once we were watching, I was interested.”
+
+**Preferred installation**  
+“I feel like if the screen was static, it would work… a screen with the writing of the event rather than the audio-visual.”
+
+**Preferred installation**  
+“Rather than the audio.”
+
+**Approachability**  
+“I like the setup… with a roof.”
+
+**Privacy / control**  
+“It'd be nice if it was like a small thing I could hook up my phone to play, so you don't have to do it in front of everyone.”
+
+**Privacy / control**  
+“Maybe next to it, there's also a QR code, so you can do it on the thing, or you can do it by yourself.”
+
+**Sharing**  
+“I just don't know what to say.”
+
+## Interview 4
+
+**Curiosity**  
+“I don't really have anything to say. I'm nosy. Let's listen to.”
+
+**Curiosity**  
+“Someone was here before you. Now you get to hear what they have left.”
+
+**Reaction**  
+“I was curious. I was definitely curious.”
+
+**Reason for curiosity**  
+“We don't necessarily know a lot of things… a lot of history… [it is] not necessarily widely accessible.”
+
+**Historical connection**  
+“It made me think that… they were here, and I was like, okay, wait. It's a very old uni. There's probably been a lot of generations of people come through.”
+
+**Accessibility**  
+“We didn't know a lot about the history, and this video made it more accessible.”
+
+**Preferred medium**  
+“I liked the film. I'm a visual learner.”
+
+**Place-based interest**  
+“Seeing UQ in a different era.”
+
+**Student contribution**  
+“Part of the history at UQ is the ibises and how they steal your food… I've witnessed in the Great Court many girls' sushi rolls get taken right out of their hand by the ibis birds… and that's really part of our history.”
+
+**Interface**  
+“I feel like the iPad made it very interactive and it was like clean design.”
+
+**Navigation**  
+“I liked the visuals, and it was easy to tap each thing and know where the journey was taking it.”
+
+**Choice**  
+“I liked that it gave us the option to listen to the sound or watch the video as well.”
+
+**Place-based engagement**  
+“If there was something at the direct area where something happened… I would be interested to learn the history of that.”
+
+**Approachability**  
+“That one seems the most accessible.”
+
+**Social comfort**  
+“I'd be a little bit embarrassed to sit at C… A makes it a bit goofy, whereas A or B, it's like okay, there's a nice screen and still has this ear, so you know you can listen.”
+
+**Low-pressure form**  
+“I feel like this feels like I'm more just nonchalant, whereas this is like I'm sitting in front of everyone… so it's a little scary.”
+
+## Overall indication from the testing
+
+Overall, the user-testing interviews suggest that ECHO is more approachable when it offers short, optional and low-pressure interaction; supports text, subtitles and choice of media; connects stories to specific places; and allows people to participate privately without feeling watched.
