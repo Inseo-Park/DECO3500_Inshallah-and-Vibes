@@ -107,7 +107,7 @@ The questionnaire package contains materials used to support prototype testing a
 
 ### Iteration Preview
 
-[Open ECHO Weeks 6–8 Iterations Preview](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_Weeks6-8_Iterations_preview.pdf)
+[Open ECHO Weeks 6–8 Iterations Preview](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_Weeks6-8_Iterations.pdf)
 
 This PDF presents the development and iteration of the ECHO concept across Weeks 6–8.
 
