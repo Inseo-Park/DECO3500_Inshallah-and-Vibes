@@ -1,234 +1,385 @@
-# DECO3500 — Inshallah and Vibes
+# ECHO — Place-Based Storytelling Installation
 
-> **Domain:** UQ History
-> **Team:** Inshallah and Vibes
-> **Course:** DECO3500
-> **Current Project:** UQ Echoes
+> **DECO3500 — Inshallah and Vibes**  
+> University of Queensland (UQ)  
+> Project: **ECHO — Stories, memories and moments left behind for others to discover**
 
-This repository contains the documentation, research, design work, prototypes, user testing, iterative refinement, and development conducted by **Team Inshallah and Vibes** throughout DECO3500.
+## 1. Project Overview
 
-Our project explores the **UQ History** domain, with the goal of creating an engaging social and mobile computing experience that allows students to interact with and discover the history of The University of Queensland.
+ECHO is a place-based storytelling experience designed to help students connect with UQ’s history, campus identity and one another through short, optional interactions.
 
-Following initial research, concept exploration, prototyping, and user testing, the team selected **UQ Echoes** as the concept to take forward. The project has now moved into an **iterative design and development process**, where the prototype is tested and refined each week based on user feedback.
+The concept combines:
 
-This README acts as the central navigation point for the repository and provides a chronological record of our design process.
+- A physical installation located in a familiar campus space.
+- A touchscreen interface for exploring stories.
+- Audio, video, text and visual storytelling.
+- Historical stories connected to UQ locations.
+- Memories and experiences contributed by students and community members.
+- An asynchronous social interaction where one person can leave an “Echo” for another person to discover later.
+- A future proximity sensor, lighting system and opening mechanism to make the installation visibly interactive.
 
----
-
-## 📚 Project Documentation
-
-| Stage                        | Documentation                                                                                                                                                                                                                                                                            |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🤝 Team Formation            | [Team Charter](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/blob/main/Team%20Charter)                                                                                                                                                                                   |
-| 💡 Domain Exploration        | [Domain & Concept Ideation](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Proposal/Domain%20Ideation)                                                                                                                                                 |
-| 🎤 Initial User Research     | [Interview Questions](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Proposal/Interview%20Questions) · [Initial Interview Transcripts](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/tree/main/Design%20Proposal/Initial%20Interviews) |
-| 🔎 Secondary Research        | [Secondary Research & Literature Analysis](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Proposal/Secondary%20Research)                                                                                                                               |
-| 📊 Design Proposal           | [Design Proposal Presentation](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Proposal/Proposal%20Presentation)                                                                                                                                        |
-| ✏️ Low-Fidelity Prototyping  | [Low-Fidelity Prototypes](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/tree/main/Low%20Fidelity%20Prototypes)                                                                                                                                                           |
-| 🧪 Initial Prototype Testing | [Prototype Feedback](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/tree/main/Prototype%20Feedback)                                                                                                                                                                       |
-| 🏛️ Selected Concept         | [UQ Echoes](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/blob/main/Low%20Fidelity%20Prototypes/Itisha/EchosOfUQ.png)                                                                                                                                                    |
-| 🎤 UQ Echoes User Testing | [UQ Echoes Student Interview Transcripts](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/UQ%20Echoes%20Transcripts) · [Echo Sessions User Testing Data](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Echo%20Sessions.md) |
-| 🔄 Iterative Refinement      | Weekly testing, evaluation, and refinement of UQ Echoes                                                                                                                                                                                                                                  |
-| 💻 Functional Prototype      | Development commencing 20 September 2026                                                                                                                                                                                                                                                 |
+The project is designed to support curiosity, belonging and low-pressure participation without requiring a group, scheduled activity or public performance.
 
 ---
 
-# 🗓️ Project Timeline
+## 2. Repository
 
-## 11 August 2026 — Team Formation & Repository Setup
+**GitHub repository:**  
+[DECO3500_Inshallah-and-Vibes](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes)
 
-The team established its working structure, expectations, communication processes, and responsibilities.
-
-* Created the GitHub repository.
-* Established team expectations and responsibilities.
-* Created the [Team Charter](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/blob/main/Team%20Charter).
+The repository contains project documentation, research outputs, prototype files, testing materials, iteration records and supporting assets.
 
 ---
 
-## 16 August 2026 — Initial Domain & Concept Ideation
+## 3. Repository Structure
 
-Each team member independently investigated potential domains and concepts before presenting their findings to the rest of the team.
+| Folder / File | Description |
+|---|---|
+| `Design Proposal/` | Initial research, project framing, design opportunity and proposal documentation. |
+| `Low Fidelity Prototypes/` | Early concepts, sketches, exploratory prototypes and initial design directions. |
+| `Prototype/` | Prototype files, interface work and implementation-related materials. |
+| `Prototype Feedback/` | User testing materials, participant feedback and evaluation outputs. |
+| `UQ Echoes Transcripts/` | Transcripts and supporting material related to the ECHO storytelling content. |
+| `Week 9 Stand Up/` | Current presentation materials, iteration documentation, images, prototype packages and supporting assets. |
+| `Week 9 Stand Up/01_existing_wiki_links.png` | Screenshot documenting existing Wiki links. |
+| `Week 9 Stand Up/02_design_decisions.png` | Summary of design decisions based on research and feedback. |
+| `Week 9 Stand Up/03_design_direction.png` | Design direction and concept development visual. |
+| `Week 9 Stand Up/04_physical_concept.png` | Physical installation concept visual. |
+| `Week 9 Stand Up/05_user_testing_01.jpeg` | User testing documentation. |
+| `Week 9 Stand Up/06_user_testing_02.jpeg` | User testing documentation. |
+| `Week 9 Stand Up/ECHO_1.zip` | Prototype package. |
+| `Week 9 Stand Up/ECHO-questionnaire_2.zip` | Questionnaire and/or testing package. |
+| `Week 9 Stand Up/ECHO_Weeks6-8_Iterations_preview.pdf` | Preview of design iterations from Weeks 6–8. |
+| `Week 9 Stand Up/ECHO_Wiki_Assets/` | Supporting assets for the Wiki documentation. |
 
-The initial concepts were documented using collaborative sticky-note ideation before being discussed and compared as a team.
-
-📄 **Documentation:** [Initial Concept Ideation](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Proposal/Domain%20Ideation)
-
----
-
-## 18 August 2026 — Domain Selection
-
-Following our initial exploration, the team narrowed the potential domains to:
-
-* 🍳 **Cooking**
-* 🏛️ **UQ History**
-
-A team vote was conducted, with **UQ History** receiving the majority vote and becoming the selected project domain.
-
----
-
-## 22 August 2026 — User & Secondary Research
-
-With UQ History selected as the project domain, the team began conducting primary and secondary research.
-
-### User Interviews
-
-The team developed a common set of [Interview Questions](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Proposal/Interview%20Questions).
-
-Each team member conducted at least one interview to investigate users' knowledge, experiences, interests, and expectations surrounding UQ history.
-
-📁 **Interview data:** [Initial Interview Transcripts](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/tree/main/Design%20Proposal/Initial%20Interviews)
-
-### Secondary Research
-
-The team also investigated existing literature and resources related to UQ history and the broader problem space.
-
-📄 **Documentation:** [Secondary Research & Literature Analysis](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Proposal/Secondary%20Research)
+> Folder names may contain spaces. When linking to files on GitHub, use the URL-encoded path generated by GitHub or copy the link directly from the relevant file page.
 
 ---
 
-## 25 August 2026 — Design Proposal
+## 4. Key Documentation
 
-Findings from our interviews, secondary research, and initial ideation were synthesised into the team's **Design Proposal**.
+### Wiki pages
 
-The presentation communicated:
+- [Design Process Overview](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/wiki/Design-Process-Overview)
+- [Ethical Considerations](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/wiki/Ethical-Considerations)
 
-* Our selected domain and problem space.
-* Key findings from user interviews.
-* Findings from secondary research and literature.
-* Initial design opportunities.
-* Early concepts proposed by the team.
+The **Design Process Overview** documents the research, design development, testing, design decisions, prototype direction and future implementation plan.
 
-📊 **Presentation:** [Design Proposal Presentation](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Proposal/Proposal%20Presentation)
+The **Ethical Considerations** page evaluates risks related to privacy, consent, historical representation, cultural respect, emotional safety, accessibility, physical safety, content moderation, intellectual property and maintenance.
 
----
+### Important supporting materials
 
-## 3 September 2026 — Low-Fidelity Prototyping & User Testing
-
-Following the Design Proposal, each team member selected a concept within the **UQ History** domain and developed an individual low-fidelity prototype.
-
-✏️ **Prototypes:** [Low-Fidelity Prototypes](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/tree/main/Low%20Fidelity%20Prototypes)
-
-The prototypes were then tested with users to evaluate:
-
-* User interest and engagement.
-* Usability and clarity.
-* Strengths and weaknesses of each concept.
-* Opportunities for further development.
-* Suitability for social and mobile computing.
-
-🧪 **Testing results:** [Prototype Feedback](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/tree/main/Prototype%20Feedback)
+- [Week 9 Stand Up folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Week%209%20Stand%20Up)
+- [Prototype folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Prototype)
+- [Prototype Feedback folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Prototype%20Feedback)
+- [Design Proposal folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Design%20Proposal)
 
 ---
 
-## 10 September 2026 — Final Concept Selection
+## 5. Prototype Overview
 
-After reviewing the concepts and feedback collected during prototype testing, the team selected **Itisha's UQ Echoes concept** for further development.
+### Current prototype
 
-🏛️ **Selected concept:** [UQ Echoes Prototype](https://github.com/deco3500-team/DECO3500_Inshallah-and-Vibes/blob/main/Low%20Fidelity%20Prototypes/Itisha/EchosOfUQ.png)
+The current prototype demonstrates:
 
-The concept was selected because it:
+1. An ECHO landing screen.
+2. An explanation of what an Echo is.
+3. Listen and Discover / Share Something pathways.
+4. Selection of story categories.
+5. Audio, visual and text-based storytelling.
+6. Reflection and feedback prompts.
+7. An optional contribution pathway.
+8. A physical cardboard prototype containing a touchscreen.
 
-* Generated strong interest and excitement within the team.
-* Provided opportunities for engaging interaction with UQ's history.
-* Had strong potential for **social and mobile computing**.
-* Offered an interesting and achievable implementation direction.
-* Provided opportunities for continued refinement through user testing.
+The physical prototype is currently a low-fidelity representation of the proposed installation. It is intended to test the relationship between the physical form, screen interaction and storytelling experience.
 
-Following this decision, the team's focus shifted from exploring multiple concepts to **iteratively developing, testing, and refining UQ Echoes**.
+### Intended future working installation
 
----
+The planned working installation will include:
 
-## 16 September 2026 — UQ Echoes Student Interviews & User Testing
-
-Following the selection of UQ Echoes, the team conducted a new round of **user interviews and prototype testing with students**.
-
-Unlike the initial interviews, which explored the broader UQ History domain, this round of research focused specifically on the **UQ Echoes concept and prototype**.
-
-Students were introduced to the concept and asked to provide feedback on areas including:
-
-* Their understanding of the UQ Echoes concept.
-* Their interest in using the experience.
-* The clarity and usability of the prototype.
-* Features they found engaging or useful.
-* Features or interactions that could be improved.
-* How effectively the concept encouraged exploration of UQ history.
-* Suggestions for future iterations of the prototype.
-
-The findings from these interviews will be used to guide the next iteration of UQ Echoes and inform decisions made during development.
-
-🎤 **User Research:** [UQ Echoes Student Interview Transcripts](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/UQ%20Echoes%20Transcripts)
-
-📊 **User Testing Data:** [Echo Sessions User Testing Data](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Echo%20Sessions.md)
+- A touchscreen.
+- A proximity sensor.
+- An Arduino or ESP32 microcontroller.
+- LED lighting.
+- A controlled opening mechanism.
+- A motor or servo.
+- Enclosed wiring and a protected electronics compartment.
+- Curated historical and student-generated content.
+- Accessibility features such as captions, readable text and alternative content formats.
 
 ---
 
-## 20 September 2026 — Functional Prototype Development
+## 6. Future Physical Implementation Plan
 
-The next stage of the project focuses on translating the UQ Echoes concept into a **functional prototype**.
+The future implementation is expected to follow these stages:
 
-Development will incorporate findings from the 16 September student interviews alongside feedback gathered during earlier prototype testing.
+### Stage 1 — Physical structure
 
-The functional prototype will allow the team to move beyond static concept evaluation and begin testing the actual interactions and experience proposed by UQ Echoes.
+- Finalise the dimensions and form of the installation.
+- Build a stable enclosure using suitable materials.
+- Create a secure mount for the touchscreen.
+- Add hinges or a controlled opening mechanism.
+- Remove sharp edges and protect vulnerable components.
 
-### Development Focus
+### Stage 2 — Electronics
 
-* Implement the core UQ Echoes experience.
-* Translate the low-fidelity design into functional interactions.
-* Incorporate findings from student user testing.
-* Identify technical and interaction limitations.
-* Prepare the prototype for further user evaluation.
-* Continue refining the experience through subsequent weekly iterations.
+Potential components include:
 
-💻 **Status:** Functional prototype development
+- Arduino Uno, Arduino Nano or ESP32.
+- PIR or time-of-flight proximity sensor.
+- Servo motor or geared motor.
+- LED strip or LED light module.
+- Appropriate motor driver, if required.
+- External power supply or battery system.
+- Wires, connectors and breadboard for initial testing.
+- Resistors and other supporting electronic components.
+- Protective casing and cable management materials.
+
+The final component selection must be based on the required motor torque, sensor range, power requirements, physical dimensions and safety constraints.
+
+### Stage 3 — Proximity activation
+
+The proximity sensor will detect when a person approaches the installation.
+
+The intended sequence is:
+
+1. The installation remains in a quiet standby state.
+2. A person approaches within the configured detection range.
+3. The sensor triggers a subtle light.
+4. The physical structure begins a slow and controlled opening movement.
+5. The screen becomes visible and displays an invitation to interact.
+6. The user touches the screen to begin.
+7. The user can listen, watch, read, share or exit.
+8. After a period of inactivity, the installation returns to standby.
+
+The proximity sensor will activate the installation only. It will not automatically record, photograph, identify or track the person approaching.
+
+### Stage 4 — Touchscreen and interaction
+
+- Connect the touchscreen device to the physical installation.
+- Test touch targets, navigation, audio playback and video playback.
+- Provide clear back, exit and stop controls.
+- Include captions or transcripts for audio and video.
+- Ensure that users can complete a short interaction without needing to finish the entire experience.
+- Test the interface in both bright and low-light conditions.
+
+### Stage 5 — Testing and safety
+
+- Test the sensor at different distances and approach angles.
+- Test the opening mechanism at low speed.
+- Add mechanical limits to prevent over-rotation.
+- Protect moving parts from fingers and clothing.
+- Check stability, wiring, heat and power consumption.
+- Test repeated activation and inactivity timeouts.
+- Conduct supervised testing before public deployment.
+- Obtain appropriate approval for any campus installation.
 
 ---
 
-# 🔄 Weekly Iterative Refinement
+## 7. Usage Instructions
 
-Following the selection of UQ Echoes, the project has moved into a **weekly iterative design cycle**.
+### For a prototype demonstration
 
-Rather than treating the prototype as a final design, each iteration will be informed by findings from the previous round of development and evaluation.
+1. Place the physical prototype on a stable surface.
+2. Secure the tablet or touchscreen in its holder.
+3. Open the prototype interface or presentation file.
+4. Ensure that audio output is available if the experience includes narration.
+5. Introduce the participant using neutral language.
+6. Allow the participant to explore without immediately explaining the intended hypothesis.
+7. Observe how they approach, interpret and interact with the prototype.
+8. Ask the planned feedback questions after the interaction.
+9. Record observations without collecting unnecessary personal information.
+10. Reset the prototype for the next participant.
 
-Our ongoing process is:
+### For the planned interactive installation
 
-**Prototype** → **Test with Users** → **Collect Feedback** → **Analyse Findings** → **Refine Design** → **Implement Changes** → **Test Again**
+The final usage procedure will be:
 
-Each week, the team will document:
+1. A person approaches the installation.
+2. The proximity sensor activates the light and opening sequence.
+3. The touchscreen displays the ECHO welcome screen.
+4. The user touches the screen to begin.
+5. The user chooses whether to listen, watch, read or leave an Echo.
+6. The user can stop or exit at any time.
+7. The system returns to standby after inactivity.
 
-1. **What was tested** — the prototype, feature, or interaction evaluated.
-2. **Who was involved** — the target users participating in evaluation.
-3. **What we found** — important observations and user feedback.
-4. **What changed** — design decisions made in response to the findings.
-5. **Why it changed** — evidence or reasoning supporting the decision.
-6. **What happens next** — features or questions to investigate in the following iteration.
-
-This approach will allow the repository to demonstrate not only the final outcome, but also **how UQ Echoes evolves in response to research, testing, and design decisions throughout the semester**.
-
----
-
-# 🔄 Overall Design Process
-
-The project has progressed through two broad phases:
-
-### Phase 1 — Domain Exploration & Concept Selection
-
-**Domain Exploration** → **Initial User Research** → **Secondary Research** → **Concept Ideation** → **Low-Fidelity Prototyping** → **User Testing** → **Concept Selection**
-
-### Phase 2 — UQ Echoes Iterative Development
-
-**UQ Echoes Prototype** → **Student Testing** → **Feedback Analysis** → **Functional Prototype** → **Evaluation** → **Refinement** → **Further Iteration**
-
-Research and user feedback are used throughout the project to inform design decisions and provide evidence for changes made to UQ Echoes.
+The final public-use procedure should be updated after the electronics and touchscreen integration have been tested.
 
 ---
 
-## 🚀 Current Project Status
+## 8. Deployment Instructions
 
-**Domain:** UQ History
-**Selected Concept:** UQ Echoes
-**Current Stage:** Functional Prototype Development
-**Current Focus:** Weekly Iterative Refinement
-**Latest User Testing:** 16 September 2026
-**Functional Prototype Development:** 20 September 2026
+The current project contains prototype and documentation materials rather than a confirmed production deployment.
 
-The repository will continue to document the evolution of **UQ Echoes** throughout the semester, including weekly prototype changes, user evaluations, findings, design decisions, and implementation progress.
+### Documentation deployment
+
+To update the Wiki:
+
+1. Open the repository on GitHub.
+2. Select the **Wiki** tab.
+3. Open the relevant Wiki page.
+4. Select **Edit**.
+5. Paste the updated Markdown content.
+6. Check that headings, links and images render correctly.
+7. Save the page.
+8. Open the saved page in a private/incognito window to verify that links work.
+
+### Asset deployment
+
+For images to display correctly in a GitHub Wiki:
+
+- Upload the image files to a committed repository folder.
+- Use the image file’s GitHub `raw` URL or a correctly formatted repository path.
+- Ensure the filename and folder path match exactly, including spaces, punctuation and capitalisation.
+- Do not reference images that exist only inside a ZIP file.
+- If an image is stored inside a ZIP file, extract it and upload the individual image file to the repository.
+- Confirm that the uploaded image is accessible from the intended GitHub URL.
+
+Example Markdown image syntax:
+
+```markdown
+![Description](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/Week%209%20Stand%20Up/example.png)
+```
+
+For long-term reliability, keep the image files in the repository rather than relying only on local computer paths.
+
+### Prototype deployment
+
+The exact deployment process depends on the prototype format:
+
+- **Figma prototype:** open the shared Figma prototype link.
+- **Video/audio prototype:** open the relevant media file from the repository or local presentation folder.
+- **HTML/CSS/JavaScript prototype:** open the project using a local development server or the hosting method specified by the implementation files.
+- **Physical prototype:** connect the touchscreen, power the electronics and run the control program after completing safety checks.
+
+No production hosting method has been confirmed in the current documentation. The deployment instructions should be updated once the final prototype technology is selected.
+
+---
+
+## 9. Login Details and Access
+
+No passwords, API keys or private credentials should be stored in this README or committed to the repository.
+
+### Access checklist
+
+Before demonstrating the project, confirm access to:
+
+- GitHub repository.
+- GitHub Wiki editing permissions.
+- Figma prototype and source file.
+- Any audio or video editing project.
+- Touchscreen device.
+- Microcontroller development environment, if used.
+- Any required hosting or deployment platform.
+
+### Credential policy
+
+- Use personal or institution-approved accounts.
+- Do not share passwords in repository files.
+- Do not commit API keys, access tokens, private URLs or authentication cookies.
+- Use environment variables or a secure secrets manager for any required credentials.
+- Remove temporary credentials after testing.
+- If access is required by another team member, grant access through the platform’s permission settings rather than sharing a password.
+
+### Login details template
+
+Complete this section only if the teaching team requires documented access instructions. Do not add passwords or secret tokens.
+
+| Service | Account / Owner | Access method | Notes |
+|---|---|---|---|
+| GitHub | To be confirmed | GitHub account with repository permissions | Do not store passwords here. |
+| Figma | To be confirmed | Shared file or team access | Confirm view/edit permissions. |
+| Prototype hosting | Not confirmed | To be completed after deployment choice | Add platform-specific instructions later. |
+| Hardware / microcontroller | Local project setup | USB connection and development environment | Document board and software versions. |
+
+---
+
+## 10. Testing and Evaluation
+
+The project should be evaluated through:
+
+- Observation of how participants approach the installation.
+- Whether the invitation is understandable.
+- Whether the physical form feels approachable rather than intimidating.
+- Whether the interaction can be completed within a short period.
+- Preferences for audio, visual and text formats.
+- Emotional and reflective responses to stories.
+- Comfort with the physical installation.
+- Perceptions of privacy and control.
+- Accessibility and ease of navigation.
+- Willingness to leave or discover an Echo.
+
+Testing should avoid pressuring participants to share personal information. Participants should be able to stop at any point.
+
+---
+
+## 11. Ethical and Safety Notes
+
+The project must consider:
+
+- Voluntary participation and informed consent.
+- Privacy and anonymity of contributions.
+- Historical accuracy and source attribution.
+- Cultural respect, including sensitive and First Nations histories.
+- Content warnings for distressing material.
+- Captions, transcripts and alternative formats.
+- Safe movement of the opening mechanism.
+- Protected wiring and stable physical construction.
+- Content moderation before public publication.
+- Copyright and permission for images, music, video and stories.
+- Maintenance responsibility after deployment.
+
+For the full assessment, see the [Ethical Considerations Wiki page](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/wiki/Ethical-Considerations).
+
+---
+
+## 12. Team Workflow
+
+When making changes:
+
+1. Use clear filenames.
+2. Keep related assets in the appropriate folder.
+3. Avoid deleting original research or testing evidence.
+4. Add a short commit message describing the change.
+5. Check image links after uploading or renaming files.
+6. Update the relevant Wiki page when documentation changes.
+7. Verify that the final repository contains the files required for assessment.
+8. Keep sensitive information and credentials outside the repository.
+
+---
+
+## 13. Project Status
+
+### Current status
+
+- Research and problem framing completed.
+- ECHO concept developed through iterative design.
+- Physical low-fidelity prototype created.
+- Touchscreen interaction concept developed.
+- User testing and feedback documentation collected.
+- Wiki documentation being updated.
+- Ethical considerations documented.
+- Future working installation planned.
+
+### Next implementation priorities
+
+1. Finalise the physical form and dimensions.
+2. Select and test the proximity sensor.
+3. Select the microcontroller and lighting components.
+4. Build and test the opening mechanism.
+5. Integrate the touchscreen.
+6. Implement the activation and standby sequence.
+7. Test accessibility, safety and user comfort.
+8. Curate and review historical and user-generated content.
+9. Conduct a final supervised prototype evaluation.
+10. Document the final build and deployment process.
+
+---
+
+## 14. Contact and Ownership
+
+Project repository: [Inseo-Park/DECO3500_Inshallah-and-Vibes](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes)
+
+Project team: **Inshallah and Vibes**
+
+For access, deployment or content questions, contact the project team through the communication channel agreed upon by the team and teaching staff.
