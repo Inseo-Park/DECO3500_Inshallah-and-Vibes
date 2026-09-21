@@ -57,7 +57,7 @@ The **Ethical Considerations** page discusses the ethical implications of the pr
 ### Supporting Materials
 
 - [Design Proposal folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Design%20Proposal)
-- [Prototype folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_5.zip)
+- [Prototype folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_7.zip)
 - [Prototype Feedback folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Prototype%20Feedback)
 - [UQ Echoes Transcripts folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/UQ%20Echoes%20Transcripts)
 - [Week 9 Stand Up folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Week%209%20Stand%20Up)
@@ -89,7 +89,7 @@ The main prototype package is stored in the **Week 9 Stand Up** folder.
 
 ### ECHO 1 Prototype
 
-[Download ECHO_1.zip](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_1.zip)
+[Download ECHO_1.zip](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_7.zip)
 
 To download the prototype:
 
