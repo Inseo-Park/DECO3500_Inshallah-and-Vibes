@@ -1,0 +1,2525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ECHO — UQ Lakes</title>
+<style>
+/* ==========================================================================
+   ECHO — UQ Lakes listening pod prototype
+   Single-file build. Open index.html directly; no server required.
+   Palette sampled from the film's own title card (see media/ASSETS.md).
+   ========================================================================== */
+
+:root{
+  --paper:#F4E6CB;
+  --paper-deep:#EBD9B8;
+  --paper-card:#F7EDD8;
+  --ink:#221C17;
+  --ink-soft:#5A4C42;
+  --maroon:#6E1C20;
+  --maroon-lift:#8A2429;
+  --rust:#A85C3C;
+  --rust-lift:#C9743F;   /* the rust, lifted for use on the dark story stage */
+  --tan:#C99B74;
+  --hair:rgba(34,28,23,.16);
+  --hair-strong:rgba(34,28,23,.30);
+
+  --display:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --dur:460ms;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:18px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+  overscroll-behavior:none;
+  -webkit-tap-highlight-color:transparent;
+}
+button{font:inherit;color:inherit;margin:0}
+[hidden]{display:none!important}
+
+/* --- film grain ---------------------------------------------------------- */
+#grain{
+  position:fixed;inset:-60%;
+  pointer-events:none;z-index:900;
+  opacity:.06;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+  animation:grain 7s steps(8) infinite;
+}
+@keyframes grain{
+  0%{transform:translate(0,0)}      12.5%{transform:translate(-3%,-4%)}
+  25%{transform:translate(-6%,2%)}  37.5%{transform:translate(3%,-3%)}
+  50%{transform:translate(-2%,5%)}  62.5%{transform:translate(4%,3%)}
+  75%{transform:translate(-5%,-2%)} 87.5%{transform:translate(2%,4%)}
+  100%{transform:translate(0,0)}
+}
+/* a soft vignette so the pod screen reads as a recess, not a poster */
+#vignette{
+  position:fixed;inset:0;pointer-events:none;z-index:899;
+  background:radial-gradient(130% 100% at 50% 40%,transparent 48%,rgba(34,28,23,.13) 100%);
+}
+
+/* --- screen scaffolding -------------------------------------------------- */
+#app{position:fixed;inset:0;z-index:10}
+.screen{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:clamp(28px,4vw,64px);
+  padding-top:max(clamp(28px,4vw,64px),env(safe-area-inset-top,0px));
+  padding-bottom:max(clamp(28px,4vw,64px),env(safe-area-inset-bottom,0px));
+  opacity:0;transform:translateY(14px);
+  transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease);
+  overflow:hidden;
+}
+.screen.in{opacity:1;transform:none}
+.screen.out{opacity:0;transform:translateY(-10px);pointer-events:none}
+.wrap{width:100%;max-width:1060px;margin:0 auto}
+.wrap.narrow{max-width:820px}
+.wrap.wide{max-width:1280px}
+
+/* stagger children on entry */
+.screen.in .stag>*{animation:rise 620ms var(--ease) backwards}
+.screen.in .stag>*:nth-child(1){animation-delay:60ms}
+.screen.in .stag>*:nth-child(2){animation-delay:150ms}
+.screen.in .stag>*:nth-child(3){animation-delay:240ms}
+.screen.in .stag>*:nth-child(4){animation-delay:330ms}
+.screen.in .stag>*:nth-child(5){animation-delay:420ms}
+.screen.in .stag>*:nth-child(6){animation-delay:510ms}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* --- type ---------------------------------------------------------------- */
+.eyebrow{
+  font-size:.82rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 18px;
+}
+.eyebrow .dot{color:var(--maroon)}
+h1.display{
+  font-family:var(--display);
+  font-size:clamp(2.8rem,6.6vw,5.4rem);
+  line-height:.94;letter-spacing:-.015em;
+  text-transform:uppercase;font-weight:700;
+  margin:0 0 22px;
+}
+h1.display.tight{font-size:clamp(2.2rem,4.6vw,3.8rem)}
+h2.display{
+  font-family:var(--display);
+  font-size:clamp(2rem,4.2vw,3.2rem);
+  line-height:1.02;letter-spacing:-.01em;
+  text-transform:uppercase;font-weight:700;margin:0 0 20px;
+}
+.lede{font-size:clamp(1.18rem,1.9vw,1.6rem);line-height:1.45;color:var(--ink-soft);margin:0 0 14px;max-width:44ch}
+.lede.wide{max-width:60ch}
+.lede strong{color:var(--ink);font-weight:600}
+.fine{font-size:1.02rem;color:var(--ink-soft);margin:22px 0 0}
+.rule{height:1px;background:var(--hair);border:0;margin:30px 0}
+.serif-quote{font-family:var(--display);font-size:clamp(1.5rem,2.6vw,2.15rem);line-height:1.28;color:var(--ink);margin:0 0 10px}
+
+/* --- choice cards -------------------------------------------------------- */
+.choices{display:grid;gap:16px;margin-top:34px}
+.choices.two{grid-template-columns:repeat(2,1fr)}
+.choices.three{grid-template-columns:repeat(3,1fr)}
+.choices.four{grid-template-columns:repeat(2,1fr)}
+.choices.list{grid-template-columns:1fr}
+.choices.six{grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){
+  .choices.two,.choices.three,.choices.four,.choices.six{grid-template-columns:1fr}
+}
+
+.choice{
+  position:relative;display:flex;gap:16px;align-items:flex-start;
+  min-height:64px;padding:22px 24px;
+  background:var(--paper-card);
+  border:1px solid var(--hair);
+  border-radius:3px;
+  text-align:left;cursor:pointer;
+  transition:transform 160ms var(--ease),border-color 160ms,background 160ms,box-shadow 160ms;
+  box-shadow:0 1px 0 rgba(34,28,23,.05);
+}
+.choice::after{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--maroon);transform:scaleY(0);transform-origin:top;
+  transition:transform 200ms var(--ease);
+}
+.choice:hover{border-color:var(--hair-strong);transform:translateY(-2px);box-shadow:0 6px 18px rgba(34,28,23,.08)}
+.choice:hover::after{transform:scaleY(1)}
+.choice:active{transform:translateY(0) scale(.988)}
+.choice:focus-visible{outline:3px solid var(--maroon);outline-offset:3px}
+.choice .ico{font-size:1.7rem;line-height:1;flex:0 0 auto;margin-top:2px;filter:saturate(.85)}
+.choice .txt{flex:1 1 auto;min-width:0}
+.choice .t{display:block;font-size:1.22rem;font-weight:650;letter-spacing:.005em;margin-bottom:5px}
+.choice .d{display:block;font-size:1.02rem;color:var(--ink-soft);line-height:1.4}
+.choice.big{padding:34px 32px;min-height:168px;flex-direction:column;justify-content:center;gap:12px}
+.choice.big .ico{font-size:2.4rem}
+.choice.big .t{font-family:var(--display);font-size:clamp(1.5rem,2.4vw,2rem);text-transform:uppercase;letter-spacing:.01em;font-weight:700}
+.choice.plain{padding:20px 24px}
+.choice.plain .t{margin-bottom:0}
+.choice.selected{border-color:var(--maroon);background:#F2E2C3}
+.choice.selected::after{transform:scaleY(1)}
+
+/* --- buttons ------------------------------------------------------------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  min-height:64px;padding:0 36px;
+  background:var(--maroon);color:var(--paper);
+  border:1px solid var(--maroon);border-radius:3px;
+  font-size:1.1rem;font-weight:650;letter-spacing:.06em;text-transform:uppercase;
+  cursor:pointer;
+  transition:transform 150ms var(--ease),background 160ms;
+}
+.btn:hover{background:var(--maroon-lift)}
+.btn:active{transform:scale(.985)}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--hair-strong)}
+.btn.ghost:hover{background:rgba(34,28,23,.05);border-color:var(--ink)}
+.btn.small{min-height:52px;padding:0 24px;font-size:.95rem}
+.btnrow{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;align-items:center}
+.btnrow.center{justify-content:center}
+
+/* --- utility bars -------------------------------------------------------- */
+.topbar{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:clamp(18px,2.2vw,28px) clamp(22px,3vw,40px);
+  padding-top:max(clamp(18px,2.2vw,28px),env(safe-area-inset-top,0px));
+  z-index:20;pointer-events:none;
+}
+.topbar>*{pointer-events:auto}
+/* The film opens on a pale title card, so the controls need their own ground
+   or they vanish into it. */
+.screen[data-screen="STORY"] .topbar{
+  background:linear-gradient(180deg,rgba(21,17,14,.80),rgba(21,17,14,0));
+  padding-bottom:34px;
+}
+.screen[data-screen="STORY"] .linkbtn{color:var(--paper)!important;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.screen[data-screen="STORY"] .linkbtn:hover{color:#fff!important}
+.linkbtn{
+  background:none;border:0;padding:20px 22px;margin:-20px -22px;
+  min-height:64px;display:inline-flex;align-items:center;
+  font-size:.86rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-soft);cursor:pointer;border-radius:3px;
+}
+.linkbtn:hover{color:var(--maroon)}
+.linkbtn:focus-visible{outline:2px solid var(--maroon);outline-offset:2px}
+.stamp{
+  font-size:.78rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+
+/* --- text input ---------------------------------------------------------- */
+.field{margin-top:26px}
+.field label{display:block;font-size:1.05rem;font-weight:600;margin-bottom:12px}
+.field textarea,.field input[type=text]{
+  width:100%;background:var(--paper-card);
+  border:1px solid var(--hair);border-radius:3px;
+  padding:18px 20px;font-family:var(--sans);font-size:1.12rem;line-height:1.5;
+  color:var(--ink);resize:none;
+}
+.field textarea::placeholder{color:rgba(90,76,66,.55)}
+.field textarea:focus,.field input:focus{outline:0;border-color:var(--maroon);background:#F7EFDD}
+.counter{font-size:.92rem;color:var(--ink-soft);margin-top:10px;text-align:right}
+
+/* --- the Person A → Echo → You diagram ----------------------------------- */
+.chain{display:flex;align-items:center;justify-content:center;gap:clamp(16px,3vw,40px);margin:38px 0 10px}
+.chain .node{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-size:.82rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+}
+.chain .node .glyph{
+  width:clamp(64px,8vw,92px);height:clamp(64px,8vw,92px);border-radius:50%;
+  border:1px solid var(--hair-strong);display:grid;place-items:center;
+  font-size:clamp(1.5rem,2.4vw,2rem);background:var(--paper-card);
+}
+.chain .node.echo .glyph{border-color:var(--maroon);border-width:2px;color:var(--maroon);font-family:var(--display);font-weight:700}
+.chain .node.echo{color:var(--maroon)}
+.chain .arrow{font-size:1.6rem;color:var(--tan);margin-bottom:22px}
+.chain .node.you .glyph{border-style:dashed}
+
+/* pulse rings on the echo node */
+.chain .node.echo .glyph{position:relative}
+.chain .node.echo .glyph::before,
+.chain .node.echo .glyph::after{
+  content:"";position:absolute;inset:-6px;border-radius:50%;
+  border:1px solid var(--maroon);opacity:0;
+  animation:ring 3.4s var(--ease) infinite;
+}
+.chain .node.echo .glyph::after{animation-delay:1.7s}
+@keyframes ring{
+  0%{transform:scale(.92);opacity:.5}
+  70%{transform:scale(1.5);opacity:0}
+  100%{opacity:0}
+}
+
+/* --- landing ------------------------------------------------------------- */
+#landing-bg{
+  position:absolute;inset:0;z-index:-1;
+  background:var(--paper);
+}
+#landing-bg img{
+  width:100%;height:100%;object-fit:cover;
+  opacity:.22;filter:sepia(.35) contrast(.92);
+  transform:scale(1.06);
+  animation:driftzoom 40s var(--ease) infinite alternate;
+}
+#landing-bg::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(244,230,203,.72) 0%,rgba(244,230,203,.86) 55%,rgba(244,230,203,.95) 100%);
+}
+@keyframes driftzoom{from{transform:scale(1.06) translate(0,0)}to{transform:scale(1.14) translate(-1.5%,-1%)}}
+
+.touchcue{
+  margin-top:40px;
+  font-size:.86rem;font-weight:700;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--maroon);animation:breathe 3.6s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:.35}50%{opacity:1}}
+
+/* --- story / player ------------------------------------------------------ */
+.stage{position:absolute;inset:0;background:#15110E;display:flex;align-items:center;justify-content:center}
+.stage video{width:100%;height:100%;object-fit:contain;background:#15110E}
+.stage .stillwrap{position:relative;width:100%;height:100%;overflow:hidden}
+.stage .stillwrap img{
+  width:100%;height:100%;object-fit:cover;opacity:.5;
+  filter:grayscale(1) contrast(1.05);
+  transform:scale(1.04);animation:driftzoom 60s var(--ease) infinite alternate;
+}
+.stage .stillwrap::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 90% at 50% 45%,rgba(21,17,14,.25) 0%,rgba(21,17,14,.86) 100%);
+}
+.modeb-overlay{
+  position:absolute;inset:0;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:clamp(28px,5vw,80px);text-align:center;color:var(--paper);
+}
+.modeb-overlay .echoid{
+  font-size:.86rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--tan);margin-bottom:18px;
+}
+.modeb-overlay .title{
+  font-family:var(--display);text-transform:uppercase;font-weight:700;
+  font-size:clamp(1.8rem,4vw,3.2rem);line-height:1.02;margin:0 0 26px;max-width:16ch;
+}
+.era{
+  font-size:.92rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--paper);opacity:.85;min-height:1.4em;
+  transition:opacity 400ms var(--ease);
+}
+.era.swap{opacity:0}
+
+/* waveform */
+#wave{width:min(760px,92%);height:96px;margin:26px 0 6px;cursor:pointer;display:block}
+
+/* transport */
+.transport{
+  position:absolute;left:0;right:0;bottom:0;z-index:5;
+  padding:clamp(20px,3vw,34px) clamp(24px,4vw,56px);
+  padding-bottom:max(clamp(20px,3vw,34px),env(safe-area-inset-bottom,0px));
+  background:linear-gradient(180deg,transparent,rgba(21,17,14,.88) 42%);
+  color:var(--paper);
+  display:flex;flex-direction:column;gap:16px;
+  transition:opacity 500ms var(--ease);
+}
+.transport.idle{opacity:0;pointer-events:none}
+.scrub{position:relative;height:44px;display:flex;align-items:center;cursor:pointer}
+.scrub .track{position:absolute;left:0;right:0;height:3px;background:rgba(244,230,203,.26);border-radius:2px}
+.scrub .fill{position:absolute;left:0;height:3px;background:var(--rust-lift);border-radius:2px;width:0}
+.scrub .knob{
+  position:absolute;width:14px;height:14px;border-radius:50%;background:var(--paper);
+  left:0;transform:translateX(-50%);box-shadow:0 0 0 4px rgba(21,17,14,.5);
+  transition:transform 140ms var(--ease);
+}
+.scrub:hover .knob{transform:translateX(-50%) scale(1.25)}
+.scrub .tick{position:absolute;width:1px;height:9px;background:rgba(244,230,203,.42);transform:translateX(-50%)}
+.tbar{display:flex;align-items:center;gap:20px}
+.tbtn{
+  width:64px;height:64px;flex:0 0 auto;border-radius:50%;
+  background:var(--paper);color:var(--ink);border:0;cursor:pointer;
+  display:grid;place-items:center;font-size:1.3rem;
+  transition:transform 150ms var(--ease),background 160ms;
+}
+.tbtn:hover{background:#fff}
+.tbtn:active{transform:scale(.94)}
+.tbtn:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+.tbtn.sub{width:52px;height:52px;background:transparent;color:var(--paper);border:1px solid rgba(244,230,203,.4);font-size:1rem}
+.tbtn.sub:hover{background:rgba(244,230,203,.14)}
+.time{font-variant-numeric:tabular-nums;font-size:1rem;letter-spacing:.06em;color:rgba(244,230,203,.9);min-width:130px}
+.tspacer{flex:1 1 auto}
+.tlabel{
+  font-size:.78rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(244,230,203,.6);
+}
+
+/* transcript panel */
+#transcript{
+  position:absolute;right:0;top:0;bottom:0;width:min(520px,86vw);z-index:8;
+  background:var(--paper);border-left:1px solid var(--hair-strong);
+  transform:translateX(100%);transition:transform 420ms var(--ease);
+  display:flex;flex-direction:column;
+}
+#transcript.open{transform:none}
+/* With the transcript open the stage and its controls give up that space, so
+   the player never ends up stranded behind the panel. */
+.screen.tr-open .stage,
+.screen.tr-open .transport{right:min(520px,86vw)}
+.screen .stage,.screen .transport{transition:right 420ms var(--ease)}
+#transcript .thead{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:26px 28px 18px;border-bottom:1px solid var(--hair);
+}
+#transcript .thead h3{margin:0;font-family:var(--display);text-transform:uppercase;font-size:1.3rem;letter-spacing:.02em}
+#transcript .tbody{overflow-y:auto;padding:22px 28px 40px;line-height:1.62}
+#transcript .tbody h4{
+  font-size:.78rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--maroon);margin:26px 0 8px;
+}
+#transcript .tbody h4:first-child{margin-top:0}
+#transcript .tbody p{margin:0 0 12px;font-size:1.04rem}
+#transcript .note{font-size:.9rem;color:var(--ink-soft);border-top:1px solid var(--hair);padding-top:14px;margin-top:24px}
+
+/* --- media failure notice ------------------------------------------------ */
+.mediafail{
+  position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:clamp(28px,5vw,72px);background:#15110E;color:var(--paper);
+}
+.mediafail h3{font-family:var(--display);text-transform:uppercase;font-size:clamp(1.4rem,3vw,2.2rem);margin:0 0 18px}
+.mediafail p{max-width:52ch;color:rgba(244,230,203,.78);margin:0 0 14px;font-size:1.05rem;line-height:1.55}
+.mediafail code{
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.95rem;
+  background:rgba(244,230,203,.12);padding:3px 8px;border-radius:3px;color:var(--tan);
+}
+.mediafail .tree{
+  text-align:left;display:inline-block;margin:18px 0 8px;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92rem;line-height:1.7;
+  color:rgba(244,230,203,.72);border-left:2px solid var(--rust-lift);padding-left:18px;
+}
+
+/* --- voice recorder ------------------------------------------------------ */
+.recstage{display:flex;flex-direction:column;align-items:center;gap:18px;margin-top:30px}
+.recbtn{
+  width:132px;height:132px;border-radius:50%;cursor:pointer;
+  background:var(--maroon);border:0;color:var(--paper);
+  display:grid;place-items:center;gap:6px;
+  font-size:.82rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  transition:transform 160ms var(--ease),background 180ms;
+  position:relative;
+}
+.recbtn:hover{background:var(--maroon-lift)}
+.recbtn:active{transform:scale(.96)}
+.recbtn:focus-visible{outline:3px solid var(--ink);outline-offset:5px}
+.recbtn .glyph{font-size:2.1rem;line-height:1}
+.recbtn.live{background:var(--ink)}
+.recbtn.live::before{
+  content:"";position:absolute;inset:-10px;border-radius:50%;
+  border:2px solid var(--maroon);animation:ring 2s var(--ease) infinite;
+}
+#reclevel{width:min(520px,90%);height:72px;display:block}
+.rectime{
+  font-family:var(--display);font-size:2.4rem;font-variant-numeric:tabular-nums;
+  color:var(--ink);line-height:1;
+}
+.rechint{font-size:1rem;color:var(--ink-soft);text-align:center;max-width:44ch}
+.recplayer{
+  display:flex;align-items:center;gap:16px;width:min(520px,90%);
+  background:var(--paper-card);border:1px solid var(--hair);border-radius:3px;padding:16px 20px;
+}
+.recplayer audio{width:100%}
+
+/* --- text echo card ------------------------------------------------------ */
+.echocard{
+  background:var(--paper-card);
+  border:1px solid var(--hair);border-radius:3px;
+  padding:clamp(32px,4.5vw,56px);
+  box-shadow:0 10px 34px rgba(34,28,23,.10);
+  position:relative;
+}
+.echocard::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--maroon);
+}
+.echocard .meta{
+  font-size:.8rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:20px;
+}
+.echocard .meta b{color:var(--maroon)}
+.typed{font-family:var(--display);font-size:clamp(1.4rem,2.5vw,2rem);line-height:1.38;margin:0}
+.typed .cursor{
+  display:inline-block;width:.06em;height:1em;background:var(--maroon);
+  vertical-align:-.12em;margin-left:.06em;animation:blink 1s steps(2) infinite;
+}
+@keyframes blink{50%{opacity:0}}
+
+/* --- echo counter -------------------------------------------------------- */
+.counterplate{
+  border:1px solid var(--hair-strong);border-radius:3px;
+  padding:26px 32px;margin-top:34px;display:inline-block;background:var(--paper-card);
+}
+.counterplate .n{
+  font-family:var(--display);font-size:clamp(2.6rem,5vw,3.8rem);font-weight:700;
+  color:var(--maroon);line-height:1;
+}
+.counterplate .l{
+  font-size:.8rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ink-soft);margin-top:10px;
+}
+
+/* --- transition screen --------------------------------------------------- */
+.pulse{
+  font-family:var(--display);text-transform:uppercase;font-weight:700;
+  font-size:clamp(1.4rem,3vw,2.4rem);letter-spacing:.02em;text-align:center;
+  color:var(--ink);max-width:20ch;
+}
+.ripple{width:120px;height:120px;margin:0 auto 40px;position:relative}
+.ripple span{
+  position:absolute;inset:0;border:1px solid var(--maroon);border-radius:50%;
+  animation:rip 2.4s var(--ease) infinite;opacity:0;
+}
+.ripple span:nth-child(2){animation-delay:.8s}
+.ripple span:nth-child(3){animation-delay:1.6s}
+@keyframes rip{0%{transform:scale(.2);opacity:.8}100%{transform:scale(1);opacity:0}}
+
+/* --- dev panel ----------------------------------------------------------- */
+/* The tester hotspot lives on the top EDGE, centred — the only strip of the
+   screen with no control under it. It used to sit in the top-left corner,
+   directly on top of the Back button, and swallowed every tap on it. */
+#devhot{
+  position:fixed;left:50%;top:0;transform:translateX(-50%);
+  width:130px;height:54px;z-index:1000;
+  background:none;border:0;cursor:default;opacity:0;
+}
+#dev{
+  position:fixed;right:18px;top:18px;z-index:1001;width:340px;
+  background:#1d1814;color:#EEDDBE;border:1px solid #3a3129;border-radius:4px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;
+  box-shadow:0 18px 50px rgba(0,0,0,.45);
+}
+#dev h4{margin:0;padding:12px 14px;border-bottom:1px solid #3a3129;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#C99B74;display:flex;justify-content:space-between;align-items:center}
+#dev .sec{padding:12px 14px;border-bottom:1px solid #2b2420}
+#dev .sec:last-child{border-bottom:0}
+#dev .lbl{color:#9a8b7a;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+#dev button{
+  background:#2b2420;color:#EEDDBE;border:1px solid #453a31;border-radius:3px;
+  padding:8px 10px;font-family:inherit;font-size:12px;cursor:pointer;
+}
+#dev button:hover{background:#3a3129}
+#dev button.on{background:#6E1C20;border-color:#8A2429;color:#F4E6CB}
+#dev .row{display:flex;gap:6px;flex-wrap:wrap}
+#dev select{background:#2b2420;color:#EEDDBE;border:1px solid #453a31;border-radius:3px;padding:7px;font-family:inherit;font-size:12px;width:100%}
+#dev .stat{display:flex;justify-content:space-between;padding:3px 0;color:#c9b99f}
+#dev .stat b{color:#EEDDBE;font-weight:600}
+#dev textarea{width:100%;height:110px;background:#12100d;color:#c9b99f;border:1px solid #3a3129;border-radius:3px;font-family:inherit;font-size:11px;padding:8px;resize:vertical}
+
+/* --- responses viewer ---------------------------------------------------- */
+#results{
+  position:fixed;inset:0;z-index:1200;background:var(--paper);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+#results .rhead{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;
+  padding:28px clamp(22px,4vw,48px) 20px;border-bottom:1px solid var(--hair);
+}
+#results h2{font-family:var(--display);text-transform:uppercase;margin:0 0 4px;font-size:clamp(1.6rem,3vw,2.2rem)}
+#results .rhead p{margin:0;color:var(--ink-soft);font-size:1rem}
+#results .rbtns{display:flex;gap:10px}
+#results .rbody{overflow-y:auto;padding:24px clamp(22px,4vw,48px) 60px}
+#results .rempty{color:var(--ink-soft);font-size:1.1rem}
+#results .rcard{
+  background:var(--paper-card);border:1px solid var(--hair);border-radius:3px;
+  padding:22px 26px;margin-bottom:18px;max-width:1000px;
+}
+#results .rcard header{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid var(--hair);
+}
+#results .rcard header b{font-family:var(--display);font-size:1.3rem;color:var(--maroon)}
+#results .rcard header span{font-size:.92rem;color:var(--ink-soft)}
+#results .rpill{
+  background:var(--paper-deep);border:1px solid var(--hair);border-radius:99px;
+  padding:3px 12px;font-size:.82rem!important;letter-spacing:.04em;
+}
+#results dl{display:grid;grid-template-columns:190px 1fr;gap:8px 20px;margin:0;font-size:.98rem}
+#results dt{color:var(--ink-soft);font-weight:600}
+#results dd{margin:0}
+#results q{font-style:italic;color:var(--ink)}
+#results code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;color:var(--ink-soft);word-break:break-word}
+@media (max-width:760px){ #results dl{grid-template-columns:1fr;gap:2px} #results dt{margin-top:8px} }
+
+/* --- reduced motion ------------------------------------------------------ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  #grain{animation:none}
+  #landing-bg img,.stage .stillwrap img{animation:none;transform:none}
+}
+
+/* Required shared journey, styled to match the original ECHO palette. */
+.screen[data-screen^="TEAM"],.screen[data-screen="LANDING"]{justify-content:flex-start;overflow-y:auto;padding-top:90px;}
+.teamwrap{max-width:1100px;padding-bottom:32px}.teamwrap h1{max-width:22ch;font-size:clamp(2rem,4vw,3.4rem)}
+.teamcols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0}.teamcard{padding:24px;background:var(--paper-card);border:1px solid var(--hair);border-radius:8px}.teamcard.role0{border-top:5px solid var(--maroon)}.teamcard.role1{border-top:5px solid #226B69}.rolelabel{font-size:.82rem;font-weight:750;letter-spacing:.12em;text-transform:uppercase;color:var(--maroon)}.role1 .rolelabel{color:#226B69}.teamcard h2{font-family:var(--display);font-size:1.6rem;line-height:1.2;margin:12px 0}.teamstatus{padding:14px 18px;border-left:3px solid var(--tan);background:rgba(255,255,255,.25)}.syncpads{display:flex;justify-content:space-between;gap:clamp(40px,15vw,240px);margin:32px 0}.holdpad{flex:1;min-height:160px;padding:22px;border:2px solid var(--maroon);border-radius:50% 50% 8px 8px;background:var(--paper-card);font-weight:700;touch-action:none;user-select:none;cursor:pointer}.holdpad.role1{border-color:#226B69}.holdpad small{display:block;margin-top:16px;font-weight:400}.holdpad.holding{background:var(--maroon);color:white}.holdpad.role1.holding{background:#226B69}progress{width:100%;height:18px;accent-color:var(--maroon)}.vote{width:100%;margin:12px 0;font-size:1rem}.teamcard textarea,.teamcard select{width:100%;padding:12px;font:inherit;background:#fffbf2;border:1px solid var(--hair-strong);border-radius:4px;margin:12px 0}.teamcard .btn{margin:8px 4px 8px 0;font-size:.85rem;letter-spacing:.02em}.drawing{border:1px dashed var(--hair-strong);margin:10px 0}canvas[id^="draw"]{width:100%;height:180px;display:block;touch-action:none}.poster svg{width:100%;max-height:280px}.teamwrap a{color:var(--maroon)}.teamwrap button:focus-visible,.teamwrap select:focus-visible,.teamwrap textarea:focus-visible{outline:3px solid #226B69;outline-offset:3px}
+@media(max-width:650px){.teamcols{grid-template-columns:1fr;gap:12px}.syncpads{gap:22px}.holdpad{min-height:155px;font-size:.95rem}.screen[data-screen^="TEAM"],.screen[data-screen="LANDING"]{padding-left:18px;padding-right:18px}.teamcard{padding:16px}}
+</style>
+</head>
+<body>
+
+<div id="grain" aria-hidden="true"></div>
+<div id="vignette" aria-hidden="true"></div>
+<main id="app" aria-live="polite"></main>
+<button id="devhot" tabindex="-1" aria-hidden="true"></button>
+<div id="dev" hidden></div>
+
+<script>
+"use strict";
+/* ==========================================================================
+   1. CONTENT — everything a researcher would want to edit lives here.
+   ========================================================================== */
+
+const MEDIA = "media/";
+
+/* Set to true to serve the 23 MB 720p video instead of the 95 MB master.
+   Use it if the pod tablet stutters or seeks slowly. */
+const USE_LIGHT_VIDEO = false;
+
+/* Era chapters.
+   NOTE: these are proportional placements derived from the timeline in §21 of
+   the spec, scaled to each track's real duration. They have NOT been checked
+   against the actual narration. Open the dev panel (triple-tap the top-left
+   corner) to see a live timecode while the story plays, then correct the
+   `at` values below — they are fractions of the total duration, 0 to 1. */
+const CHAPTERS = [
+  {at:0.000, label:"Opening"},
+  {at:0.094, label:"1966 — Students for Democratic Action"},
+  {at:0.208, label:"1967 — The march"},
+  {at:0.321, label:"1968–1970 — The questions grow"},
+  {at:0.453, label:"1970s — Conservative Queensland"},
+  {at:0.585, label:"1977 — The right to march"},
+  {at:0.698, label:"1980s — Student culture"},
+  {at:0.830, label:"1981 & 1985 — Fees and Joh"},
+  {at:0.925, label:"And now you're here"}
+];
+
+const ECHOES = {
+  "027":{
+    id:"027",
+    location:"UQ",
+    type:"history",
+    kind:"media",                       /* media = has audio/video */
+    title:"The University That Wouldn't Stay Quiet",
+    leftBy:"Left by a student",
+    intro:"What if the university you walk through every day once became a place where thousands of students discovered that they could challenge the world around them?",
+    video:MEDIA+(USE_LIGHT_VIDEO?"echo-027-video-light.mp4":"echo-027-video.mp4"),
+    audio:MEDIA+"echo-027-audio.mp3",
+    still:MEDIA+"echo-027-still-modeb.jpg",
+    poster:MEDIA+"echo-027-poster.jpg",
+    tags:["history","student activism","Vietnam","civil liberties","music","1970s","1980s"]
+  },
+  "014":{
+    id:"014",
+    location:"UQ Lakes",
+    type:"place",
+    kind:"text",
+    title:"The Quietest Place on Campus",
+    leftBy:"Left by a student, second year",
+    body:"I used to sit here between classes because it was one of the only places where nobody expected anything from me.",
+    tags:["place","student memory","quiet"]
+  },
+  "039":{
+    id:"039",
+    location:"UQ Lakes",
+    type:"student",
+    kind:"text",
+    title:"I Almost Didn't Come Here",
+    leftBy:"Left by a student, first year",
+    body:"On my first week I sat here and watched everyone walking around like they already knew where they belonged. Eventually I realised most people were probably pretending.",
+    tags:["student memory","belonging","first year"]
+  }
+};
+
+/* EVERY listening path returns Echo #027, because #027 is the only story that
+   has actually been produced. The point of the choice screens is not to serve
+   different content — it is to record which door a student opens. Every choice
+   is logged faithfully in `curiosity`, `subtopic` and `clicks` even though the
+   destination is the same.
+   To branch for real later, point a route at "014" or "039" (both are still
+   defined above) or add a new Echo. */
+const ROUTES = {
+  place:   ()=>"027",
+  people:  ()=>"027",
+  moment:  ()=>"027",
+  surprise:()=>"027"
+};
+
+/* Mocked, per §29. */
+const ECHO_COUNT = 143;
+
+/* Transcript — the narration script from §16 of the spec.
+   Captions are not yet time-synced to the recordings; see README. */
+const TRANSCRIPT = [
+  ["Opening", [
+    "Imagine UQ decades ago.",
+    "The university was more than somewhere you went to study.",
+    "It was a place where students argued, organised, performed, marched, made music — and began to realise that they could challenge the world around them.",
+    "This is the story of a university that wouldn't stay quiet."
+  ]],
+  ["1966", [
+    "In 1966, students formed Students for Democratic Action.",
+    "Vietnam was one of the issues. But it wasn't the only one.",
+    "They were also talking about nuclear war, conscription, poverty, government interference — and what democracy should actually look like.",
+    "Something was changing."
+  ]],
+  ["1967", [
+    "Then came 1967.",
+    "Around four thousand UQ students and staff marched from St Lucia towards Brisbane.",
+    "They didn't have a permit. Police blocked the march.",
+    "The crowd linked arms and sat down. More than a hundred people were arrested.",
+    "The protest became a defining moment in Queensland's struggle over civil liberties and the right to protest."
+  ]],
+  ["1968–1970", [
+    "And the questions kept growing.",
+    "Vietnam led to conscription. Conscription led to questions about civil liberties.",
+    "Those questions opened into conversations about racism, sexism, capitalism and democracy.",
+    "At lunchtime forums, students argued about what was happening in the world — and what their university should have to say about it.",
+    "In 1970, the Vietnam Moratorium movement brought huge anti-war demonstrations across Australia.",
+    "But at UQ, activism was becoming bigger than one war."
+  ]],
+  ["1970s", [
+    "Queensland was deeply conservative. Protest could come with real consequences.",
+    "Students continued organising around anti-apartheid activism, Indigenous rights, racism, sexism and police power.",
+    "The university became one of the places where those conflicts played out."
+  ]],
+  ["1977", [
+    "In 1977, anti-uranium protesters found themselves fighting over something more basic: the right to march.",
+    "The Queensland government had outlawed street marches.",
+    "So the question became: do you march anyway?",
+    "Imagine the crowd. Footsteps. Whistles. Drums. Police. People shouting.",
+    "And thousands of people deciding whether to move forward."
+  ]],
+  ["1980s", [
+    "By the 1980s, political culture was deeply embedded in student life.",
+    "There were student newspapers. The union. The Schonell. The Cement Box. Political clubs. Lunchtime discussions. Live music.",
+    "And 4ZZZ — alternative radio growing alongside student culture.",
+    "Music and politics weren't separate worlds. They were part of the same ecosystem."
+  ]],
+  ["1981", [
+    "In 1981, several thousand UQ students marched into Brisbane against proposed tertiary fees.",
+    "Once again, students were asking: who gets access to education? And what is a university actually for?"
+  ]],
+  ["1985", [
+    "Then, in 1985, UQ became the site of another huge confrontation.",
+    "Around five thousand people protested the decision to award an honorary doctorate to Queensland premier Joh Bjelke-Petersen.",
+    "Protesters gathered outside Mayne Hall. Police were there. Posters went up. The atmosphere became tense.",
+    "And underneath the noise was a bigger question:",
+    "What does a university owe its students? What does it owe the government? What does it owe its own principles?"
+  ]],
+  ["Ending", [
+    "Today, the campus can feel very different.",
+    "But the people who came before you stood here too.",
+    "They argued. They marched. They made music. They organised. They disagreed.",
+    "They left traces of themselves behind.",
+    "And now you're here.",
+    "What would you leave for the next student?"
+  ]]
+];
+
+/* Real amplitude envelopes, measured from the supplied files with ffmpeg.
+   Used to draw the Mode B waveform. A live Web Audio analyser cannot read a
+   file:// media element, so the shape is precomputed rather than faked. */
+const ENVELOPES = {
+  audio:"52,56,69,46,61,48,44,21,11,50,49,66,9,62,54,61,52,20,58,49,74,59,15,65,40,44,39,8,8,59,73,60,28,47,64,53,13,50,74,55,55,74,43,54,48,20,10,11,6,77,74,89,64,49,35,43,41,45,100,57,51,36,73,70,100,82,66,75,60,58,48,47,73,60,64,78,44,62,78,86,82,33,73,67,43,81,39,72,93,75,55,73,77,84,48,91,59,48,43,39,52,64,66,71,40,37,65,75,96,80,47,96,81,62,97,67,83,73,65,48,42,60,67,60,76,64,52,78,68,34,41,68,54,80,60,57,97,47,80,66,37,74,62,66,72,96,59,41,67,46,83,77,97,72,65,65,42,58,71,74,73,73,71,79,55,89,74,78,43,64,67,47,36,51,63,51,46,26,23,68,85,73,76,41,53,52,57,44,27,17,17,66,71,50,44,10,9,29,74,45,44,22,25,51,73,52,47,47,48,82,58,67,41,20,17,59,63,46,65,47,39,15,14,16,43,73,21,23,60,62,53,51,29,41,35,32,47,62,17,17,18,56,50,16,13,14,38,43,18,5,1,1,35,47,47,38,8,1,8,65,3,35,45,42,1,1,1,53,39,41,16,1,1,2,75,57,52,44,34,1,1,1,38,57,75,29,41,57,63,69,61,61,43,32,1,1,56,62,71,33,1,1,55,61,55,46,1,1,65,47,40,1,3,68,50,55,11,1,45,47,1,41,41,19,30,50,45,36,44,14,13,65,74,53,53,49,30,62,70,66,56,51,70,50,32,72,74,69,71,62,56,56,50,48,55,50,80,73,50,44,57,40,62,51,45,52,52,42,44,44,44,60,67,73,65,64,56,60,73,71,60,59,61,59,72,78,53,61,37,44,40,45,53,72,77,48,66,67,65,52,55,54,54,57,54,40,35,35,33,50,66,53,53,40,44,42,54,70,74,66,69,59,67,62,52,64,76,83,73,57,49,66,61,56,50,55,66,68,66,60,57,49,50,82,68,62,48,37,52,74,48,22,16,79,63,35,11,72,77,55,18,74,66,50,2,41,71,56,39,2,1,2,45,91,45,59,44,53,45,41,21,53,74,83,64,70,61,38,35,30,34,16,80,58,51,54,36,70,72,59,46,55,34,48,65,72,40,39,64,42,19,17,45,52,39,47,53,49,55,31,29,68,63,53,53,77,54,49,41,17,72,59,35,59,50,36,50,45,43,11,6,38,40,68,62,52,48,56,56,53,50,42,55,43,25,36,40,24,22,18,52,50,41,53,23,17,16,24,58,51,58,50,36,37,41,44,45,47,47,24,18,20,62,35,41,40,15,14,67,58,33,3,31,65,51,42,1,1,40,47,15,1,1,60,63,37,57,40,38,23,44,28,33,3,1,18,49,43,30,47,50,47,38,54,37,42,3,1,47,51,50,52,58,34,36,35,27,8,1,1,1,43,59,49,65,50,39,36,75,83,60,65,61,76,64,43,68,19,7,48,55,83,32,29,87,57,25,66,96,37,25,92,55,47,24,77,91,83,65,30,37,98,94,43,30,69,67,59,28,36,86,74,60,43,29,30,30,97,75,71,46,93,48,78,75,35,60,73,79,69,59,48,33,34,78,74,86,57,43,32,68,73,32,31,59,72,28,25,77,71,50,21,21,62,69,53,59,18,57,70,66,59,38,61,26,18,16,14,15,17,17,15,15,13,12,14,17,13,7,4",
+  video:"57,95,97,98,99,96,95,90,90,100,60,4,36,53,29,29,29,54,31,49,33,52,37,40,39,27,52,43,47,37,42,41,41,41,41,43,47,36,48,33,29,32,56,44,42,45,38,36,27,44,43,37,35,49,44,41,39,25,46,45,41,42,37,31,48,44,43,39,45,47,38,37,22,26,45,40,36,32,45,41,38,46,44,47,37,35,20,27,25,30,67,70,48,40,37,52,64,73,81,82,69,68,59,50,47,43,26,47,47,30,23,45,45,45,36,28,47,43,37,43,43,26,42,44,32,47,48,41,34,30,51,43,30,31,48,42,42,47,38,42,49,43,42,42,43,45,40,34,49,42,43,38,38,30,30,21,15,48,48,37,50,45,45,41,31,27,27,52,39,48,45,44,36,42,48,43,43,43,45,43,50,35,50,48,29,36,50,53,42,46,39,43,51,47,48,47,35,37,49,44,43,43,41,47,51,39,46,46,50,46,47,31,47,47,45,46,47,43,35,52,41,40,45,36,36,48,45,50,40,51,43,47,52,44,47,42,39,31,31,26,13,51,43,37,24,47,44,45,42,51,44,35,43,45,33,49,46,46,41,40,30,47,48,41,41,39,48,41,39,42,39,25,48,45,41,41,30,49,51,46,36,52,48,42,47,48,43,44,35,30,53,45,47,34,34,53,47,42,44,33,28,31,24,14,51,45,45,38,55,49,44,45,49,47,46,42,45,36,36,54,45,43,49,53,46,50,46,41,45,34,36,54,49,44,44,46,45,37,51,42,46,51,44,49,51,41,45,45,36,36,45,50,43,43,51,43,46,43,39,45,47,35,56,41,47,48,49,47,42,35,34,29,16,48,43,45,42,56,46,55,53,45,50,51,51,50,47,49,42,50,49,44,35,52,49,47,49,33,57,48,42,51,39,43,39,43,50,45,44,43,43,27,40,55,46,37,50,45,45,43,51,46,40,32,52,44,48,43,34,36,43,46,43,39,45,42,37,31,34,24,19,54,48,50,48,50,51,50,49,47,40,43,56,51,54,56,56,56,51,44,58,57,52,49,46,45,57,52,52,55,46,57,54,55,49,47,37,56,52,53,49,44,49,40,38,41,53,45,55,48,48,46,46,37,51,52,47,51,46,40,41,56,50,46,41,38,42,53,51,49,49,40,39,41,29,24,61,55,49,52,48,50,41,51,54,47,54,52,44,40,48,49,56,55,53,51,58,46,45,46,58,54,60,52,55,53,54,49,52,39,49,50,44,48,51,36,46,43,34,19"
+};
+
+/* ==========================================================================
+   2. STATE + RESEARCH LOG
+   ========================================================================== */
+
+const STORE_KEY = "echo.sessions.v1";
+
+/* localStorage is unreliable on file:// in some browsers, so every access is
+   guarded and an in-memory copy is always kept as the working truth. */
+const Store = {
+  mem:[],
+  read(){
+    try{
+      const raw = localStorage.getItem(STORE_KEY);
+      if(raw){ this.mem = JSON.parse(raw) || []; }
+    }catch(e){ /* keep whatever is in memory */ }
+    return this.mem;
+  },
+  write(){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(this.mem)); }catch(e){}
+  },
+  clear(){ this.mem = []; try{ localStorage.removeItem(STORE_KEY); }catch(e){} }
+};
+
+const State = {
+  screen:null,
+  echo:null,
+  medium:null,                       /* the medium currently being experienced */
+  seen:{video:false, audio:false},   /* everyone does both, in their own order */
+  draft:{type:null, format:null, text:"", audioUrl:null, audioSecs:0},
+  session:null
+};
+const MEDIUM_LABEL = {video:"Watch", audio:"Listen"};
+
+const Log = {
+  begin(){
+    State.session = {
+      id: "S" + Date.now().toString(36).toUpperCase(),
+      started: new Date().toISOString(),
+      ended: null,
+      entry: null,
+      curiosity: null,
+      subtopic: null,
+      echo: null,
+      time_to_touch_s: null,
+
+      /* Within-subjects: every participant experiences both the film and the
+         audio. Which they reach for first is itself a finding. */
+      first_medium: null,
+      video_seconds: 0, video_pct: 0, video_completed: false,
+      video_reaction: null, video_reaction_why: "",
+      audio_seconds: 0, audio_pct: 0, audio_completed: false,
+      audio_reaction: null, audio_reaction_why: "",
+      preferred_medium: null, preferred_why: "",
+
+      takeaway: null, takeaway_why: "",
+      echo_type: null, echo_format: null, echo_text: "", echo_audio_seconds: "", echo_left: false,
+      last_screen: null,
+      path: [],
+      events: []
+    };
+  },
+  set(k,v){ if(State.session) State.session[k] = v; },
+  event(type, detail){
+    if(!State.session) return;
+    State.session.events.push({
+      t: +((Date.now() - Date.parse(State.session.started))/1000).toFixed(1),
+      type: type,
+      detail: detail === undefined ? "" : detail
+    });
+  },
+  screen(id){
+    if(!State.session) return;
+    State.session.path.push(id);
+    State.session.last_screen = id;
+    this.event("screen", id);
+  },
+  /* A session is banked the moment it has any substance, and re-banked on
+     every later change, so closing the lid mid-test never loses a participant. */
+  commit(){
+    if(!State.session) return;
+    if(State.session.path.length < 2) return;
+    State.session.ended = new Date().toISOString();
+    const i = Store.mem.findIndex(s => s.id === State.session.id);
+    if(i >= 0) Store.mem[i] = State.session; else Store.mem.push(State.session);
+    Store.write();
+  }
+};
+
+const CSV_COLUMNS = [
+  "team_progress","team_words","id","started","ended","entry","time_to_touch_s","curiosity","subtopic","echo",
+  "first_medium",
+  "video_seconds","video_pct","video_completed","video_reaction","video_reaction_why",
+  "audio_seconds","audio_pct","audio_completed","audio_reaction","audio_reaction_why",
+  "preferred_medium","preferred_why",
+  "takeaway","takeaway_why",
+  "echo_type","echo_format","echo_text","echo_audio_seconds","echo_left","last_screen","path","clicks"
+];
+
+function toCSV(){
+  const q = v => {
+    if(v === null || v === undefined) v = "";
+    if(Array.isArray(v)) v = v.join(" > ");
+    v = String(v);
+    return /[",\n]/.test(v) ? '"' + v.replace(/"/g,'""') + '"' : v;
+  };
+  const rows = [CSV_COLUMNS.join(",")];
+  Store.read().forEach(s => {
+    const row = Object.assign({}, s);
+    /* every tap, in order, with the time it happened */
+    row.clicks = (s.events || [])
+      .map(e => e.t + "s " + e.type + (e.detail ? ":" + e.detail : ""))
+      .join(" | ");
+    rows.push(CSV_COLUMNS.map(c => q(row[c])).join(","));
+  });
+  return rows.join("\n");
+}
+
+/* ==========================================================================
+   3. SMALL HELPERS
+   ========================================================================== */
+
+const $  = (s, r) => (r||document).querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = t => {
+  if(!isFinite(t) || t < 0) t = 0;
+  const m = Math.floor(t/60), s = Math.floor(t%60);
+  return m + ":" + String(s).padStart(2,"0");
+};
+const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function topbar(opts){
+  opts = opts || {};
+  const back = opts.back
+    ? '<button class="linkbtn" data-act="back" data-val="'+esc(opts.back)+'">&larr; Back</button>'
+    : '<span class="stamp">'+esc(opts.stamp||"Echo &middot; UQ Lakes")+'</span>';
+  const right = opts.noReset ? "" : '<button class="linkbtn" data-act="reset">Start over</button>';
+  return '<div class="topbar">'+back+right+'</div>';
+}
+
+function choices(cls, items){
+  return '<div class="choices '+cls+'">' + items.map(i =>
+    '<button class="choice'+(i.big?" big":"")+(i.plain?" plain":"")+'" data-act="'+esc(i.act)+'"'+
+      (i.val!==undefined?' data-val="'+esc(i.val)+'"':"")+'>'+
+      (i.ico?'<span class="ico" aria-hidden="true">'+i.ico+'</span>':"")+
+      '<span class="txt"><span class="t">'+esc(i.t)+'</span>'+
+      (i.d?'<span class="d">'+esc(i.d)+'</span>':"")+'</span>'+
+    '</button>'
+  ).join("") + '</div>';
+}
+
+/* A question screen: heading, options, then a free-text "why" that unlocks
+   the continue button. Used for reaction / medium / takeaway. */
+function questionScreen(o){
+  return topbar({back:o.back}) +
+    '<div class="wrap stag">'+
+      (o.eyebrow?'<p class="eyebrow">'+esc(o.eyebrow)+'</p>':"")+
+      '<h2 class="display">'+esc(o.heading)+'</h2>'+
+      choices(o.cls||"four", o.options.map(x => ({act:"pick", val:x.val, ico:x.ico, t:x.t, d:x.d})))+
+      '<div class="field" hidden id="why">'+
+        '<label for="whytext">'+esc(o.why)+'</label>'+
+        '<textarea id="whytext" rows="3" placeholder="'+esc(o.placeholder||"In your own words…")+'"></textarea>'+
+      '</div>'+
+      '<div class="btnrow"><button class="btn" data-act="next" disabled id="nextbtn">Continue &rarr;</button>'+
+      (o.skip!==false?'<button class="linkbtn" data-act="next" data-val="skip">Skip</button>':"")+'</div>'+
+    '</div>';
+}
+
+function wireQuestion(root, onDone){
+  let picked = null;
+  root.addEventListener("click", e => {
+    const b = e.target.closest("[data-act]");
+    if(!b) return;
+    if(b.dataset.act === "pick"){
+      root.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
+      b.classList.add("selected");
+      picked = b.dataset.val;
+      $("#why", root).hidden = false;
+      $("#nextbtn", root).disabled = false;
+      Log.event("option", picked);
+    }
+    if(b.dataset.act === "next"){
+      const ta = $("#whytext", root);
+      onDone(picked, ta ? ta.value.trim() : "");
+    }
+  });
+}
+
+/* ==========================================================================
+   4. NAVIGATION
+   ========================================================================== */
+
+const app = $("#app");
+let current = null;
+let currentId = null;
+
+function go(id, payload){
+  // Central guards also cover back buttons, direct navigation and tester jumps.
+  if(typeof Team !== 'undefined'){
+    if(id === 'TEAM_OPEN' && !Team.joined.every(Boolean)) return go('LANDING',payload);
+    if(id.startsWith('TEAM_') && id!=='TEAM_OPEN' && !Team.opened) return go('TEAM_OPEN',payload);
+    if(id==='TEAM_ANSWER' && !Team.confirmed.every(Boolean)) return go('TEAM_CLUES',payload);
+    if(id==='TEAM_LEARN' && Team.solved<=Team.round) return go('TEAM_CLUES',payload);
+    if(['TEAM_MAKE','TEAM_REVIEW','TEAM_SEAL','TEAM_DONE'].includes(id) && Team.solved<3) return go('TEAM_CLUES',payload);
+    if(id==='TEAM_REVIEW' && !(Team.words.every(w=>w.trim().length>=5)&&Team.strokes.every(s=>s.length))) return go('TEAM_MAKE',payload);
+    if(id==='TEAM_SEAL' && !(Team.approvals.every(Boolean)&&Team.recall.every(v=>v==='right'))) return go('TEAM_REVIEW',payload);
+    if(id==='TEAM_DONE' && !Team.done) return go('TEAM_SEAL',payload);
+    if(id!=='LANDING' && !id.startsWith('TEAM_') && !Team.done) return go(Team.opened?'TEAM_CLUES':'LANDING',payload);
+  }
+  const def = SCREENS[id];
+  if(!def) { console.warn("No screen", id); return; }
+
+  /* Every screen gets the current Echo and medium whether or not the caller
+     passed them. Without this, any navigation that doesn't carry a payload —
+     a Back button, a jump from the tester panel — throws inside render() and
+     silently does nothing, which looks exactly like a dead button. */
+  payload = Object.assign({
+    id: State.echo || "027",
+    medium: State.medium || "video"
+  }, payload || {});
+
+  if(current && SCREENS[currentId] && SCREENS[currentId].unmount){
+    try{ SCREENS[currentId].unmount(current); }catch(e){}
+  }
+
+  const old = current;
+  const el = document.createElement("div");
+  el.className = "screen";
+  el.dataset.screen = id;
+  try{
+    el.innerHTML = def.render(payload);
+  }catch(err){
+    console.error("Screen failed to render:", id, err);
+    el.innerHTML = topbar({})+
+      '<div class="wrap narrow" style="text-align:center">'+
+        '<h2 class="display">Something went wrong</h2>'+
+        '<p class="lede" style="margin:0 auto">That screen couldn\'t open. Tap below to go back to the start.</p>'+
+        '<div class="btnrow center"><button class="btn" data-act="restart-hard">Start over</button></div>'+
+      '</div>';
+  }
+  app.appendChild(el);
+
+  void el.offsetWidth;              /* force reflow so the transition runs */
+  el.classList.add("in");
+  if(old){
+    old.classList.add("out");
+    setTimeout(() => old.remove(), reduceMotion() ? 10 : 520);
+  }
+
+  current = el;
+  currentId = id;
+  State.screen = id;
+  Log.screen(id);
+  Log.commit();
+
+  if(def.mount) def.mount(el, payload);
+
+  const h = el.querySelector("h1,h2,.pulse");
+  if(h){ h.setAttribute("tabindex","-1"); }
+}
+
+let resetArmed = false;
+app.addEventListener("click", e => {
+  const b = e.target.closest("[data-act]");
+  if(!b) return;
+  const act = b.dataset.act, val = b.dataset.val;
+
+  if(act === "go"){ go(val); }
+  else if(act === "back"){ go(val); }
+  else if(act === "restart-hard"){ restart(); }
+  else if(act === "reset"){
+    if(!resetArmed){
+      resetArmed = true;
+      b.textContent = "Tap again to reset";
+      b.style.color = "var(--maroon)";
+      setTimeout(() => {
+        resetArmed = false;
+        if(document.body.contains(b)){ b.textContent = "Start over"; b.style.color = ""; }
+      }, 3000);
+    } else {
+      resetArmed = false;
+      restart();
+    }
+  }
+});
+
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape" && $("#transcript.open")) toggleTranscript(false);
+  if((e.metaKey||e.ctrlKey) && e.shiftKey && (e.key === "D" || e.key === "d")){
+    e.preventDefault(); Dev.toggle();
+  }
+});
+
+function restart(){
+  Log.event("reset");
+  Player.bankProgress();      /* capture the drop-off before the session rolls */
+  Log.commit();
+  Log.begin();
+  State.echo = null;
+  State.draft = {type:null, format:null, text:"", audioUrl:null, audioSecs:0};
+  State.medium = null;
+  State.seen = {video:false, audio:false};
+  go("LANDING");
+}
+
+/* ==========================================================================
+   5. SCREENS
+   ========================================================================== */
+
+const SCREENS = {
+
+/* --- 01 LANDING ---------------------------------------------------------- */
+LANDING:{
+  render(){
+    return ''+
+    '<div id="landing-bg" aria-hidden="true"><img src="'+MEDIA+'landing-greatcourt.jpg" alt=""></div>'+
+    '<div class="wrap narrow" style="text-align:center">'+
+      '<div id="attract" class="stag">'+
+        '<p class="eyebrow">You\'re at <span class="dot">&bull;</span> UQ Lakes</p>'+
+        '<h1 class="display">Echo</h1>'+
+        '<p class="lede" style="margin:0 auto 6px">Stories, memories &amp; moments left behind for you to discover.</p>'+
+        '<p class="touchcue">Touch to begin</p>'+
+      '</div>'+
+      '<div id="invite" hidden>'+
+        '<p class="eyebrow">You\'re at <span class="dot">&bull;</span> UQ Lakes</p>'+
+        '<h1 class="display tight">Echo</h1>'+
+        '<p class="lede" style="margin:0 auto 4px">Take a moment. Discover something. Leave something behind.</p>'+
+        choices("two", [
+          {act:"entry", val:"listen", big:true, ico:"&#127911;", t:"Listen & discover", d:"Hear something someone left here."},
+          {act:"entry", val:"share",  big:true, ico:"&#128483;", t:"Share something",     d:"Leave something for whoever comes next."}
+        ])+
+        '<p class="fine">No right answer. Just follow your curiosity.</p>'+
+      '</div>'+
+    '</div>';
+  },
+  mount(root){
+    const shown = Date.now();
+    const attract = $("#attract", root), invite = $("#invite", root);
+    let revealed = false;
+
+    function reveal(){
+      if(revealed) return;
+      revealed = true;
+      const secs = +((Date.now() - shown)/1000).toFixed(1);
+      Log.set("time_to_touch_s", secs);
+      Log.event("landing_touched", secs);
+      attract.style.transition = "opacity 260ms var(--ease)";
+      attract.style.opacity = "0";
+      setTimeout(() => {
+        attract.hidden = true;
+        invite.hidden = false;
+        void invite.offsetWidth;
+        invite.classList.add("stag");
+      }, reduceMotion() ? 10 : 260);
+    }
+
+    root.addEventListener("pointerdown", e => {
+      if(e.target.closest("[data-act]")) return;
+      reveal();
+    });
+    root.addEventListener("keydown", e => {
+      if(e.key === "Enter" || e.key === " ") reveal();
+    });
+    root.tabIndex = 0;
+
+    root.addEventListener("click", e => {
+      const b = e.target.closest('[data-act="entry"]');
+      if(!b) return;
+      Log.set("entry", b.dataset.val);
+      Log.event("entry", b.dataset.val);
+      go("WHAT_IS_AN_ECHO");
+    });
+  }
+},
+
+/* --- 02 WHAT IS AN ECHO -------------------------------------------------- */
+WHAT_IS_AN_ECHO:{
+  render(){
+    return topbar({back:"LANDING"})+
+    '<div class="wrap narrow stag" style="text-align:center">'+
+      '<h2 class="display">What\'s an Echo?</h2>'+
+      '<p class="lede wide" style="margin:0 auto 18px">An Echo is something someone has left behind &mdash; a story, memory, fact or moment &mdash; for someone else to discover.</p>'+
+      '<div class="chain">'+
+        '<div class="node"><span class="glyph" aria-hidden="true">&#128100;</span>Someone</div>'+
+        '<div class="arrow" aria-hidden="true">&rarr;</div>'+
+        '<div class="node echo"><span class="glyph" aria-hidden="true">))</span>Echo</div>'+
+        '<div class="arrow" aria-hidden="true">&rarr;</div>'+
+        '<div class="node you"><span class="glyph" aria-hidden="true">&#128075;</span>You</div>'+
+      '</div>'+
+      '<p class="serif-quote" style="margin-top:26px">Someone was here before you.<br>Now you get to hear what they left behind.</p>'+
+      '<p class="fine">You can listen to an Echo. Or leave one for someone else.</p>'+
+      '<div class="btnrow center"><button class="btn" data-act="ready">I\'m ready &rarr;</button></div>'+
+    '</div>';
+  },
+  mount(root){
+    root.addEventListener("click", e => {
+      if(!e.target.closest('[data-act="ready"]')) return;
+      const entry = State.session && State.session.entry;
+      go(entry === "share" ? "SHARE_TYPE" : entry === "listen" ? "CHOOSE_CURIOSITY" : "CHOOSE_ACTION");
+    });
+  }
+},
+
+/* --- 03 CHOOSE ACTION (the hub you return to) ---------------------------- */
+CHOOSE_ACTION:{
+  render(){
+    return topbar({})+
+    '<div class="wrap stag" style="text-align:center">'+
+      '<h2 class="display">What do you want to do?</h2>'+
+      choices("two", [
+        {act:"hub", val:"listen", big:true, ico:"&#127911;", t:"Listen & discover", d:"Hear something someone left here."},
+        {act:"hub", val:"share",  big:true, ico:"&#128483;", t:"Share something",     d:"Leave something for whoever comes next."}
+      ])+
+    '</div>';
+  },
+  mount(root){
+    root.addEventListener("click", e => {
+      const b = e.target.closest('[data-act="hub"]');
+      if(!b) return;
+      Log.event("hub", b.dataset.val);
+      if(!State.session.entry) Log.set("entry", b.dataset.val);
+      go(b.dataset.val === "share" ? "SHARE_TYPE" : "CHOOSE_CURIOSITY");
+    });
+  }
+},
+
+/* --- 04 CHOOSE CURIOSITY ------------------------------------------------- */
+CHOOSE_CURIOSITY:{
+  render(){
+    return topbar({back:"CHOOSE_ACTION"})+
+    '<div class="wrap stag">'+
+      '<h2 class="display">What are you curious about?</h2>'+
+      choices("four", [
+        {act:"cur", val:"place",    ico:"&#127807;", t:"This place",        d:"Discover something about where you are."},
+        {act:"cur", val:"people",   ico:"&#128101;", t:"The people",        d:"Hear what other students have experienced."},
+        {act:"cur", val:"moment",   ico:"&#128205;", t:"What happened here",d:"Discover a moment connected to this place."},
+        {act:"cur", val:"surprise", ico:"&#127922;", t:"Surprise me",       d:"Give me something unexpected."}
+      ])+
+    '</div>';
+  },
+  mount(root){
+    root.addEventListener("click", e => {
+      const b = e.target.closest('[data-act="cur"]');
+      if(!b) return;
+      const v = b.dataset.val;
+      Log.set("curiosity", v);
+      Log.event("curiosity", v);
+      if(v === "surprise"){ Log.set("subtopic","(surprise)"); startEcho(ROUTES.surprise()); }
+      else go({place:"SUB_PLACE", people:"SUB_PEOPLE", moment:"SUB_MOMENT"}[v]);
+    });
+  }
+},
+
+/* --- 05-07 SUBTOPICS ----------------------------------------------------- */
+SUB_PLACE:{
+  render(){ return subtopic("What do you want to discover?", [
+    "What was here before?","Something people don't know","Why does this place matter?","Surprise me"
+  ]); },
+  mount(root){ wireSubtopic(root, "place"); }
+},
+SUB_PEOPLE:{
+  render(){ return subtopic("Who do you want to hear from?", [
+    "Another UQ student","A personal memory","Something they've never shared","Surprise me"
+  ]); },
+  mount(root){ wireSubtopic(root, "people"); }
+},
+SUB_MOMENT:{
+  render(){ return subtopic("What kind of moment?", [
+    "Something unexpected","Something worth remembering","Something funny","Something from the past","Surprise me"
+  ]); },
+  mount(root){ wireSubtopic(root, "moment"); }
+},
+
+/* --- 08 FINDING (transition) --------------------------------------------- */
+FINDING:{
+  render(){
+    return '<div class="wrap narrow" style="text-align:center">'+
+      '<div class="ripple" aria-hidden="true"><span></span><span></span><span></span></div>'+
+      '<p class="pulse" style="margin:0 auto">Let\'s see what someone left behind&hellip;</p>'+
+    '</div>';
+  },
+  mount(root, payload){
+    setTimeout(() => {
+      const echo = ECHOES[payload.id];
+      go(echo.kind === "media" ? "ECHO_INTRO" : "TEXT_ECHO", payload);
+    }, reduceMotion() ? 400 : 2100);
+  }
+},
+
+/* --- 09 ECHO INTRO ------------------------------------------------------- */
+ECHO_INTRO:{
+  render(payload){
+    const e = ECHOES[payload.id];
+    return topbar({back:"CHOOSE_CURIOSITY"})+
+    '<div class="wrap narrow stag">'+
+      '<p class="eyebrow">Echo #'+esc(e.id)+' <span class="dot">&bull;</span> '+esc(e.location)+' <span class="dot">&bull;</span> '+esc(e.leftBy)+'</p>'+
+      '<h2 class="display">'+esc(e.title)+'</h2>'+
+      '<p class="lede wide">'+esc(e.intro)+'</p>'+
+      '<hr class="rule">'+
+      '<p class="eyebrow" style="margin-bottom:14px">How do you want to start?</p>'+
+      choices("two", [
+        {act:"med", val:"video", big:true, ico:"&#127902;", t:"Watch it",  d:"Archival film with narration. About 4 minutes."},
+        {act:"med", val:"audio", big:true, ico:"&#127911;", t:"Listen to it", d:"Sound only, eyes free. About 5 and a half minutes."}
+      ])+
+      '<p class="fine">You\'ll get to try the other one afterwards. Stop whenever you like.</p>'+
+    '</div>';
+  },
+  mount(root, payload){
+    root.addEventListener("click", e => {
+      const b = e.target.closest('[data-act="med"]');
+      if(!b) return;
+      const m = b.dataset.val;
+      if(!State.session.first_medium){
+        Log.set("first_medium", m);
+        Log.event("first_medium", m);
+      }
+      go("STORY", {id:payload.id, medium:m});
+    });
+  }
+},
+
+/* --- 09b THE SECOND PASS ------------------------------------------------- */
+SECOND_PASS:{
+  render(payload){
+    const other = payload.medium;
+    const watching = other === "video";
+    return topbar({})+
+    '<div class="wrap narrow stag" style="text-align:center">'+
+      '<p class="eyebrow">One more thing</p>'+
+      '<h2 class="display">'+(watching ? "Now see it." : "Now just listen.")+'</h2>'+
+      '<p class="lede wide" style="margin:0 auto 6px">'+
+        (watching
+          ? "The same story exists as a film. Same events, same era &mdash; different way in."
+          : "The same story exists as sound alone. Same events, same era &mdash; nothing to look at.")+
+      '</p>'+
+      '<p class="fine">You don\'t have to sit through all of it. Tap <em>I\'m done</em> whenever you\'ve got the feel of it.</p>'+
+      '<div class="btnrow center">'+
+        '<button class="btn" data-act="second">'+(watching ? "Watch it" : "Listen to it")+' &rarr;</button>'+
+        '<button class="linkbtn" data-act="skipsecond">Skip this</button>'+
+      '</div>'+
+    '</div>';
+  },
+  mount(root, payload){
+    root.addEventListener("click", e => {
+      const b = e.target.closest("[data-act]");
+      if(!b) return;
+      if(b.dataset.act === "second") go("STORY", {id:payload.id, medium:payload.medium});
+      if(b.dataset.act === "skipsecond"){
+        Log.event("skipped_second_medium", payload.medium);
+        go("COMPARE");
+      }
+    });
+  }
+},
+
+/* --- 10 STORY (the A/B condition) ---------------------------------------- */
+STORY:{
+  render(payload){
+    const e = ECHOES[payload.id];
+    const medium = payload.medium || "video";
+    State.medium = medium;
+    const light = 'style="color:rgba(244,230,203,.72)"';
+    const bar = '<div class="topbar">'+
+      '<button class="linkbtn" data-act="back" data-val="ECHO_INTRO" '+light+'>&larr; Back</button>'+
+      '<button class="linkbtn" data-act="reset" '+light+'>Start over</button>'+
+    '</div>';
+
+    const stage = medium === "video"
+      ? '<div class="stage"><video id="media" playsinline preload="auto" poster="'+MEDIA+'echo-027-poster.jpg">'+
+          '<source src="'+e.video+'" type="video/mp4"></video></div>'
+      : '<div class="stage">'+
+          '<div class="stillwrap"><img src="'+e.still+'" alt="Students seated with linked arms facing a line of police, 1967"></div>'+
+          '<div class="modeb-overlay">'+
+            '<p class="echoid">Echo #'+esc(e.id)+' &bull; '+esc(e.location)+' &bull; '+esc(e.leftBy)+'</p>'+
+            '<h2 class="title">'+esc(e.title)+'</h2>'+
+            '<canvas id="wave" aria-hidden="true"></canvas>'+
+            '<p class="era" id="era"></p>'+
+          '</div>'+
+          '<audio id="media" preload="auto"><source src="'+e.audio+'" type="audio/mpeg"></audio>'+
+        '</div>';
+
+    const transport =
+      '<div class="transport" id="transport">'+
+        '<div class="scrub" id="scrub" role="slider" aria-label="Playback position" tabindex="0">'+
+          '<div class="track"></div><div class="fill" id="fill"></div>'+
+          '<div id="ticks"></div><div class="knob" id="knob"></div>'+
+        '</div>'+
+        '<div class="tbar">'+
+          '<button class="tbtn" id="playbtn" aria-label="Play">&#9658;</button>'+
+          '<button class="tbtn sub" id="backbtn" aria-label="Back 15 seconds">15&#8635;</button>'+
+          '<div class="time" id="time">0:00 / 0:00</div>'+
+          (medium === "video" ? '<p class="era" id="era" style="margin:0"></p>' : '<span class="tlabel">Echo #'+esc(e.id)+'</span>')+
+          '<div class="tspacer"></div>'+
+          '<button class="tbtn sub" id="ccbtn" aria-label="Show transcript">CC</button>'+
+          '<button class="btn ghost small" id="donebtn" style="color:var(--paper);border-color:rgba(244,230,203,.42)">I\'m done</button>'+
+        '</div>'+
+      '</div>';
+
+    const panel =
+      '<aside id="transcript" aria-label="Transcript" aria-hidden="true">'+
+        '<div class="thead"><h3>Transcript</h3>'+
+          '<button class="linkbtn" data-act="cc-close">Close</button></div>'+
+        '<div class="tbody">'+
+          TRANSCRIPT.map(sec =>
+            '<h4>'+esc(sec[0])+'</h4>'+ sec[1].map(p => '<p>'+esc(p)+'</p>').join("")
+          ).join("")+
+          '<p class="note">This is the written narration script. It is not yet time-synced to the recording, so wording may differ slightly from what you hear.</p>'+
+        '</div>'+
+      '</aside>';
+
+    return stage + bar + transport + panel;
+  },
+  mount(root, payload){ Player.init(root, payload); },
+  unmount(){ Player.destroy(); }
+},
+
+/* --- 11 TEXT ECHO -------------------------------------------------------- */
+TEXT_ECHO:{
+  render(payload){
+    const e = ECHOES[payload.id];
+    return topbar({back:"CHOOSE_CURIOSITY"})+
+    '<div class="wrap narrow stag">'+
+      '<div class="echocard">'+
+        '<p class="meta"><b>Echo #'+esc(e.id)+'</b> &bull; '+esc(e.location)+' &bull; '+esc(e.leftBy)+'</p>'+
+        '<h2 class="display" style="font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:24px">'+esc(e.title)+'</h2>'+
+        '<p class="typed" id="typed"></p>'+
+      '</div>'+
+      '<div class="btnrow" id="after" hidden>'+
+        '<button class="btn" data-act="on">Continue &rarr;</button>'+
+        '<button class="linkbtn" data-act="hero">Hear the long one about this place</button>'+
+      '</div>'+
+    '</div>';
+  },
+  mount(root, payload){
+    const e = ECHOES[payload.id];
+    const node = $("#typed", root), after = $("#after", root);
+    const text = e.body;
+    if(reduceMotion()){
+      node.textContent = text; after.hidden = false;
+    } else {
+      let i = 0;
+      node.innerHTML = '<span class="cursor"></span>';
+      const cursor = node.querySelector(".cursor");
+      const tick = setInterval(() => {
+        i++;
+        cursor.insertAdjacentText("beforebegin", text[i-1]);
+        if(i >= text.length){
+          clearInterval(tick);
+          cursor.remove();
+          after.hidden = false;
+        }
+      }, 26);
+      Player.timers.push(tick);
+    }
+    root.addEventListener("click", ev => {
+      const b = ev.target.closest("[data-act]");
+      if(!b) return;
+      if(b.dataset.act === "on"){ Log.event("text_echo_done", e.id); go("REACTION"); }
+      if(b.dataset.act === "hero"){ Log.event("switched_to_hero", e.id); startEcho("027"); }
+    });
+  }
+},
+
+/* --- 12 REACTION --------------------------------------------------------- */
+REACTION:{
+  render(payload){
+    const m = payload && payload.medium;
+    const tag = m === "video" ? "The film" : m === "audio" ? "The audio" : "Echo #"+(State.echo||"027");
+    return questionScreen({
+      back:"STORY",
+      eyebrow: tag,
+      heading:"What did that Echo make you feel?",
+      options:[
+        {val:"connected", ico:"&#10084;&#65039;", t:"Connected", d:"It felt personal."},
+        {val:"curious",   ico:"&#128064;",        t:"Curious",   d:"I want to know more."},
+        {val:"surprised", ico:"&#128558;",        t:"Surprised", d:"I didn't know that."},
+        {val:"unmoved",   ico:"&#128528;",        t:"It didn't really grab me", d:"It didn't stay with me."}
+      ],
+      why:"Why did you choose that?",
+      placeholder:"Whatever comes to mind…"
+    });
+  },
+  mount(root, payload){
+    const m = payload && payload.medium;
+    wireQuestion(root, (pick, why) => {
+      if(m){
+        Log.set(m + "_reaction", pick);
+        Log.set(m + "_reaction_why", why);
+      }
+      /* Text Echoes have no medium and go straight on. Otherwise: if the
+         other medium hasn't been experienced yet, offer it; if both are
+         done, ask which one they preferred. */
+      if(!m){ go("TAKEAWAY"); return; }
+      const other = m === "video" ? "audio" : "video";
+      if(!State.seen[other]) go("SECOND_PASS", {id:State.echo||"027", medium:other});
+      else go("COMPARE");
+    });
+  }
+},
+
+/* --- 13 COMPARE — the research question, asked once both are done -------- */
+COMPARE:{
+  render(){
+    const both = State.seen.video && State.seen.audio;
+    return questionScreen({
+      back:"ECHO_INTRO",
+      eyebrow: both ? "Now that you've had both" : "The medium",
+      heading:"Which way did you want this story?",
+      cls:"four",
+      options:[
+        {val:"audio",  ico:"&#127911;", t:"The audio",  d:"Sound alone held it better."},
+        {val:"video",  ico:"&#127902;", t:"The film",   d:"Seeing it made the difference."},
+        {val:"both",   ico:"&#128256;", t:"Both, differently", d:"They each gave me something."},
+        {val:"depends",ico:"&#129300;", t:"Depends on the story", d:"It would change case by case."}
+      ],
+      why:"What made you choose that?",
+      placeholder:"In your own words…"
+    });
+  },
+  mount(root){
+    wireQuestion(root, (pick, why) => {
+      Log.set("preferred_medium", pick); Log.set("preferred_why", why);
+      go("TAKEAWAY");
+    });
+  }
+},
+
+/* --- 14 TAKEAWAY --------------------------------------------------------- */
+TAKEAWAY:{
+  render(){
+    return questionScreen({
+      back:"COMPARE",
+      heading:"What stayed with you?",
+      options:[
+        {val:"energy",  ico:"&#9889;",   t:"The energy"},
+        {val:"history", ico:"&#128220;", t:"The history"},
+        {val:"people",  ico:"&#128101;", t:"The people"},
+        {val:"place",   ico:"&#127807;", t:"The place"}
+      ],
+      why:"Why?",
+      placeholder:"Optional…"
+    });
+  },
+  mount(root){
+    wireQuestion(root, (pick, why) => {
+      Log.set("takeaway", pick); Log.set("takeaway_why", why);
+      go("SHARE_TYPE");
+    });
+  }
+},
+
+/* --- 15 SHARE: ECHO TYPE ------------------------------------------------- */
+SHARE_TYPE:{
+  render(){
+    const listened = !!(State.session && State.session.echo);
+    return topbar({back:"CHOOSE_ACTION"})+
+    '<div class="wrap stag">'+
+      (listened ? '<p class="serif-quote">Someone left that for you.</p>' : '')+
+      '<h2 class="display">What would you leave for the next person?</h2>'+
+      choices("six", [
+        {act:"type", val:"memory",   ico:"&#128173;", t:"A memory",   d:"Something that happened to you here."},
+        {act:"type", val:"secret",   ico:"&#129323;", t:"A secret",   d:"Something you want to leave anonymously."},
+        {act:"type", val:"fact",     ico:"&#128161;", t:"A fact",     d:"Something you know about this place."},
+        {act:"type", val:"moment",   ico:"&#128205;", t:"A moment",   d:"Something that happened here that you remember."},
+        {act:"type", val:"event",    ico:"&#127881;", t:"An event",   d:"Something you experienced or witnessed here."},
+        {act:"type", val:"question", ico:"&#10067;",  t:"A question", d:"Leave something for the next person to think about."}
+      ])+
+    '</div>';
+  },
+  mount(root){
+    root.addEventListener("click", e => {
+      const b = e.target.closest('[data-act="type"]');
+      if(!b) return;
+      State.draft.type = b.dataset.val;
+      Log.set("echo_type", b.dataset.val);
+      Log.event("echo_type", b.dataset.val);
+      go("SHARE_FORMAT");
+    });
+  }
+},
+
+/* --- 16 SHARE: FORMAT ---------------------------------------------------- */
+SHARE_FORMAT:{
+  render(){
+    return topbar({back:"SHARE_TYPE"})+
+    '<div class="wrap stag">'+
+      '<h2 class="display">How do you want to leave your Echo?</h2>'+
+      choices("three", [
+        {act:"fmt", val:"write",  ico:"&#9997;&#65039;", t:"Write",  d:"Leave a short message."},
+        {act:"fmt", val:"record", ico:"&#127908;",       t:"Record", d:"Leave your voice."},
+        {act:"fmt", val:"show",   ico:"&#128247;",       t:"Show",   d:"Leave something visual."}
+      ])+
+      '<p class="fine" id="fmtnote" hidden></p>'+
+    '</div>';
+  },
+  mount(root){
+    const note = $("#fmtnote", root);
+    root.addEventListener("click", e => {
+      const b = e.target.closest('[data-act="fmt"]');
+      if(!b) return;
+      const v = b.dataset.val;
+      Log.event("format_chosen", v);
+      if(v === "write"){
+        State.draft.format = "write";
+        Log.set("echo_format", "write");
+        go("WRITE");
+      } else if(v === "record"){
+        State.draft.format = "record";
+        Log.set("echo_format", "record");
+        go("RECORD");
+      } else {
+        /* Leaving something visual is out of scope for this prototype (§26),
+           but the choice is still captured — wanting it is itself a finding. */
+        Log.set("echo_format", v);
+        note.hidden = false;
+        note.innerHTML = "Leaving something visual isn't wired up in this prototype yet &mdash; "+
+          "but we've noted that's what you'd rather do. Want to write it instead for now?";
+        root.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
+        b.classList.add("selected");
+        if(!$("#fmtgo", root)){
+          note.insertAdjacentHTML("afterend",
+            '<div class="btnrow"><button class="btn" id="fmtgo" data-act="fmt" data-val="write">Write it instead &rarr;</button></div>');
+        }
+      }
+    });
+  }
+},
+
+/* --- 17a RECORD ---------------------------------------------------------- */
+RECORD:{
+  render(){
+    return topbar({back:"SHARE_FORMAT"})+
+    '<div class="wrap narrow stag" style="text-align:center">'+
+      '<h2 class="display">Leave your voice</h2>'+
+      '<p class="lede wide" style="margin:0 auto">If someone sat here after you, what would you want them to hear?</p>'+
+      '<div class="recstage" id="recstage">'+
+        '<button class="recbtn" id="recbtn"><span class="glyph" aria-hidden="true">&#9679;</span><span id="reclabel">Record</span></button>'+
+        '<p class="rectime" id="rectime" hidden>0:00</p>'+
+        '<canvas id="reclevel" hidden aria-hidden="true"></canvas>'+
+        '<p class="rechint" id="rechint">Tap to start. Up to 60 seconds &mdash; a sentence or two is plenty.</p>'+
+      '</div>'+
+      '<div id="recreview" hidden>'+
+        '<div class="recplayer"><audio id="recplay" controls></audio></div>'+
+        '<div class="btnrow center">'+
+          '<button class="btn" data-act="use">Leave this Echo &rarr;</button>'+
+          '<button class="btn ghost" data-act="again">Record again</button>'+
+        '</div>'+
+      '</div>'+
+      '<p class="fine" id="recfallback" hidden></p>'+
+    '</div>';
+  },
+  mount(root){ Rec.mount(root); },
+  unmount(){ Rec.teardown(); }
+},
+
+/* --- 17 WRITE ------------------------------------------------------------ */
+WRITE:{
+  render(){
+    return topbar({back:"SHARE_FORMAT"})+
+    '<div class="wrap narrow stag">'+
+      '<h2 class="display">Leave something behind</h2>'+
+      '<p class="lede wide">If someone sat here after you, what would you want them to discover?</p>'+
+      '<div class="field">'+
+        '<textarea id="echotext" rows="5" maxlength="420" placeholder="Write something you\'d leave for a stranger…"></textarea>'+
+        '<p class="counter"><span id="cc">0</span> / 420 &mdash; keep it short, a few sentences is enough</p>'+
+      '</div>'+
+      '<div class="btnrow"><button class="btn" id="leavebtn" data-act="leave" disabled>Leave my Echo &rarr;</button></div>'+
+    '</div>';
+  },
+  mount(root){
+    const ta = $("#echotext", root), cc = $("#cc", root), btn = $("#leavebtn", root);
+    ta.value = State.draft.text || "";
+    const sync = () => {
+      cc.textContent = ta.value.length;
+      btn.disabled = ta.value.trim().length < 2;
+    };
+    ta.addEventListener("input", sync); sync();
+    setTimeout(() => ta.focus(), 420);
+    root.addEventListener("click", e => {
+      if(!e.target.closest('[data-act="leave"]')) return;
+      State.draft.text = ta.value.trim();
+      Log.set("echo_text", State.draft.text);
+      Log.event("echo_written", State.draft.text.length + " chars");
+      go("CONFIRM");
+    });
+  }
+},
+
+/* --- 18 CONFIRM ---------------------------------------------------------- */
+CONFIRM:{
+  render(){
+    const voice = State.draft.format === "record" && State.draft.audioUrl;
+    const backTo = voice ? "RECORD" : "WRITE";
+    const body = voice
+      ? '<p class="meta" style="margin-bottom:14px">Your voice &bull; '+fmt(State.draft.audioSecs||0)+'</p>'+
+        '<div class="recplayer" style="width:100%"><audio controls src="'+State.draft.audioUrl+'"></audio></div>'
+      : '<p class="typed">'+esc(State.draft.text)+'</p>';
+    return topbar({back:backTo})+
+    '<div class="wrap narrow stag">'+
+      '<h2 class="display">Your Echo is ready.</h2>'+
+      '<div class="echocard" style="margin:10px 0 8px">'+
+        '<p class="meta"><b>A '+esc(State.draft.type||"memory")+'</b> &bull; UQ Lakes &bull; left by you</p>'+
+        body+
+      '</div>'+
+      '<p class="lede">Someone sitting here after you might discover it.</p>'+
+      '<p class="fine">Would you like to leave it here?</p>'+
+      '<div class="btnrow">'+
+        '<button class="btn" data-act="confirm">Leave my Echo</button>'+
+        '<button class="btn ghost" data-act="back" data-val="'+backTo+'">Change it</button>'+
+      '</div>'+
+    '</div>';
+  },
+  mount(root){
+    root.addEventListener("click", e => {
+      if(!e.target.closest('[data-act="confirm"]')) return;
+      Log.set("echo_left", true);
+      Log.event("echo_left");
+      go("LEFT");
+    });
+  }
+},
+
+/* --- 19 ECHO LEFT -------------------------------------------------------- */
+LEFT:{
+  render(){
+    return topbar({})+
+    '<div class="wrap narrow stag" style="text-align:center">'+
+      '<h2 class="display">Echo left.</h2>'+
+      '<p class="lede" style="margin:0 auto 6px">You just left something behind for someone you may never meet.</p>'+
+      '<p class="fine" style="margin-top:6px">Maybe they\'ll discover it tomorrow.</p>'+
+      '<div class="counterplate">'+
+        '<div class="n" id="tally">'+(ECHO_COUNT)+'</div>'+
+        '<div class="l">Echoes left at UQ Lakes</div>'+
+      '</div>'+
+      '<div class="btnrow center">'+
+        '<button class="btn ghost" data-act="go" data-val="CHOOSE_CURIOSITY">Hear another</button>'+
+        '<button class="btn ghost" data-act="go" data-val="SHARE_TYPE">Leave another</button>'+
+        '<button class="btn" data-act="go" data-val="END">I\'m done</button>'+
+      '</div>'+
+    '</div>';
+  },
+  mount(root){
+    const n = $("#tally", root);
+    if(reduceMotion()){ n.textContent = ECHO_COUNT + 1; return; }
+    let v = ECHO_COUNT;
+    setTimeout(() => {
+      n.textContent = v + 1;
+      n.style.transition = "transform 420ms var(--ease)";
+      n.style.transform = "scale(1.12)";
+      setTimeout(() => n.style.transform = "none", 420);
+    }, 900);
+  }
+},
+
+/* --- 20 END -------------------------------------------------------------- */
+END:{
+  render(){
+    return '<div id="landing-bg" aria-hidden="true"><img src="'+MEDIA+'end-greatcourt.jpg" alt=""></div>'+
+    topbar({noReset:true})+
+    '<div class="wrap narrow stag" style="text-align:center">'+
+      '<h2 class="display">Thanks for listening.</h2>'+
+      '<p class="lede" style="margin:0 auto 4px">Someone was here before you.</p>'+
+      '<p class="lede" style="margin:0 auto 18px">Now you\'ve left something for whoever comes next.</p>'+
+      '<hr class="rule" style="max-width:220px;margin:28px auto">'+
+      '<p class="touchcue" style="animation:none;color:var(--maroon)">Keep an Echo with you</p>'+
+      '<p class="fine">Take a card from the tray beside you.</p>'+
+      '<div class="btnrow center"><button class="btn ghost" data-act="restart">Start again</button></div>'+
+    '</div>';
+  },
+  mount(root){
+    Log.commit();
+    root.addEventListener("click", e => {
+      if(e.target.closest('[data-act="restart"]')) restart();
+    });
+    /* The pod resets itself so the next student finds the invitation, not
+       the previous participant's ending. */
+    Player.timers.push(setTimeout(restart, 45000));
+  }
+}
+
+}; /* end SCREENS */
+
+/* --- subtopic helpers ---------------------------------------------------- */
+function subtopic(heading, items){
+  return topbar({back:"CHOOSE_CURIOSITY"})+
+  '<div class="wrap narrow stag">'+
+    '<h2 class="display">'+esc(heading)+'</h2>'+
+    choices("list", items.map(t => ({act:"sub", val:t, plain:true, t:t})))+
+  '</div>';
+}
+function wireSubtopic(root, curiosity){
+  root.addEventListener("click", e => {
+    const b = e.target.closest('[data-act="sub"]');
+    if(!b) return;
+    Log.set("subtopic", b.dataset.val);
+    Log.event("subtopic", b.dataset.val);
+    startEcho(ROUTES[curiosity]());
+  });
+}
+
+function startEcho(id){
+  State.echo = id;
+  Log.set("echo", id);
+  Log.event("echo_served", id);
+  go("FINDING", {id:id});
+}
+
+/* ==========================================================================
+   6. PLAYER
+   ========================================================================== */
+
+const Player = {
+  media:null, env:null, canvas:null, raf:null, timers:[], ro:null,
+  idle:null, seeking:false, maxTime:0, root:null, era:null, lastEra:-1, sessionId:null,
+
+  init(root, payload){
+    this.root = root;
+    this.maxTime = 0; this.lastEra = -1;
+    this.sessionId = State.session ? State.session.id : null;
+    this.medium = (payload && payload.medium) || State.medium || "video";
+    const media = this.media = $("#media", root);
+    if(!media) return;
+
+    this.env = (State.medium === "video" ? ENVELOPES.video : ENVELOPES.audio)
+      .split(",").map(Number);
+    this.canvas = $("#wave", root);
+    this.era = $("#era", root);
+
+    const playbtn = $("#playbtn", root),
+          backbtn = $("#backbtn", root),
+          ccbtn   = $("#ccbtn", root),
+          donebtn = $("#donebtn", root),
+          scrub   = $("#scrub", root),
+          fill    = $("#fill", root),
+          knob    = $("#knob", root),
+          timeEl  = $("#time", root),
+          transport = $("#transport", root);
+
+    const setPlayIcon = () => {
+      playbtn.innerHTML = media.paused ? "&#9658;" : "&#10074;&#10074;";
+      playbtn.setAttribute("aria-label", media.paused ? "Play" : "Pause");
+    };
+
+    const paint = () => {
+      const d = media.duration || 0, t = media.currentTime || 0;
+      if(t > this.maxTime) this.maxTime = t;
+      const p = d ? t/d : 0;
+      fill.style.width = (p*100)+"%";
+      knob.style.left  = (p*100)+"%";
+      timeEl.textContent = fmt(t) + " / " + fmt(d);
+      scrub.setAttribute("aria-valuetext", fmt(t)+" of "+fmt(d));
+      this.updateEra(p);
+      if(this.canvas) this.drawWave(p);
+    };
+
+    const loop = () => { paint(); this.raf = requestAnimationFrame(loop); };
+
+    media.addEventListener("loadedmetadata", () => {
+      this.loaded = true;
+      this.renderTicks(root);
+      paint();
+    });
+
+    /* If the media folder isn't sitting next to index.html the browser fails
+       silently — a black rectangle and no explanation. Say what's wrong. */
+    this.loaded = false;
+    const fail = () => this.showMediaFailure(root, media.currentSrc ||
+      (State.medium === "video" ? ECHOES[payload.id].video : ECHOES[payload.id].audio));
+    media.addEventListener("error", fail);
+    const srcEl = media.querySelector("source");
+    if(srcEl) srcEl.addEventListener("error", fail);
+    this.timers.push(setTimeout(() => {
+      if(!this.loaded && this.media && this.media.readyState === 0) fail();
+    }, 6000));
+    media.addEventListener("play",  () => { setPlayIcon(); Log.event("play", fmt(media.currentTime)); this.armIdle(transport); });
+    media.addEventListener("pause", () => { setPlayIcon(); Log.event("pause", fmt(media.currentTime)); this.showTransport(transport); });
+    media.addEventListener("ended", () => {
+      Log.set(this.medium + "_completed", true);
+      Log.event("ended", this.medium);
+      this.finish();
+    });
+
+    playbtn.addEventListener("click", () => {
+      if(media.paused) media.play().catch(() => {}); else media.pause();
+    });
+    backbtn.addEventListener("click", () => {
+      media.currentTime = Math.max(0, media.currentTime - 15);
+      Log.event("back15", fmt(media.currentTime));
+    });
+    ccbtn.addEventListener("click", () => toggleTranscript());
+    donebtn.addEventListener("click", () => { Log.event("stopped_early", fmt(media.currentTime)); this.finish(); });
+
+    root.addEventListener("click", e => {
+      if(e.target.closest('[data-act="cc-close"]')) toggleTranscript(false);
+    });
+
+    /* scrubbing */
+    const seekAt = clientX => {
+      const r = scrub.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (clientX - r.left)/r.width));
+      if(media.duration) media.currentTime = p * media.duration;
+      paint();
+    };
+    scrub.addEventListener("pointerdown", e => {
+      this.seeking = true; scrub.setPointerCapture(e.pointerId); seekAt(e.clientX);
+    });
+    scrub.addEventListener("pointermove", e => { if(this.seeking) seekAt(e.clientX); });
+    scrub.addEventListener("pointerup",   e => {
+      if(this.seeking) Log.event("seek", fmt(media.currentTime));
+      this.seeking = false;
+    });
+    scrub.addEventListener("keydown", e => {
+      if(e.key === "ArrowRight"){ media.currentTime += 10; paint(); }
+      if(e.key === "ArrowLeft"){ media.currentTime -= 10; paint(); }
+    });
+    if(this.canvas){
+      this.canvas.addEventListener("click", e => {
+        const r = this.canvas.getBoundingClientRect();
+        const p = Math.min(1, Math.max(0, (e.clientX - r.left)/r.width));
+        if(media.duration) media.currentTime = p * media.duration;
+        Log.event("seek_wave", fmt(media.currentTime));
+        paint();
+      });
+    }
+
+    /* Mode A hides its chrome so the film can breathe; Mode B keeps it. */
+    if(State.medium === "video"){
+      root.addEventListener("pointermove", () => this.showTransport(transport));
+      root.addEventListener("pointerdown", () => this.showTransport(transport));
+    }
+
+    window.addEventListener("resize", this.onResize = () => { if(this.canvas) this.drawWave(); });
+    if(this.canvas && window.ResizeObserver){
+      this.ro = new ResizeObserver(() => this.drawWave());
+      this.ro.observe(this.canvas);
+    }
+
+    setPlayIcon();
+    loop();
+    media.play().then(setPlayIcon).catch(() => {
+      /* autoplay refused — the big play button is right there */
+      setPlayIcon(); this.showTransport(transport);
+    });
+  },
+
+  showMediaFailure(root, src){
+    if($(".mediafail", root)) return;
+    Log.event("media_failed", src || "");
+    const file = (src || "").split("/").pop() || "the media file";
+    const wanted = State.medium === "video" ? "echo-027-video.mp4" : "echo-027-audio.mp3";
+    const box = document.createElement("div");
+    box.className = "mediafail";
+    box.innerHTML =
+      "<h3>The Echo can't find its recording</h3>"+
+      "<p>The browser couldn't load <code>"+esc(file)+"</code>. Nine times out of ten this means "+
+      "<code>index.html</code> has been opened on its own, without the <code>media</code> folder beside it.</p>"+
+      '<div class="tree">ECHO/<br>&nbsp;&nbsp;index.html<br>&nbsp;&nbsp;media/<br>'+
+      '&nbsp;&nbsp;&nbsp;&nbsp;'+esc(wanted)+'<br>&nbsp;&nbsp;&nbsp;&nbsp;&hellip;</div>'+
+      "<p>Keep the whole ECHO folder together and open <code>index.html</code> from inside it.</p>"+
+      '<div class="btnrow center"><button class="btn" data-act="back" data-val="ECHO_INTRO">Go back</button></div>';
+    root.appendChild(box);
+    const t = $("#transport", root);
+    if(t) t.classList.add("idle");
+  },
+
+  renderTicks(root){
+    const box = $("#ticks", root);
+    if(!box) return;
+    box.innerHTML = CHAPTERS.map(c =>
+      c.at > 0 ? '<div class="tick" style="left:'+(c.at*100)+'%"></div>' : ""
+    ).join("");
+  },
+
+  updateEra(p){
+    if(!this.era) return;
+    let idx = 0;
+    for(let i = 0; i < CHAPTERS.length; i++) if(p >= CHAPTERS[i].at) idx = i;
+    if(idx === this.lastEra) return;
+    this.lastEra = idx;
+    this.era.classList.add("swap");
+    setTimeout(() => {
+      this.era.textContent = CHAPTERS[idx].label;
+      this.era.classList.remove("swap");
+    }, reduceMotion() ? 0 : 340);
+  },
+
+  drawWave(progress){
+    const c = this.canvas; if(!c) return;
+    const w = c.clientWidth, h = c.clientHeight;
+    if(!w || !h) return;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    if(c.width !== Math.round(w*dpr)){ c.width = Math.round(w*dpr); c.height = Math.round(h*dpr); }
+    const ctx = c.getContext("2d");
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,w,h);
+
+    const barW = 3, gap = 3;
+    const n = Math.max(8, Math.floor((w + gap)/(barW + gap)));
+    const bars = resample(this.env, n);
+    const p = progress !== undefined ? progress
+      : (this.media && this.media.duration ? this.media.currentTime/this.media.duration : 0);
+    const mid = h/2;
+    for(let i = 0; i < n; i++){
+      const bh = Math.max(2, (bars[i]/100) * (h - 8));
+      const played = (i/n) <= p;
+      ctx.fillStyle = played ? "#D98B4A" : "rgba(244,230,203,.24)";
+      ctx.fillRect(i*(barW+gap), mid - bh/2, barW, bh);
+    }
+  },
+
+  showTransport(t){
+    if(!t) return;
+    t.classList.remove("idle");
+    this.armIdle(t);
+  },
+  armIdle(t){
+    if(State.medium !== "video" || !t) return;
+    clearTimeout(this.idle);
+    this.idle = setTimeout(() => {
+      if(this.media && !this.media.paused && !$("#transcript.open")) t.classList.add("idle");
+    }, 3400);
+  },
+
+  /* Banked both on a clean finish and on abandonment, because how far a
+     participant got before walking away is the drop-off measure. */
+  bankProgress(){
+    const m = this.media;
+    if(!m) return;
+    /* Only ever write back into the session that actually watched this
+       playback — a reset or a mode switch opens a new one, and playback
+       figures must not leak forward into it. */
+    if(!State.session || State.session.id !== this.sessionId) return;
+    const k = this.medium || State.medium || "video";
+    Log.set(k + "_seconds", +this.maxTime.toFixed(1));
+    Log.set(k + "_pct", m.duration ? +((this.maxTime/m.duration)*100).toFixed(1) : 0);
+    Log.commit();
+  },
+
+  finish(){
+    this.bankProgress();
+    if(this.media) this.media.pause();
+    toggleTranscript(false);
+    const k = this.medium || State.medium;
+    State.seen[k] = true;
+    go("REACTION", {medium:k});
+  },
+
+  destroy(){
+    this.bankProgress();
+    cancelAnimationFrame(this.raf);
+    clearTimeout(this.idle);
+    this.timers.forEach(t => { clearTimeout(t); clearInterval(t); });
+    this.timers = [];
+    if(this.onResize) window.removeEventListener("resize", this.onResize);
+    if(this.ro){ this.ro.disconnect(); this.ro = null; }
+    if(this.media){ try{ this.media.pause(); this.media.removeAttribute("src"); this.media.load(); }catch(e){} }
+    this.media = null; this.canvas = null; this.era = null;
+  }
+};
+
+/* ==========================================================================
+   6b. VOICE RECORDER
+   Recordings are held in memory for the session and downloaded from the
+   tester panel. Nothing is uploaded — there is no backend (§44).
+   ========================================================================== */
+
+const RECORDINGS = [];
+const MAX_REC_SECONDS = 60;
+
+const Rec = {
+  root:null, stream:null, mr:null, chunks:[], blob:null, url:null,
+  secs:0, tick:null, raf:null, ac:null, analyser:null, data:null, t0:0,
+
+  mount(root){
+    this.root = root;
+    this.reset();
+    const btn = $("#recbtn", root);
+
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder){
+      this.unsupported("This browser can't record audio here.");
+      return;
+    }
+
+    btn.addEventListener("click", () => {
+      if(this.mr && this.mr.state === "recording") this.stop();
+      else this.start();
+    });
+
+    root.addEventListener("click", e => {
+      const b = e.target.closest("[data-act]");
+      if(!b) return;
+      if(b.dataset.act === "use"){
+        State.draft.audioUrl = this.url;
+        State.draft.audioSecs = this.secs;
+        Log.set("echo_audio_seconds", +this.secs.toFixed(1));
+        Log.event("recording_kept", this.secs.toFixed(1) + "s");
+        go("CONFIRM");
+      }
+      if(b.dataset.act === "again"){
+        Log.event("recording_redo");
+        this.reset();
+        $("#recreview", root).hidden = true;
+        $("#recstage", root).hidden = false;
+      }
+    });
+  },
+
+  async start(){
+    const root = this.root;
+    try{
+      this.stream = await navigator.mediaDevices.getUserMedia({audio:true});
+    }catch(err){
+      Log.event("mic_denied", err && err.name);
+      this.unsupported(
+        err && err.name === "NotAllowedError"
+          ? "The microphone wasn't allowed, so recording can't start."
+          : "The microphone isn't available on this device."
+      );
+      return;
+    }
+
+    let mime = "";
+    ["audio/webm;codecs=opus","audio/webm","audio/mp4","audio/ogg;codecs=opus"].forEach(m => {
+      if(!mime && window.MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(m)) mime = m;
+    });
+
+    this.chunks = [];
+    this.mr = mime ? new MediaRecorder(this.stream, {mimeType:mime}) : new MediaRecorder(this.stream);
+    this.mr.ondataavailable = e => { if(e.data && e.data.size) this.chunks.push(e.data); };
+    this.mr.onstop = () => this.finalise();
+    this.mr.start();
+    this.t0 = Date.now();
+    Log.event("recording_started");
+
+    const btn = $("#recbtn", root);
+    btn.classList.add("live");
+    $("#reclabel", root).textContent = "Stop";
+    btn.querySelector(".glyph").innerHTML = "&#9632;";
+    $("#rectime", root).hidden = false;
+    $("#reclevel", root).hidden = false;
+    $("#rechint", root).textContent = "Speak whenever you're ready. Tap again to stop.";
+
+    this.tick = setInterval(() => {
+      this.secs = (Date.now() - this.t0)/1000;
+      $("#rectime", root).textContent = fmt(this.secs);
+      if(this.secs >= MAX_REC_SECONDS) this.stop();
+    }, 200);
+
+    /* A live meter from the microphone stream — this one is a real analyser,
+       because a MediaStream is not subject to the file:// media restriction. */
+    try{
+      this.ac = new (window.AudioContext || window.webkitAudioContext)();
+      const src = this.ac.createMediaStreamSource(this.stream);
+      this.analyser = this.ac.createAnalyser();
+      this.analyser.fftSize = 1024;
+      this.data = new Uint8Array(this.analyser.frequencyBinCount);
+      src.connect(this.analyser);
+      this.history = [];
+      this.drawLevel();
+    }catch(e){ /* meter is decorative; recording continues without it */ }
+  },
+
+  drawLevel(){
+    const c = $("#reclevel", this.root);
+    if(!c || !this.analyser) return;
+    const w = c.clientWidth, h = c.clientHeight;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    if(c.width !== Math.round(w*dpr)){ c.width = Math.round(w*dpr); c.height = Math.round(h*dpr); }
+    const ctx = c.getContext("2d");
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+
+    this.analyser.getByteTimeDomainData(this.data);
+    let peak = 0;
+    for(let i = 0; i < this.data.length; i++){
+      const v = Math.abs(this.data[i] - 128)/128;
+      if(v > peak) peak = v;
+    }
+    this.history.push(peak);
+    const barW = 3, gap = 2, n = Math.floor((w + gap)/(barW + gap));
+    if(this.history.length > n) this.history.shift();
+
+    ctx.clearRect(0,0,w,h);
+    const mid = h/2;
+    this.history.forEach((v, i) => {
+      const bh = Math.max(2, Math.pow(v, .7) * (h - 8));
+      ctx.fillStyle = "#6E1C20";
+      ctx.fillRect(i*(barW+gap), mid - bh/2, barW, bh);
+    });
+    this.raf = requestAnimationFrame(() => this.drawLevel());
+  },
+
+  stop(){
+    if(this.mr && this.mr.state === "recording") this.mr.stop();
+    clearInterval(this.tick);
+    cancelAnimationFrame(this.raf);
+  },
+
+  finalise(){
+    const root = this.root;
+    this.secs = (Date.now() - this.t0)/1000;
+    this.blob = new Blob(this.chunks, {type: this.mr.mimeType || "audio/webm"});
+    if(this.url) URL.revokeObjectURL(this.url);
+    this.url = URL.createObjectURL(this.blob);
+
+    RECORDINGS.push({
+      session: State.session ? State.session.id : "-",
+      seconds: +this.secs.toFixed(1),
+      type: this.blob.type,
+      blob: this.blob,
+      url: this.url
+    });
+    Log.event("recording_made", this.secs.toFixed(1) + "s");
+
+    this.releaseMic();
+    if(!root || !document.body.contains(root)) return;
+    $("#recstage", root).hidden = true;
+    const rev = $("#recreview", root);
+    rev.hidden = false;
+    $("#recplay", root).src = this.url;
+  },
+
+  unsupported(msg){
+    const root = this.root;
+    const note = $("#recfallback", root);
+    $("#recstage", root).hidden = true;
+    note.hidden = false;
+    note.innerHTML = esc(msg) + " You can write your Echo instead.";
+    if(!$("#recwrite", root)){
+      note.insertAdjacentHTML("afterend",
+        '<div class="btnrow center"><button class="btn" id="recwrite" data-act="go" data-val="WRITE">Write it instead &rarr;</button></div>');
+    }
+    State.draft.format = "write";
+    Log.set("echo_format", "write_after_record_failed");
+  },
+
+  releaseMic(){
+    if(this.stream){ this.stream.getTracks().forEach(t => t.stop()); this.stream = null; }
+    if(this.ac){ try{ this.ac.close(); }catch(e){} this.ac = null; }
+    this.analyser = null;
+  },
+
+  reset(){
+    this.chunks = []; this.blob = null; this.secs = 0; this.history = [];
+    const root = this.root;
+    if(!root) return;
+    const btn = $("#recbtn", root);
+    if(btn){
+      btn.classList.remove("live");
+      btn.querySelector(".glyph").innerHTML = "&#9679;";
+      $("#reclabel", root).textContent = "Record";
+    }
+    const t = $("#rectime", root); if(t){ t.hidden = true; t.textContent = "0:00"; }
+    const l = $("#reclevel", root); if(l) l.hidden = true;
+    const h = $("#rechint", root); if(h) h.textContent = "Tap to start. Up to 60 seconds — a sentence or two is plenty.";
+  },
+
+  teardown(){
+    this.stop();
+    this.releaseMic();
+    this.root = null;
+  }
+};
+
+function downloadRecordings(){
+  RECORDINGS.forEach((r, i) => {
+    const ext = /mp4/.test(r.type) ? "m4a" : /ogg/.test(r.type) ? "ogg" : "webm";
+    const a = document.createElement("a");
+    a.href = r.url;
+    a.download = "echo-voice-" + r.session + "-" + (i+1) + "." + ext;
+    document.body.appendChild(a);
+    setTimeout(() => { a.click(); a.remove(); }, i * 350);
+  });
+}
+
+function resample(arr, n){
+  const out = [];
+  for(let i = 0; i < n; i++){
+    const a = Math.floor(i*arr.length/n);
+    const b = Math.max(a+1, Math.floor((i+1)*arr.length/n));
+    let m = 0;
+    for(let j = a; j < b && j < arr.length; j++) if(arr[j] > m) m = arr[j];
+    out.push(m);
+  }
+  return out;
+}
+
+function toggleTranscript(force){
+  const p = $("#transcript");
+  if(!p) return;
+  const open = force !== undefined ? force : !p.classList.contains("open");
+  p.classList.toggle("open", open);
+  p.setAttribute("aria-hidden", open ? "false" : "true");
+  const scr = p.closest(".screen");
+  if(scr) scr.classList.toggle("tr-open", open);
+  Log.event(open ? "transcript_open" : "transcript_close");
+  if(open){
+    const t = $("#transport");
+    if(t) t.classList.remove("idle");
+  }
+}
+
+/* ==========================================================================
+   7. HIDDEN TESTER PANEL
+   Triple-tap the top-left corner, or press Ctrl/Cmd + Shift + D.
+   ========================================================================== */
+
+const Dev = {
+  open:false,
+  toggle(){ this.open = !this.open; this.render(); },
+  render(){
+    const box = $("#dev");
+    box.hidden = !this.open;
+    if(!this.open) return;
+    const n = Store.read().length;
+    box.innerHTML =
+      '<h4>Tester panel <button id="dclose" style="padding:2px 7px">&times;</button></h4>'+
+      '<div class="sec"><div class="lbl">Responses</div>'+
+        '<div class="row"><button id="dview" style="width:100%;padding:10px">View all responses</button></div>'+
+      '</div>'+
+      '<div class="sec"><div class="lbl">Live</div>'+
+        '<div class="stat"><span>screen</span><b>'+esc(currentId||"-")+'</b></div>'+
+        '<div class="stat"><span>session</span><b>'+esc(State.session?State.session.id:"-")+'</b></div>'+
+        '<div class="stat"><span>timecode</span><b id="dtc">&mdash;</b></div>'+
+      '</div>'+
+      '<div class="sec"><div class="lbl">Jump to screen</div>'+
+        '<select id="djump">'+Object.keys(SCREENS).map(k =>
+          '<option value="'+k+'"'+(k===currentId?" selected":"")+'>'+k+'</option>').join("")+'</select>'+
+      '</div>'+
+      '<div class="sec"><div class="lbl">Data &mdash; '+n+' session'+(n===1?"":"s")+'</div>'+
+        '<div class="row">'+
+          '<button id="dcsv">Download CSV</button>'+
+          '<button id="dcopy">Copy CSV</button>'+
+          '<button id="dshow">Show</button>'+
+          '<button id="dclear">Clear</button>'+
+        '</div>'+
+        '<textarea id="dout" hidden readonly></textarea>'+
+      '</div>'+
+      '<div class="sec"><div class="lbl">Voice Echoes &mdash; '+RECORDINGS.length+' this run</div>'+
+        (RECORDINGS.length
+          ? RECORDINGS.map((r,i) => '<div class="stat"><span>'+esc(r.session)+'</span><b>'+fmt(r.seconds)+'</b></div>').join("")+
+            '<div class="row" style="margin-top:8px"><button id="drec">Download all</button></div>'+
+            '<div style="color:#9a8b7a;font-size:10.5px;margin-top:8px;line-height:1.45">Held in memory only &mdash; download before reloading the page.</div>'
+          : '<div style="color:#9a8b7a;font-size:11px">None recorded yet.</div>')+
+      '</div>'+
+      '<div class="sec"><div class="lbl">Session</div>'+
+        '<div class="row"><button id="dreset">Reset to landing</button></div></div>';
+
+    $("#dclose").onclick = () => this.toggle();
+    $("#dview").onclick = () => Results.open();
+    $("#djump").onchange = e => go(e.target.value, {id: State.echo || "027", medium: State.medium || "video"});
+    $("#dreset").onclick = () => { restart(); this.render(); };
+    $("#dcsv").onclick = () => downloadCSV();
+    if($("#drec")) $("#drec").onclick = () => downloadRecordings();
+    $("#dcopy").onclick = e => {
+      const csv = toCSV();
+      navigator.clipboard && navigator.clipboard.writeText(csv)
+        .then(() => e.target.textContent = "Copied")
+        .catch(() => { const o = $("#dout"); o.hidden = false; o.value = csv; o.select(); });
+      setTimeout(() => e.target.textContent = "Copy CSV", 1400);
+    };
+    $("#dshow").onclick = () => { const o = $("#dout"); o.hidden = !o.hidden; o.value = toCSV(); };
+    $("#dclear").onclick = e => {
+      if(e.target.textContent !== "Sure?"){ e.target.textContent = "Sure?"; setTimeout(() => e.target.textContent = "Clear", 2500); return; }
+      Store.clear(); this.render();
+    };
+  },
+  tick(){
+    if(!this.open) return;
+    const el = $("#dtc");
+    if(el && Player.media) el.textContent = fmt(Player.media.currentTime) + " / " + fmt(Player.media.duration||0);
+    else if(el) el.textContent = "—";
+  }
+};
+setInterval(() => Dev.tick(), 250);
+
+/* ==========================================================================
+   7b. RESPONSES VIEWER
+   A readable table of every session, with the CSV download beside it.
+   ========================================================================== */
+
+const Results = {
+  open(){
+    let box = $("#results");
+    if(!box){
+      box = document.createElement("div");
+      box.id = "results";
+      document.body.appendChild(box);
+    }
+    const rows = Store.read();
+    const pick = (s, k) => (s[k] === null || s[k] === undefined || s[k] === "") ? "—" : String(s[k]);
+
+    box.innerHTML =
+      '<div class="rhead">'+
+        '<div><h2>Responses</h2><p>'+rows.length+' session'+(rows.length===1?"":"s")+' recorded on this device</p></div>'+
+        '<div class="rbtns">'+
+          '<button class="btn small" id="rcsv">Download CSV</button>'+
+          '<button class="btn small ghost" id="rclose">Back to the pod</button>'+
+        '</div>'+
+      '</div>'+
+      '<div class="rbody">'+
+        (rows.length === 0
+          ? '<p class="rempty">No sessions yet. Run someone through the pod and their answers appear here.</p>'
+          : rows.slice().reverse().map((s, i) => {
+              const n = rows.length - i;
+              return '<article class="rcard">'+
+                '<header><b>#'+n+'</b> <span>'+esc(new Date(s.started).toLocaleString())+'</span>'+
+                  '<span class="rpill">first: '+esc(pick(s,"first_medium"))+'</span>'+
+                  '<span class="rpill">prefers: '+esc(pick(s,"preferred_medium"))+'</span></header>'+
+                '<dl>'+
+                  rrow("Entry", pick(s,"entry")+" · curious about "+pick(s,"curiosity")+" · "+pick(s,"subtopic"))+
+                  rrow("Time to first touch", pick(s,"time_to_touch_s")+" s")+
+                  rrow("Film", pick(s,"video_seconds")+"s ("+pick(s,"video_pct")+"%)"+(s.video_completed?" · finished":"")+
+                       (s.video_reaction?" · felt "+esc(s.video_reaction):""))+
+                  (s.video_reaction_why ? rrow("&nbsp;", '<q>'+esc(s.video_reaction_why)+'</q>') : "")+
+                  rrow("Audio", pick(s,"audio_seconds")+"s ("+pick(s,"audio_pct")+"%)"+(s.audio_completed?" · finished":"")+
+                       (s.audio_reaction?" · felt "+esc(s.audio_reaction):""))+
+                  (s.audio_reaction_why ? rrow("&nbsp;", '<q>'+esc(s.audio_reaction_why)+'</q>') : "")+
+                  rrow("Preferred", pick(s,"preferred_medium")+(s.preferred_why?'': ''))+
+                  (s.preferred_why ? rrow("&nbsp;", '<q>'+esc(s.preferred_why)+'</q>') : "")+
+                  rrow("Stayed with them", pick(s,"takeaway")+(s.takeaway_why?" — "+esc(s.takeaway_why):""))+
+                  rrow("Left an Echo", s.echo_left
+                    ? (pick(s,"echo_type")+" · "+pick(s,"echo_format")+
+                       (s.echo_text ? '<br><q>'+esc(s.echo_text)+'</q>' : "")+
+                       (s.echo_audio_seconds ? " · voice "+esc(s.echo_audio_seconds)+"s" : ""))
+                    : "no")+
+                  rrow("Screens", '<code>'+esc((s.path||[]).join(" › "))+'</code>')+
+                  rrow("Every tap", '<code>'+esc((s.events||[]).map(e =>
+                    e.t+"s "+e.type+(e.detail?":"+e.detail:"")).join("  ·  "))+'</code>')+
+                '</dl>'+
+              '</article>';
+            }).join(""))+
+      '</div>';
+
+    $("#rclose").onclick = () => {
+      box.remove();
+      if(location.hash) history.replaceState(null, "", location.pathname);
+    };
+    $("#rcsv").onclick = () => downloadCSV();
+    Log.event("results_viewed");
+  }
+};
+function rrow(k, v){ return '<dt>'+k+'</dt><dd>'+v+'</dd>'; }
+
+function downloadCSV(){
+  const csv = toCSV();
+  const stamp = new Date().toISOString().slice(0,16).replace(/[:T]/g,"-");
+  try{
+    const blob = new Blob([csv], {type:"text/csv"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "echo-sessions-" + stamp + ".csv";
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+  }catch(e){
+    const o = $("#dout"); o.hidden = false; o.value = csv; o.select();
+  }
+}
+
+/* Top-edge hotspot: three taps within 1.5s, or a 1.2s press-and-hold. */
+(function(){
+  const hot = $("#devhot");
+  let taps = [], t0 = 0, hold = null;
+  hot.addEventListener("click", () => {
+    const now = Date.now();
+    if(now - t0 > 1500) taps = [];
+    t0 = now; taps.push(now);
+    if(taps.length >= 3){ taps = []; Dev.toggle(); }
+  });
+  hot.addEventListener("pointerdown", () => {
+    hold = setTimeout(() => { taps = []; Results.open(); }, 1200);
+  });
+  ["pointerup","pointerleave","pointercancel"].forEach(ev =>
+    hot.addEventListener(ev, () => clearTimeout(hold)));
+})();
+
+/* ==========================================================================
+   8. BOOT
+   ========================================================================== */
+
+/* ECHO Together: local kiosk prototype. Two roles are enforced, human identity is not.
+   Physical deployment needs separate stations/wands or facilitator supervision.
+   No camera, accounts, network service, or simulated NFC detection is used. */
+const Team = {
+  joined:[false,false], opened:false, round:0, solved:0, reveal:[false,false],
+  votes:[null,null], confirmed:[false,false], done:false, strokes:[[],[]],
+  words:['',''], approvals:[false,false], recall:[null,null],
+  fresh(){this.joined=[false,false];this.opened=false;this.round=0;this.solved=0;
+    this.reveal=[false,false];this.votes=[null,null];this.confirmed=[false,false];
+    this.done=false;this.strokes=[[],[]];this.words=['',''];this.approvals=[false,false];this.recall=[null,null];},
+  record(type,detail){Log.event('team_'+type,detail);Log.set('team_progress',this.solved);Log.commit();}
+};
+const TEAM_SOURCE='https://stories.uq.edu.au/shorthand-uq/contact-magazine/summer-2017/from-little-things-big-things-grow/';
+const TEAM_CHAPTERS=[
+ {title:'A campus on the move',a:'Your archive clue: on 8 September 1967, about 4,000 UQ students and staff set out from the St Lucia campus.',b:'Your archive clue: their destination was Brisbane’s CBD. They were taking part in a civil liberties march.',q:'Combine your clues: which journey belongs to the civil liberties march?',options:['St Lucia → Brisbane CBD, 1967','Brisbane CBD → St Lucia, 1985','St Lucia → Gold Coast, 1977'],answer:0,lesson:'In 1967, thousands of UQ students and staff marched from campus into Brisbane to defend civil liberties.',prompt:'How might leaving campus together make a protest more visible?'},
+ {title:'More than one cause',a:'Your archive clue: UQ graduate and musician Kev Carmody describes student politics alongside music, and recalls performing live on campus community radio.',b:'Your archive clue: Carmody recalls student concerns including campus safety, sexism and police brutality. Campus radio helped carry songs beyond the campus.',q:'What connection do both clues reveal?',options:['Student culture focused only on exams','Music and radio could carry student concerns to wider audiences','Radio replaced all student discussions'],answer:1,lesson:'At UQ, cultural activity and student politics intersected: music and campus radio gave concerns another way to travel.',prompt:'Which would reach you today: a song, a discussion or a poster? Ask your partner why.'},
+ {title:'Belonging takes teamwork',a:'Your archive clue: Kev Carmody worked with UQ’s first Aboriginal tutor, Lilla Watson, and social work academic Matt Foley to help establish what became the ATSIS Unit.',b:'Your archive clue: they raised concerns about retaining Indigenous students and the importance of community. In UQ’s 2017 account, student Tionne Seden describes the Unit as a place of belonging.',q:'What connects the earlier action to the later student experience?',options:['Removing community spaces','Making every student study alone','Working together to build support and belonging'],answer:2,lesson:'Carmody, Watson and Foley helped establish a campus support community; a later student described finding belonging there.',prompt:'What small action could the two of you take to help a new student feel welcome?'}
+];
+function teamHeader(step,title,description){return topbar({stamp:'ECHO · Together'})+'<div class="wrap teamwrap"><p class="eyebrow">'+step+'</p><h1 class="display tight">'+title+'</h1><p class="lede wide">'+description+'</p>';}
+function teamColumns(items){return '<div class="teamcols">'+items.map((x,i)=>'<section class="teamcard role'+i+'"><p class="rolelabel">Participant '+(i===0?'A · Maroon':'B · Teal')+'</p>'+x+'</section>').join('')+'</div>';}
+function teamStatus(text){return '<p class="teamstatus" role="status" aria-live="polite">'+text+'</p>';}
+function teamPad(i,label){return '<button class="holdpad role'+i+'" data-pad="'+i+'" aria-label="Participant '+(i?'B':'A')+': '+label+'">'+label+'<small>Hold here · '+(i?'B / L key':'A / A key')+'</small></button>';}
+/* Pointer IDs or two distinct keyboard keys must remain down together.
+   Mouse clicks cannot bank readiness. Blur/visibility/cancel always clear it. */
+function simultaneous(root,onDone){
+ const held=new Map();let start=0,finished=false;
+ const pads=[...root.querySelectorAll('[data-pad]')], meter=root.querySelector('progress');
+ const status=root.querySelector('.syncstatus');
+ function clear(){held.clear();start=0;pads.forEach(p=>p.classList.remove('holding'));if(meter)meter.value=0;}
+ function release(id){held.delete(id);if(held.size<2){start=0;if(meter)meter.value=0;}paint();}
+ function paint(){pads.forEach((p,i)=>p.classList.toggle('holding',[...held.values()].includes(i)));}
+ pads.forEach((p,i)=>{p.addEventListener('pointerdown',e=>{if(e.button!==0||finished)return;e.preventDefault();p.setPointerCapture(e.pointerId);held.set('p'+e.pointerId,i);paint();});
+ ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>p.addEventListener(ev,e=>release('p'+e.pointerId)));});
+ const keys={a:0,l:1};
+ function down(e){const k=e.key.toLowerCase();if(keys[k]===undefined||e.repeat||finished||e.target.matches('input,textarea'))return;e.preventDefault();held.set('k'+k,keys[k]);paint();}
+ function up(e){release('k'+e.key.toLowerCase());}
+ document.addEventListener('keydown',down);document.addEventListener('keyup',up);
+ window.addEventListener('blur',clear);document.addEventListener('visibilitychange',clear);
+ const timer=setInterval(()=>{if(finished)return;const both=[...held.values()].includes(0)&&[...held.values()].includes(1);
+ if(!both){start=0;status.textContent='Waiting for both participants to hold their controls.';return;}
+ if(!start)start=performance.now();const elapsed=performance.now()-start;meter.value=Math.min(100,elapsed/20);
+ status.textContent='Together… '+Math.min(2,elapsed/1000).toFixed(1)+' / 2 seconds';
+ if(elapsed>=2000){finished=true;clear();onDone();}},50);
+ root._teamCleanup=()=>{clearInterval(timer);document.removeEventListener('keydown',down);document.removeEventListener('keyup',up);window.removeEventListener('blur',clear);document.removeEventListener('visibilitychange',clear);};
+}
+SCREENS.LANDING={
+ render(){return teamHeader('Two voices · One shared story','History opens together','Invite someone beside you. Each person takes a role, shares a different clue and helps create an Echo for the next students.')+
+ teamColumns([0,1].map(i=>'<h2>Take your place</h2><p>Introduce yourself and ask your partner what they already know about UQ.</p><button class="btn join" data-join="'+i+'" aria-pressed="false">Join as '+(i?'B':'A')+'</button>'))+
+ teamStatus('Waiting for Participant A and Participant B.')+'<button class="btn" id="teamstart" disabled>Open our story →</button><p class="fine">2+ people · Around 6–8 minutes · One shared touchscreen or keyboard<br>More people? Form two groups and rotate the controls after every chapter.</p></div>';},
+ mount(root){Team.fresh();root.querySelectorAll('[data-join]').forEach(b=>b.onclick=()=>{const i=+b.dataset.join;Team.joined[i]=!Team.joined[i];b.setAttribute('aria-pressed',Team.joined[i]);b.textContent=Team.joined[i]?'Joined · '+(i?'B':'A'):'Join as '+(i?'B':'A');root.querySelector('#teamstart').disabled=!Team.joined.every(Boolean);root.querySelector('.teamstatus').textContent=Team.joined.every(Boolean)?'Both roles joined. Now open the story together.':'Waiting for both participants.';});root.querySelector('#teamstart').onclick=()=>{if(Team.joined.every(Boolean)){Team.record('joined','A+B');go('TEAM_OPEN');}};}
+};
+SCREENS.TEAM_OPEN={
+ render(){return teamHeader('01 / 04 · Open together','Two hands, one beginning','Each person holds their own control for two seconds at the same time. Releasing either control resets the hold.')+'<div class="syncpads">'+teamPad(0,'I’m here with my partner')+teamPad(1,'I’m here with my partner')+'</div><progress max="100" value="0" aria-label="Together hold progress"></progress><p class="syncstatus teamstatus" role="status">Waiting for both participants.</p><p class="fine">Touchscreen: use two simultaneous touches. Keyboard: A holds A; B holds L. A mouse alone cannot complete this step.</p></div>';},
+ mount(root){simultaneous(root,()=>{Team.opened=true;Team.record('opened','simultaneous 2s');go('TEAM_CLUES');});},unmount(root){root._teamCleanup?.();}
+};
+SCREENS.TEAM_CLUES={
+ render(){const c=TEAM_CHAPTERS[Team.round];return teamHeader('02 / 04 · Chapter '+(Team.round+1)+' of 3',c.title,'One clue each. Read yours, explain it in your own words, then listen to your partner. Swap who explains first each round.')+teamColumns([0,1].map(i=>'<button class="btn ghost" data-reveal="'+i+'">Read my clue</button><p class="cluetext" hidden></p><button class="btn small explain" data-explain="'+i+'" disabled>I explained it to my partner</button>'))+teamStatus('Both people must share their clue before answering.')+'<button class="btn" id="cluenext" disabled>Combine our clues →</button></div>';},
+ mount(root){Team.reveal=[false,false];const explained=[false,false];root.querySelectorAll('[data-reveal]').forEach(b=>b.onclick=()=>{const i=+b.dataset.reveal;Team.reveal[i]=true;const p=b.nextElementSibling;p.hidden=false;p.textContent=TEAM_CHAPTERS[Team.round][i?'b':'a'];b.textContent='My clue is open';root.querySelector('[data-explain="'+i+'"]').disabled=false;Team.record('clue_read',Team.round+':'+i);});root.querySelectorAll('[data-explain]').forEach(b=>b.onclick=()=>{const i=+b.dataset.explain;if(!Team.reveal[i])return;explained[i]=true;b.textContent='Shared ✓';b.disabled=true;root.querySelector('#cluenext').disabled=!explained.every(Boolean);});root.querySelector('#cluenext').onclick=()=>{if(explained.every(Boolean)){Team.confirmed=[true,true];go('TEAM_ANSWER');}};}
+};
+SCREENS.TEAM_ANSWER={
+ render(){const c=TEAM_CHAPTERS[Team.round];return teamHeader('02 / 04 · Decide together',c.q,'A and B each choose an answer. Different answers? Discuss the clues and revise. You can only submit when you agree.')+teamColumns([0,1].map(i=>c.options.map((o,n)=>'<button class="choice vote" data-voter="'+i+'" data-option="'+n+'" aria-pressed="false">'+esc(o)+'</button>').join('')))+teamStatus('Waiting for both answers.')+'<button class="btn" id="answersubmit" disabled>Check our answer</button></div>';},
+ mount(root){Team.votes=[null,null];root.querySelectorAll('.vote').forEach(b=>b.onclick=()=>{const i=+b.dataset.voter;Team.votes[i]=+b.dataset.option;root.querySelectorAll('[data-voter="'+i+'"]').forEach(x=>{const sel=x===b;x.classList.toggle('selected',sel);x.setAttribute('aria-pressed',sel);});const both=Team.votes.every(v=>v!==null),same=Team.votes[0]===Team.votes[1];root.querySelector('#answersubmit').disabled=!(both&&same);root.querySelector('.teamstatus').textContent=!both?'Waiting for the other person.':same?'You agree. Check your reasoning together.':'Different answers. Explain which clue supports your choice.';});root.querySelector('#answersubmit').onclick=()=>{if(Team.votes.some(v=>v===null)||Team.votes[0]!==Team.votes[1])return;Team.record('answer',{round:Team.round,votes:Team.votes.slice(),correct:Team.votes[0]===TEAM_CHAPTERS[Team.round].answer});if(Team.votes[0]!==TEAM_CHAPTERS[Team.round].answer){root.querySelector('.teamstatus').textContent='Not yet. '+TEAM_CHAPTERS[Team.round].lesson+' Discuss, then both choose again.';Team.votes=[null,null];root.querySelectorAll('.vote').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false');});root.querySelector('#answersubmit').disabled=true;return;}Team.solved=Team.round+1;go('TEAM_LEARN');};}
+};
+SCREENS.TEAM_LEARN={
+ render(){const c=TEAM_CHAPTERS[Team.round];return teamHeader('Chapter unlocked · '+(Team.round+1)+' / 3','You pieced it together',esc(c.lesson))+'<div class="teamcard"><p class="rolelabel">Pause and talk</p><h2>'+esc(c.prompt)+'</h2><p>Each person offers one thought. You do not need to agree.</p><a href="'+TEAM_SOURCE+'" target="_blank" rel="noopener">Explore the UQ historical account ↗</a></div>'+teamColumns([0,1].map(i=>'<button class="btn ghost" data-talk="'+i+'">'+(i?'B':'A')+' · I shared my thought</button>'))+teamStatus('Both voices before the next chapter.')+'<button class="btn" id="learnnext" disabled>'+(Team.round<2?'Next chapter →':'Create our Echo →')+'</button></div>';},
+ mount(root){const spoken=[false,false];root.querySelectorAll('[data-talk]').forEach(b=>b.onclick=()=>{spoken[+b.dataset.talk]=true;b.textContent='Shared ✓';b.disabled=true;root.querySelector('#learnnext').disabled=!spoken.every(Boolean);});root.querySelector('#learnnext').onclick=()=>{if(!spoken.every(Boolean))return;Team.record('discussion',Team.round);if(Team.round<2){Team.round++;Team.confirmed=[false,false];go('TEAM_CLUES');}else go('TEAM_MAKE');};}
+};
+SCREENS.TEAM_MAKE={
+ render(){return teamHeader('03 / 04 · Make something together','A poster with two voices','Inspired by UQ’s history of collective action, create a poster welcoming a new student. A draws a symbol; B connects or adds to it. Each writes a line explaining what your poster means.')+'<div class="teamcard"><p class="rolelabel">History anchor</p><p>1967: UQ students and staff marched together for civil liberties. Your poster is a present-day response, not a historical artefact.</p></div>'+teamColumns([0,1].map(i=>'<label class="rolelabel" for="word'+i+'">'+(i?'B · Connect it to belonging today':'A · Connect it to something you learned')+'</label><textarea id="word'+i+'" maxlength="180" rows="2" placeholder="Your own sentence…"></textarea><div class="drawing"><canvas id="draw'+i+'" width="600" height="240" aria-label="Participant '+(i?'B':'A')+' drawing area"></canvas></div><button class="btn small ghost" data-clear="'+i+'">Clear my drawing</button><button class="btn small ghost" data-symbol="'+i+'">Add a '+(i?'connecting circle':'solidarity star')+' instead</button>'))+teamStatus('Each participant contributes a drawing (or symbol) and a sentence.')+'<button class="btn" id="makenext" disabled>Review our shared poster →</button><p class="fine">Drawing is optional: use the symbol button with touch, mouse or keyboard. Nothing is uploaded or shared publicly.</p></div>';},
+ mount(root){const update=()=>{root.querySelector('#makenext').disabled=!(Team.words.every(w=>w.trim().length>=5)&&Team.strokes.every(s=>s.length>0));};[0,1].forEach(i=>{const ta=root.querySelector('#word'+i);ta.value=Team.words[i];ta.oninput=()=>{Team.words[i]=ta.value;update();};const cv=root.querySelector('#draw'+i),ctx=cv.getContext('2d');let stroke=null;
+ function paint(){ctx.clearRect(0,0,600,240);ctx.strokeStyle=i?'#226B69':'#6E1C20';ctx.lineWidth=5;ctx.lineCap='round';Team.strokes[i].forEach(points=>{ctx.beginPath();points.forEach((p,n)=>n?ctx.lineTo(...p):ctx.moveTo(...p));ctx.stroke();});}
+ function point(e){const r=cv.getBoundingClientRect();return [(e.clientX-r.left)*600/r.width,(e.clientY-r.top)*240/r.height];}
+ cv.onpointerdown=e=>{if(e.button!==0||stroke)return;e.preventDefault();cv.setPointerCapture(e.pointerId);stroke={id:e.pointerId,points:[point(e)]};};cv.onpointermove=e=>{if(!stroke||stroke.id!==e.pointerId)return;stroke.points.push(point(e));paint();ctx.beginPath();stroke.points.forEach((p,n)=>n?ctx.lineTo(...p):ctx.moveTo(...p));ctx.stroke();};cv.onpointerup=e=>{if(!stroke||stroke.id!==e.pointerId)return;if(stroke.points.length>=2)Team.strokes[i].push(stroke.points);stroke=null;paint();update();};cv.onpointercancel=()=>{stroke=null;paint();};
+ root.querySelector('[data-clear="'+i+'"]').onclick=()=>{Team.strokes[i]=[];paint();update();};root.querySelector('[data-symbol="'+i+'"]').onclick=()=>{const pts=[];for(let n=0;n<=40;n++){const a=n/40*Math.PI*2;const radius=i?65:(n%8<4?65:30);pts.push([300+Math.cos(a)*radius,120+Math.sin(a)*radius]);}Team.strokes[i].push(pts);paint();update();};paint();});update();root.querySelector('#makenext').onclick=()=>{if(Team.words.every(w=>w.trim().length>=5)&&Team.strokes.every(s=>s.length)){Team.approvals=[false,false];go('TEAM_REVIEW');}};}
+};
+function posterSVG(){return '<svg viewBox="0 0 1200 500" role="img" aria-label="Our poster: maroon and teal contributions"><rect width="1200" height="500" fill="#F7EDD8"/>'+Team.strokes.map((ss,i)=>ss.map(ps=>'<polyline transform="translate('+(i*600)+',0)" points="'+ps.map(p=>p.join(',')).join(' ')+'" fill="none" stroke="'+(i?'#226B69':'#6E1C20')+'" stroke-width="5" stroke-linecap="round"/>').join('')).join('')+'<path d="M540 250 Q600 200 660 250" stroke="#C99B74" stroke-width="4" fill="none"/><text x="600" y="310" text-anchor="middle" font-family="Georgia" font-size="40" fill="#221C17">Two voices. One campus.</text><text x="600" y="370" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#5A4C42">1967 · Collective action for civil liberties</text></svg>';}
+SCREENS.TEAM_REVIEW={
+ render(){return teamHeader('04 / 04 · Remember, then agree','Our Echo','Before you leave it, each person answers a different recall question and approves the shared poster.')+'<div class="poster">'+posterSVG()+'</div>'+teamColumns([0,1].map(i=>'<p>'+esc(Team.words[i])+'</p><label for="recall'+i+'">'+(i?'What did the march defend?':'Which year was the march?')+'</label><select id="recall'+i+'"><option value="">Choose from memory</option>'+(i?'<option value="wrong">A sporting result</option><option value="right">Civil liberties</option>':'<option value="wrong">1985</option><option value="right">1967</option>')+'</select><button class="btn small ghost" data-approve="'+i+'" disabled>Approve my contribution</button>'))+teamStatus('Both recall answers and both approvals are needed.')+'<button class="btn" id="publishteam" disabled>Seal our Echo together →</button><button class="btn ghost" id="editteam">Edit poster</button></div>';},
+ mount(root){Team.approvals=[false,false];Team.recall=[null,null];root.querySelectorAll('select').forEach((s,i)=>s.onchange=()=>{Team.recall[i]=s.value;Team.approvals[i]=false;const b=root.querySelector('[data-approve="'+i+'"]');b.disabled=s.value!=='right';b.textContent='Approve my contribution';root.querySelector('#publishteam').disabled=true;if(s.value==='wrong')root.querySelector('.teamstatus').textContent='Remember: the 1967 march defended civil liberties. Try again.';});root.querySelectorAll('[data-approve]').forEach(b=>b.onclick=()=>{const i=+b.dataset.approve;if(Team.recall[i]!=='right')return;Team.approvals[i]=true;b.textContent='Approved ✓';b.disabled=true;root.querySelector('#publishteam').disabled=!Team.approvals.every(Boolean);});root.querySelector('#editteam').onclick=()=>go('TEAM_MAKE');root.querySelector('#publishteam').onclick=()=>{if(Team.approvals.every(Boolean)&&Team.recall.every(v=>v==='right'))go('TEAM_SEAL');};}
+};
+SCREENS.TEAM_SEAL={render(){return teamHeader('04 / 04 · Seal together','Leave a shared trace','Hold both controls together once more to seal your poster and reflections.')+'<div class="syncpads">'+teamPad(0,'Seal my contribution')+teamPad(1,'Seal my contribution')+'</div><progress max="100" value="0" aria-label="Seal progress"></progress><p class="syncstatus teamstatus" role="status">Waiting for both participants.</p></div>';},mount(root){simultaneous(root,()=>{Team.done=true;Log.set('team_words',Team.words.slice());Log.set('team_strokes',Team.strokes);Team.record('complete','Both roles, 3 chapters, recall and joint poster');go('TEAM_DONE');});},unmount(root){root._teamCleanup?.();}};
+SCREENS.TEAM_DONE={render(){return teamHeader('Together · Story unlocked','You made an Echo','Three stories explored, two voices heard, one shared poster. Ask your partner: what will you notice differently on campus now?')+'<div class="poster">'+posterSVG()+'</div>'+teamColumns(Team.words.map(w=>'<p>'+esc(w)+'</p>'))+'<div class="btnrow"><button class="btn" id="saveposter">Download our poster</button><button class="btn ghost" data-act="go" data-val="CHOOSE_ACTION">Explore original Echo stories →</button><button class="btn ghost" data-act="restart-hard">Invite the next team</button></div><p class="fine">Saved on this browser only. Download a copy to keep it. Original story media still needs the supplied media folder.</p></div>';},mount(root){root.querySelector('#saveposter').onclick=()=>{const svg=posterSVG().replace('<svg ','<svg xmlns="http://www.w3.org/2000/svg" ');const html='<!doctype html><meta charset="utf-8"><title>Our ECHO poster</title><style>body{max-width:900px;margin:40px auto;padding:24px;background:#F4E6CB;color:#221C17;font:20px Georgia}svg{width:100%}</style>'+svg+'<p><b>A:</b> '+esc(Team.words[0])+'</p><p><b>B:</b> '+esc(Team.words[1])+'</p><p>Contemporary response to UQ history · '+new Date().toLocaleDateString('en-AU')+'</p><p>Source: <a href="'+TEAM_SOURCE+'">UQ: From little things big things grow</a></p>';const url=URL.createObjectURL(new Blob([html],{type:'text/html'}));const a=document.createElement('a');a.href=url;a.download='our-echo-poster.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);};}};
+
+Store.read();
+Log.begin();
+go("LANDING");
+
+/* Three ways into the responses, so it is never a hunt:
+   1. add #responses to the address and reload  (bookmark this)
+   2. Ctrl/Cmd + Shift + D  → tester panel → View all responses
+   3. triple-tap the middle of the very top edge of the screen
+   None of them are visible to a participant. */
+function openIfRequested(){
+  const h = (location.hash || "").toLowerCase();
+  if(h === "#responses" || h === "#data" || h === "#results") Results.open();
+}
+openIfRequested();
+window.addEventListener("hashchange", openIfRequested);
+
+window.addEventListener("beforeunload", () => { Player.bankProgress(); Log.commit(); });
+document.addEventListener("visibilitychange", () => {
+  if(document.hidden){ Player.bankProgress(); Log.commit(); }
+});
+</script>
+</body>
+</html>
