@@ -56,11 +56,11 @@ The **Ethical Considerations** page discusses the ethical implications of the pr
 
 ### Supporting Materials
 
-- [Design Proposal folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_Weeks6-8_Iterations_1.pdf)
-- [Prototype folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_7.zip)
+- [Design Proposal folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Project/Week%209%20Stand%20Up/ECHO_Weeks6-8_Iterations_1.pdf)
+- [Prototype folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Project/Week%209%20Stand%20Up/ECHO_7.zip)
 - [Prototype Feedback folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Prototype%20Feedback)
 - [UQ Echoes Transcripts folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/UQ%20Echoes%20Transcripts)
-- [Week 9 Stand Up folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Week%209%20Stand%20Up)
+- [Week 9 Stand Up folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Design%20Project/Week%209%20Stand%20Up)
 
 ---
 
@@ -89,7 +89,7 @@ The main prototype package is stored in the **Week 9 Stand Up** folder.
 
 ### ECHO 1 Prototype
 
-[Download ECHO_1.zip](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_7.zip)
+[Download ECHO_1.zip](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Project/Week%209%20Stand%20Up/ECHO_1.zip)
 
 To download the prototype:
 
@@ -101,13 +101,13 @@ To download the prototype:
 
 ### ECHO Questionnaire
 
-[Download ECHO-questionnaire_2.zip](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO-questionnaire_2.zip)
+[Download ECHO-questionnaire_2.zip](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Project/Week%209%20Stand%20Up/ECHO-questionnaire_2.zip)
 
 The questionnaire package contains materials used to support prototype testing and feedback collection.
 
 ### Iteration Preview
 
-[Open ECHO Weeks 6–8 Iterations Preview](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_Weeks6-8_Iterations_1.pdf)
+[Open ECHO Weeks 6–8 Iterations Preview](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Project/Week%209%20Stand%20Up/ECHO_Weeks6-8_Iterations_1.pdf)
 
 This PDF presents the development and iteration of the ECHO concept across Weeks 6–8.
 
