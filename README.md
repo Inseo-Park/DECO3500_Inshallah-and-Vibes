@@ -58,8 +58,8 @@ The **Ethical Considerations** page discusses the ethical implications of the pr
 
 - [Design Proposal folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Project/Week%209%20Stand%20Up/ECHO_Weeks6-8_Iterations_1.pdf)
 - [Prototype folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Design%20Project/Week%209%20Stand%20Up/ECHO_7.zip)
-- [Prototype Feedback folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Prototype%20Feedback)
-- [UQ Echoes Transcripts folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/UQ%20Echoes%20Transcripts)
+- [Prototype Feedback folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/Prototypes/Prototype%20Feedback)
+- [UQ Echoes Transcripts folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Design%20Project/Week%209%20Stand%20Up/UQ%20Echoes%20Transcripts)
 - [Week 9 Stand Up folder](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Design%20Project/Week%209%20Stand%20Up)
 
 ---
