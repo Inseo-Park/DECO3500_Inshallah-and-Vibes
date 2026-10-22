@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ECHO — pick an installation</title>
+<style>
+:root{
+  --paper:#F4E6CB; --paper-deep:#EBD9B8; --paper-card:#F7EDD8;
+  --ink:#221C17; --ink-soft:#5A4C42;
+  --uq:#51247A; --uq-deep:#36164F; --gold:#E8B84B;
+  --hair:rgba(34,28,23,.16); --hair-strong:rgba(34,28,23,.30);
+  --display:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:clamp(20px,5vw,56px) clamp(16px,4vw,32px)}
+.wrap{width:100%;max-width:880px}
+h1{font-family:var(--display);font-size:clamp(2.6rem,10vw,4rem);letter-spacing:.02em;
+  margin:0 0 6px;text-transform:uppercase;line-height:.92}
+.lede{font-size:clamp(.98rem,2.4vw,1.1rem);color:var(--ink-soft);margin:0 0 30px;max-width:46ch;line-height:1.5}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.doors{grid-template-columns:1fr}}
+a.door{display:block;text-decoration:none;color:inherit;background:var(--paper-card);
+  border:1px solid var(--hair-strong);border-top:4px solid var(--uq);border-radius:14px;
+  padding:22px 22px 24px;transition:transform 140ms var(--ease),box-shadow 160ms var(--ease)}
+a.door:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(34,28,23,.16)}
+a.door .k{display:block;font-size:.66rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--uq);margin-bottom:8px}
+a.door h2{font-family:var(--display);font-size:1.6rem;margin:0 0 6px;line-height:1.15}
+a.door p{margin:0;font-size:.9rem;line-height:1.5;color:var(--ink-soft)}
+a.door .go{display:inline-block;margin-top:14px;font-size:.78rem;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--uq)}
+.svg{display:block;width:100%;height:112px;margin:-4px 0 12px}
+.note{margin-top:26px;padding:18px 20px;border-radius:13px;background:var(--paper-deep);
+  border:1px solid var(--hair);font-size:.88rem;line-height:1.6;color:var(--ink-soft)}
+.note b{color:var(--ink)}
+.note code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;
+  background:var(--paper-card);border:1px solid var(--hair);padding:1px 6px;border-radius:5px}
+.addr{display:none;margin-top:12px;padding:14px 16px;border-radius:11px;
+  background:rgba(63,125,82,.12);border:1px solid rgba(63,125,82,.32)}
+.addr b{display:block;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:#2F6B43;margin-bottom:5px}
+.addr span{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1.02rem;color:var(--ink)}
+.foot{margin-top:22px;font-size:.78rem;color:var(--ink-soft);opacity:.85}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ECHO</h1>
+  <p class="lede">Two installations, one each. Open a different one on each device and
+  they will find each other.</p>
+
+  <div class="doors">
+    <a class="door" href="ECHO-lakes/">
+      <span class="k">Installation one</span>
+      <svg class="svg" viewBox="0 0 220 110" aria-hidden="true" shape-rendering="crispEdges">
+        <rect width="220" height="110" fill="#BEDFF2"/>
+        <path d="M0 62h220v48H0z" fill="#7FB04F"/>
+        <path d="M34 60h152v26H34z" fill="#55A0D6"/><path d="M52 66h116v14H52z" fill="#3E86C4"/>
+        <rect x="92" y="52" width="36" height="8" fill="#B5956B"/>
+        <rect x="96" y="60" width="4" height="10" fill="#6B4A2F"/><rect x="120" y="60" width="4" height="10" fill="#6B4A2F"/>
+        <rect x="150" y="38" width="16" height="24" fill="#6B4A2F"/><rect x="140" y="22" width="36" height="18" fill="#6F9A4E"/>
+        <rect x="46" y="44" width="12" height="18" fill="#51247A"/><rect x="43" y="38" width="18" height="7" fill="#7A5634"/>
+        <rect x="47" y="48" width="8" height="4" fill="#E8B84B"/>
+      </svg>
+      <h2>The UQ Lakes</h2>
+      <p>The lakes are open and built out. The Great Court, Forgan Smith, Duhig and the ferry are in the mist.</p>
+      <span class="go">Open this one &rsaquo;</span>
+    </a>
+    <a class="door" href="ECHO-court/">
+      <span class="k">Installation two</span>
+      <svg class="svg" viewBox="0 0 220 110" aria-hidden="true" shape-rendering="crispEdges">
+        <rect width="220" height="110" fill="#BEDFF2"/>
+        <path d="M0 62h220v48H0z" fill="#7FB04F"/>
+        <rect x="40" y="36" width="140" height="34" fill="#DCC9A2"/>
+        <rect x="40" y="30" width="140" height="8" fill="#E8D7B4"/>
+        <rect x="52" y="44" width="10" height="26" fill="#C9B48B"/><rect x="74" y="44" width="10" height="26" fill="#C9B48B"/>
+        <rect x="96" y="44" width="10" height="26" fill="#C9B48B"/><rect x="118" y="44" width="10" height="26" fill="#C9B48B"/>
+        <rect x="140" y="44" width="10" height="26" fill="#C9B48B"/><rect x="162" y="44" width="10" height="26" fill="#C9B48B"/>
+        <rect x="64" y="52" width="92" height="18" fill="#88B857"/>
+        <rect x="30" y="44" width="12" height="18" fill="#51247A"/><rect x="27" y="38" width="18" height="7" fill="#7A5634"/>
+        <rect x="31" y="48" width="8" height="4" fill="#E8B84B"/>
+      </svg>
+      <h2>The Great Court</h2>
+      <p>The Court is open and built out. The lakes, Forgan Smith, Duhig and the ferry are in the mist.</p>
+      <span class="go">Open this one &rsaquo;</span>
+    </a>
+  </div>
+
+  <div class="addr" id="addr">
+    <b>Open this on the other device</b>
+    <span id="here"></span>
+  </div>
+
+  <div class="note" id="note">
+    <p style="margin:0 0 10px"><b>To link two devices</b>, one of them has to run the relay first.
+    On a laptop, double-click <code>start-link.command</code> (Mac) or <code>start-link.bat</code>
+    (Windows) in this folder. It prints an address.</p>
+    <p style="margin:0">Open that address in a browser on <b>both</b> devices — a second laptop, or an
+    iPad — choosing a different installation on each. Anything opened from the relay joins the link
+    by itself; there is no code to type. Both devices need to be on the same wi-fi.</p>
+  </div>
+
+  <p class="foot">Each installation also works on its own, offline, with nothing running.</p>
+</div>
+<script>
+(function(){
+  if(location.protocol !== "http:") return;
+  var box = document.getElementById("addr"), here = document.getElementById("here");
+  box.style.display = "block";
+  here.textContent = "http://" + location.host + "/";
+  if(location.hostname === "localhost" || location.hostname === "127.0.0.1"){
+    here.textContent = "http://<this laptop's number>:" + (location.port || 80) + "/";
+    box.querySelector("b").textContent = "On the other device, use the number the relay printed";
+  }
+  document.getElementById("note").innerHTML =
+    '<p style="margin:0"><b>The relay is running.</b> Open the address above on the other device ' +
+    'and pick the other installation. They will join each other on their own — there is no code ' +
+    'to type. Keep the relay window open on the laptop.</p>';
+})();
+</script>
+</body>
+</html>

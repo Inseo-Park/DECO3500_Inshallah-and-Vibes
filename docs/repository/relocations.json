@@ -1,0 +1,452 @@
+[
+  {
+    "old": "Design Project/Features to Open Echo/piece_together.png",
+    "new": "docs/design/unlock-concepts/piece-together.png",
+    "action": "move",
+    "sha256": "6f2b1b0260e438738ad5af7b0407aba582abd887f9b0a06117150e4be251ccec"
+  },
+  {
+    "old": "Design Project/Features to Open Echo/Simon Says UQ Echo.png",
+    "new": "docs/design/unlock-concepts/simon-says-uq-echo.png",
+    "action": "move",
+    "sha256": "3b5b5e142d267584b0b46bd5446945b47c7bde3d76b42a134aaad235b60aeaa8"
+  },
+  {
+    "old": "Design Project/Feedback for 2 Echo Prototypes/feedback.md",
+    "new": "docs/evaluation/social-garden-feedback.md",
+    "action": "move",
+    "sha256": "fa1524e76f0baca55e4f7b0de3b535ad9416400e6303dab55b9b1afd15c8e0a9"
+  },
+  {
+    "old": "Design Project/Prototype/ECHO_1.zip",
+    "new": "archive/prototypes/echo-01.zip",
+    "action": "remove-identical-duplicate",
+    "sha256": "991430678a8618db5f61531c6c08636b384a3717d050c05a40872796eff7ebe3"
+  },
+  {
+    "old": "Design Project/Prototype/ECHO_5.zip",
+    "new": "archive/prototypes/echo-05.zip",
+    "action": "remove-identical-duplicate",
+    "sha256": "b9db73fe743e97fe4fdbe8e60d2b29b5830097cab55abba77f8a2d0f87ba4513"
+  },
+  {
+    "old": "Design Project/Prototype/README.md",
+    "new": null,
+    "action": "remove-placeholder",
+    "sha256": "0b41edf0aa3f5d2959a6dbb157b020e0bfc5f1fe8f8a30ff709399d27f7d943d"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Echo Sessions.md",
+    "new": "docs/process/week-09/echo-sessions.md",
+    "action": "move",
+    "sha256": "c2aa4b4dfc37481161fd3744899bec068d49636637ec06e012518bf3ed15de67"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/ECHO-questionnaire_2.zip",
+    "new": "docs/evaluation/questionnaire/echo-questionnaire-v02.zip",
+    "action": "move",
+    "sha256": "c1b0e7af8af958ce455a6878dd0f3feedb7786fcce8df176c5d33cdef76e44be"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/echo-sessions-raw.csv",
+    "new": "docs/process/week-09/echo-sessions-raw.csv",
+    "action": "move",
+    "sha256": "ddca6286cdab25eae22dff572e3dfa83c8ca16c0ea197f81027c339ec0c40695"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/ECHO_1.zip",
+    "new": "archive/prototypes/echo-01.zip",
+    "action": "move",
+    "sha256": "991430678a8618db5f61531c6c08636b384a3717d050c05a40872796eff7ebe3"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/ECHO_5.zip",
+    "new": "archive/prototypes/echo-05.zip",
+    "action": "move",
+    "sha256": "b9db73fe743e97fe4fdbe8e60d2b29b5830097cab55abba77f8a2d0f87ba4513"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/ECHO_7.zip",
+    "new": "archive/prototypes/echo-07.zip",
+    "action": "move",
+    "sha256": "a322ceac6fb7adb0d644559d9a502cdb37ed86f27d1cdfdaaa0900f9788ba968"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/ECHO_User_Interview_Quotes.md",
+    "new": "docs/process/week-09/interview-quotes.md",
+    "action": "move",
+    "sha256": "93bbfd3f3bb0e54aa6dfce32909d54b09fdbd1fb6803345b722950772a079a0d"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/ECHO_Weeks6-8_Iterations_1.pdf",
+    "new": "docs/process/week-09/weeks-06-08-iterations.pdf",
+    "action": "move",
+    "sha256": "997229af7433565366befa9a2ee563650efa7af1654764efc3253a29bb930c28"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/ECHO_Wiki_Assets",
+    "new": null,
+    "action": "remove-placeholder",
+    "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/ECHO_Wiki_Page_Final_With_Images.zip",
+    "new": "archive/documentation/week-09-wiki-package.zip",
+    "action": "move",
+    "sha256": "5ce31dfdab0f6f8f731bab9333a1ac7bbe2be201ae6f25db1b16d1da49bec9b3"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/01_existing_wiki_links.png",
+    "new": "docs/process/week-09/images/01-existing-wiki-links.png",
+    "action": "move",
+    "sha256": "92911ef168333b77ff42e9984993c74608561a4cdb29a903f84970d5062368da"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/02_design_decisions.png",
+    "new": "docs/process/week-09/images/02-design-decisions.png",
+    "action": "move",
+    "sha256": "4c438cfb4a722c4c915bff89ffc1c9d0cf5582b102360e85e27eb417cc58337e"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/03_design_direction.png",
+    "new": "docs/process/week-09/images/03-design-direction.png",
+    "action": "move",
+    "sha256": "6d0afd141f49771c7d781e41965ea09247cac9ca85f30f9713a86132a49e328b"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/04_physical_concept.png",
+    "new": "docs/process/week-09/images/04-physical-concept.png",
+    "action": "move",
+    "sha256": "9da4869e51cdf6f008cf0fe67fce3fbd58964ce3506366e7f6fc4997645114e2"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/05_user_testing_01.jpeg",
+    "new": "docs/process/week-09/images/user-testing-3.jpeg",
+    "action": "remove-identical-duplicate",
+    "sha256": "928ba41af06a8cc987a0413c452a86180452429c417705272f6e261958c8cbb2"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/06_user_testing_02.jpeg",
+    "new": "docs/process/week-09/images/user-testing-2.jpeg",
+    "action": "remove-identical-duplicate",
+    "sha256": "427b84739159757a912fdf04eea81bafa38e25c2484148e9164db23b548bfac8"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/ChatGPT Image Sep 15, 2026, 10_05_30 PM.png",
+    "new": "docs/process/week-09/images/chatgpt-image-sep-15-2026-10-05-30-pm.png",
+    "action": "move",
+    "sha256": "db8ceed55d02787d16ef013a9685613c8aa5e2c48718a8510fb4d45eea7e230c"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/Screenshot 2026-09-20 125346.png",
+    "new": "docs/process/week-09/images/screenshot-2026-09-20-125346.png",
+    "action": "move",
+    "sha256": "a6b582ce2c30c560ea4c53c2f630748576d0148e5c479a6b52a58e44d893181a"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/Screenshot 2026-09-20 130013.png",
+    "new": "docs/process/week-09/images/screenshot-2026-09-20-130013.png",
+    "action": "move",
+    "sha256": "d467532ea99a4256e945fe94ef702e752c795a5738a8318a817f028bd8b61d41"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/Screenshot 2026-09-22 044301.png",
+    "new": "docs/process/week-09/images/screenshot-2026-09-22-044301.png",
+    "action": "move",
+    "sha256": "39bc65723e2fb81b4a85561f961ac7e1cbf68843e1ef01f1e057874761f5bda0"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/Screenshot 2026-09-22 044309.png",
+    "new": "docs/process/week-09/images/screenshot-2026-09-22-044309.png",
+    "action": "move",
+    "sha256": "c13efaa16cf2484cfd153c31355f9dc138082a4f173e92dbf809d3485b611583"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/user-testing-1.jpeg",
+    "new": "docs/process/week-09/images/user-testing-1.jpeg",
+    "action": "move",
+    "sha256": "c409bce5c1583f9a6a93cd7eae2030722435c6fcd100beba9b70ba2c2ca40217"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/user-testing-2.jpeg",
+    "new": "docs/process/week-09/images/user-testing-2.jpeg",
+    "action": "move",
+    "sha256": "427b84739159757a912fdf04eea81bafa38e25c2484148e9164db23b548bfac8"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/user-testing-3.jpeg",
+    "new": "docs/process/week-09/images/user-testing-3.jpeg",
+    "action": "move",
+    "sha256": "928ba41af06a8cc987a0413c452a86180452429c417705272f6e261958c8cbb2"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/user-testing-4.jpeg",
+    "new": "docs/process/week-09/images/user-testing-4.jpeg",
+    "action": "move",
+    "sha256": "4af5cfc3d32cd9e48f0bb7ecf82efab76e5ee86499a1da010cce5f2707bdd7be"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-16 at 16.04.41.jpeg",
+    "new": "docs/process/week-09/images/user-testing-1.jpeg",
+    "action": "remove-identical-duplicate",
+    "sha256": "c409bce5c1583f9a6a93cd7eae2030722435c6fcd100beba9b70ba2c2ca40217"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-16 at 16.11.52.jpeg",
+    "new": "docs/process/week-09/images/user-testing-2.jpeg",
+    "action": "remove-identical-duplicate",
+    "sha256": "427b84739159757a912fdf04eea81bafa38e25c2484148e9164db23b548bfac8"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-16 at 16.11.54.jpeg",
+    "new": "docs/process/week-09/images/user-testing-3.jpeg",
+    "action": "remove-identical-duplicate",
+    "sha256": "928ba41af06a8cc987a0413c452a86180452429c417705272f6e261958c8cbb2"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-16 at 16.11.55.jpeg",
+    "new": "docs/process/week-09/images/user-testing-4.jpeg",
+    "action": "remove-identical-duplicate",
+    "sha256": "4af5cfc3d32cd9e48f0bb7ecf82efab76e5ee86499a1da010cce5f2707bdd7be"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-18 at 16.10.21.jpeg",
+    "new": "docs/process/week-09/images/whatsapp-image-2026-09-18-at-16.10.21.jpeg",
+    "action": "move",
+    "sha256": "c7b32adffe8e68b592b3bc3e3323c45deb252a9258d634590d77e440f6bb7170"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-18 at 16.10.22.jpeg",
+    "new": "docs/process/week-09/images/whatsapp-image-2026-09-18-at-16.10.22.jpeg",
+    "action": "move",
+    "sha256": "86981b2959ab37541aff04f06ea46835d37a02528b4a7ab9d15bdd5d5fb67f99"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-22 at 04.35.02 (1).jpeg",
+    "new": "docs/process/week-09/images/whatsapp-image-2026-09-22-at-04.35.02-1-.jpeg",
+    "action": "move",
+    "sha256": "6c0253daef87ad8b43a64b3ffaf6b807d54318e89eb59ed3d8dca6acf17a8a58"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-22 at 04.35.02.jpeg",
+    "new": "docs/process/week-09/images/whatsapp-image-2026-09-22-at-04.35.02.jpeg",
+    "action": "move",
+    "sha256": "49cb0eb6dee6bb8afa7a667f4c7c8d8888cf194ec1f50c7c8d6effb4cade9f64"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Interview Results",
+    "new": null,
+    "action": "remove-placeholder",
+    "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/Untitled document (5).pdf",
+    "new": "docs/process/week-09/echo-user-testing-interviews.pdf",
+    "action": "move",
+    "sha256": "abaf3bf23bc7290237f27da144845bd9dad78346b34ea27e1ec9d1682214ed14"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/UQ Echoes Transcripts/Transcript1.md",
+    "new": "docs/process/week-09/interview-transcripts/transcript1.md",
+    "action": "move",
+    "sha256": "9ac226817dc04a20f2b93cc003fd8b5e2a116b0cada1ba3dfaa7531ff7baacda"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/UQ Echoes Transcripts/Transcript2.md",
+    "new": "docs/process/week-09/interview-transcripts/transcript2.md",
+    "action": "move",
+    "sha256": "593050dcb46a6196f67aa8fb400f8cb22f424a78e75f7d29c5065a17253026cb"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/UQ Echoes Transcripts/Transcript3.md",
+    "new": "docs/process/week-09/interview-transcripts/transcript3.md",
+    "action": "move",
+    "sha256": "3b8e210b9bde16742f2d7913691747a11253ebe0918c0bafa41b4e3dc58d6c81"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/UQ Echoes Transcripts/Transcript4.md",
+    "new": "docs/process/week-09/interview-transcripts/transcript4.md",
+    "action": "move",
+    "sha256": "c466b12a394370cca96864041d6c510b55e89a6ad31c3323ad48d1515a35aaa8"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/User Testing (Wiz of Oz)Statistics.csv",
+    "new": "docs/process/week-09/wizard-of-oz-statistics.csv",
+    "action": "move",
+    "sha256": "48b245ba23c23f980dac4fd898ef3428ca9063c80c88adec15b100f85de1acb5"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/User testing Transcripts (Wiz of Oz).pdf",
+    "new": "docs/process/week-09/wizard-of-oz-transcripts.pdf",
+    "action": "move",
+    "sha256": "6426b1783a81ef9746d10a1086b05a8a78f5eea3e392d566b61c4c4ff55c0bce"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/user-testing-1-vid.mp4",
+    "new": "docs/process/week-09/user-testing-1-vid.mp4",
+    "action": "move",
+    "sha256": "564e71301a2cd0e14fd053524dd10c3d58be8e329a84165c5abda2685f8c8809"
+  },
+  {
+    "old": "Design Project/Week 9 Stand Up/WhatsApp Video 2026-09-16 at 16.04.48.mp4",
+    "new": "docs/process/week-09/user-testing-1-vid.mp4",
+    "action": "remove-identical-duplicate",
+    "sha256": "564e71301a2cd0e14fd053524dd10c3d58be8e329a84165c5abda2685f8c8809"
+  },
+  {
+    "old": "Design Proposal/Ideation",
+    "new": "docs/proposal/ideation.md",
+    "action": "move",
+    "sha256": "8115529f07cb38d79587dd60d765dcd42651d321d8d6999e73acbbc1aaf3e72f"
+  },
+  {
+    "old": "Design Proposal/Initial Interviews/Interviews/Alex(Inseo Park)/Interview Analysis.md",
+    "new": "docs/proposal/interviews/alex/interview-analysis.md",
+    "action": "move",
+    "sha256": "54b2219ad74e5268c2ad4520ecbcc6b1a7f03cb77d1c29c05d44594612680646"
+  },
+  {
+    "old": "Design Proposal/Initial Interviews/Interviews/Alex(Inseo Park)/Interview1 Transcript.md",
+    "new": "docs/proposal/interviews/alex/interview1-transcript.md",
+    "action": "move",
+    "sha256": "91aef831b298090de15b2e5c410849b7d2dbb98f08d210d37e51976180d3b08d"
+  },
+  {
+    "old": "Design Proposal/Initial Interviews/Interviews(Ishan)/Interview Transcripts",
+    "new": "docs/proposal/interviews/ishan/interview-transcripts.md",
+    "action": "move",
+    "sha256": "5b12c069938368003cddb0d304080ac66752f60545095d5765ad63b17e50ddcf"
+  },
+  {
+    "old": "Design Proposal/Initial Interviews/Interviews(Ishan)/Interviews Insights",
+    "new": "docs/proposal/interviews/ishan/interviews-insights.md",
+    "action": "move",
+    "sha256": "7dec845f88d76090c610306b1982155b02f34bf64e131cdbf5beef808340618b"
+  },
+  {
+    "old": "Design Proposal/Initial Interviews/Interviews(Itisha)/Interview Transcript.pdf",
+    "new": "docs/proposal/interviews/itisha/interview-transcript.pdf",
+    "action": "move",
+    "sha256": "b85973bdccb78467432aacef2879d3a7d77e8b72e4ce2470950b3bc95112e9aa"
+  },
+  {
+    "old": "Design Proposal/Initial Interviews/Interviews(Keerthana)/Interview 2.mp3",
+    "new": "docs/proposal/interviews/keerthana/interview-02-link.md",
+    "action": "move",
+    "sha256": "98d6da216f97cbc6fd633c4b81c643e4ac5fedce52a5b9e121b8d7e74d01f9a1"
+  },
+  {
+    "old": "Design Proposal/Initial Interviews/Interviews(Keerthana)/Interview1-Keerthana.mp4",
+    "new": "docs/proposal/interviews/keerthana/interview-01-link.md",
+    "action": "move",
+    "sha256": "2f441d9dc611f2b52347308550e12fd2d7d023bddb98853f1e5cca5516d01237"
+  },
+  {
+    "old": "Design Proposal/Interview Questions",
+    "new": "docs/proposal/interview-questions.md",
+    "action": "move",
+    "sha256": "4e993138124dd606987165d0a17c1ff6e67b1af4adac3cca187dfe1be881ba52"
+  },
+  {
+    "old": "Design Proposal/Low Fidelity Prototypes/Alex/README.md",
+    "new": "docs/proposal/low-fidelity/alex/README.md",
+    "action": "move",
+    "sha256": "83860ab678c2f33f9fd9dd523d79363b3c0744542082114ac5697418ded72ed6"
+  },
+  {
+    "old": "Design Proposal/Low Fidelity Prototypes/Alex/UQ Scavenger Hunt",
+    "new": "docs/proposal/low-fidelity/alex/uq-scavenger-hunt.md",
+    "action": "move",
+    "sha256": "0fa341607c16722dc2b4a918ec93bc1a8132066ff944a7b8efe8f636d39388de"
+  },
+  {
+    "old": "Design Proposal/Low Fidelity Prototypes/Ishan/README.md",
+    "new": "docs/proposal/low-fidelity/ishan/README.md",
+    "action": "move",
+    "sha256": "83860ab678c2f33f9fd9dd523d79363b3c0744542082114ac5697418ded72ed6"
+  },
+  {
+    "old": "Design Proposal/Low Fidelity Prototypes/Ishan/uq_stories.html",
+    "new": "docs/proposal/low-fidelity/ishan/uq-stories.html",
+    "action": "move",
+    "sha256": "e995098ecce75257fd52ea91735f4a7c3d4d63245af72dbdffaed4b64c2ffaa1"
+  },
+  {
+    "old": "Design Proposal/Low Fidelity Prototypes/Itisha/EchosOfUQ.png",
+    "new": "docs/proposal/low-fidelity/itisha/echosofuq.png",
+    "action": "move",
+    "sha256": "a2cf18a6f782fbb4af482c66c01486c494c868baad380d0e410157f56a38eafd"
+  },
+  {
+    "old": "Design Proposal/Low Fidelity Prototypes/Itisha/README.md",
+    "new": "docs/proposal/low-fidelity/itisha/README.md",
+    "action": "move",
+    "sha256": "83860ab678c2f33f9fd9dd523d79363b3c0744542082114ac5697418ded72ed6"
+  },
+  {
+    "old": "Design Proposal/Low Fidelity Prototypes/Keerthana/boardgame.html",
+    "new": "docs/proposal/low-fidelity/keerthana/boardgame.html",
+    "action": "move",
+    "sha256": "f997a11e6977ad1540f5fa24b47bf80902dfa3b7f5bd05c785fd98496dc37756"
+  },
+  {
+    "old": "Design Proposal/Low Fidelity Prototypes/Keerthana/README.md",
+    "new": "docs/proposal/low-fidelity/keerthana/README.md",
+    "action": "move",
+    "sha256": "83860ab678c2f33f9fd9dd523d79363b3c0744542082114ac5697418ded72ed6"
+  },
+  {
+    "old": "Design Proposal/Low Fidelity Prototypes/Keerthana/UQ VR Escape room.png",
+    "new": "docs/proposal/low-fidelity/keerthana/uq-vr-escape-room.png",
+    "action": "move",
+    "sha256": "9e0a671b4fd9336fc6873f80ff76d0630f1632950616fbda1b64d416668af866"
+  },
+  {
+    "old": "Design Proposal/Low Fidelity Prototypes/Keerthana/UQBOARD GAME.png",
+    "new": "docs/proposal/low-fidelity/keerthana/uqboard-game.png",
+    "action": "move",
+    "sha256": "f6b6dc55c645cfb9681ba53a31f9fc9b0e93054e3c53a01166bb4c1fb71ced8b"
+  },
+  {
+    "old": "Design Proposal/Proposal Presentation",
+    "new": "docs/proposal/proposal-presentation.md",
+    "action": "move",
+    "sha256": "7b4c0a4b76fd96167d808f8243e4da1e03b41e559392dbaeff5e109c6f8d9439"
+  },
+  {
+    "old": "Design Proposal/Prototype Feedback/Boardgame/Prototype Feedback-UQ Boardgame",
+    "new": "docs/proposal/feedback/boardgame/prototype-feedback-uq-boardgame.md",
+    "action": "move",
+    "sha256": "4f37529665c61d26aa73880a41268239c35d32988d6c7b66d24fa82e90f0294f"
+  },
+  {
+    "old": "Design Proposal/Prototype Feedback/UQ Stories/Feedback 1.docx",
+    "new": "docs/proposal/feedback/uq-stories/feedback-1.docx",
+    "action": "move",
+    "sha256": "122c7937b744e81b756d7bdb5597e899a6253e3e0611159ebd3c8d8e43f684fd"
+  },
+  {
+    "old": "Design Proposal/Prototype Feedback/UQ Stories/Feedback 2.docx",
+    "new": "docs/proposal/feedback/uq-stories/feedback-2.docx",
+    "action": "move",
+    "sha256": "98eab40c90a604662800596522c26c9af0da93e3023bbc0eb331b3948b46a58d"
+  },
+  {
+    "old": "Design Proposal/Prototype Feedback/UQ Stories/Feedback3.md",
+    "new": "docs/proposal/feedback/uq-stories/feedback3.md",
+    "action": "move",
+    "sha256": "6f1a7828e26bfaae52b08a404e588ccc4ae1ec06a104c9e5ffeb04c67b094d02"
+  },
+  {
+    "old": "Design Proposal/Secondary Research",
+    "new": "docs/proposal/secondary-research.md",
+    "action": "move",
+    "sha256": "c81bbc6113f1202a0233440f96430a68aaa74c127af98c29e464b4070615a068"
+  },
+  {
+    "old": "Team Charter",
+    "new": "docs/team/charter.md",
+    "action": "move",
+    "sha256": "904e7a673684009a7a659cca274664c41964e84155c76993d63fe8bf9d30d8a9"
+  }
+]

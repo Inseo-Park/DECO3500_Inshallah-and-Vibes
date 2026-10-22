@@ -1,0 +1,20 @@
+# Predictable text for new documentation and scripts.
+* text=auto
+*.md text eol=lf
+*.json text eol=lf
+*.mjs text eol=lf
+
+# Imported prototype snapshots retain the exact bytes supplied in the ZIPs.
+prototype/** -text
+archive/prototypes/echo-social/** -text
+archive/prototypes/echo-social-voxel/** -text
+
+# Binary evidence and archives.
+*.zip -text
+*.pdf -text
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.mp3 -text
+*.mp4 -text
+*.docx -text

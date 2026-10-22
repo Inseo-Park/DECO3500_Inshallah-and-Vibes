@@ -1,0 +1,20 @@
+# Local tools and working extracts used to organise this repository
+.repo-work/
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*~
+
+# Dependencies, caches, credentials and local configuration
+node_modules/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+*.log
+
