@@ -26,7 +26,7 @@ For a single-device offline preview, open [UQ Lakes](prototype/ECHO-lakes/index.
 
 ## Explore the evidence
 
-**Exhibition materials:** [Final poster](docs/exhibition/poster.pdf) · [A4 brochure — sheet 1](docs/exhibition/brochure-a4-01.pdf) · [A4 brochure — sheet 2](docs/exhibition/brochure-a4-02.pdf)
+**Exhibition materials:** [Final poster](docs/exhibition/final-poster.pdf) · [A4 brochure — sheet 1](docs/exhibition/brochure-a4-01.pdf) · [A4 brochure — sheet 2](docs/exhibition/brochure-a4-02.pdf)
 
 | Material | Where to start |
 | --- | --- |
