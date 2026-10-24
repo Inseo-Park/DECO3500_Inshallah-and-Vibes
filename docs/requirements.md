@@ -1,6 +1,6 @@
 # Evidence-based experience requirements
 
-These requirements bring together the research and participant feedback. The checks below are proposed evaluation tasks; they have not yet established that ECHO v22 satisfies every requirement.
+These requirements bring together the research and participant feedback. The checks below are proposed evaluation tasks; they have not yet established that echo-tradeshow satisfies every requirement.
 
 ## Core experience
 
@@ -31,4 +31,4 @@ Real authentication and production infrastructure are not necessary to demonstra
 | --- | --- | --- |
 | Proposal interviews and early concepts | Campus context, short interactions and stories linked to place. | Whether heritage discovery changes belonging. |
 | September discovery/share tests | Optional discovery first, varied formats, subtitles, prompts and a smaller, approachable form. | Unassisted use, repeat use and which formats work across users and settings. |
-| October realistic/voxel comparison | Clearer garden structure, direct navigation, reliable selection/media and understandable identity. | Whether the changes improve task outcomes in v22; whether new social features are useful. |
+| October realistic/voxel comparison | Clearer garden structure, direct navigation, reliable selection/media and understandable identity. | Whether the changes improve task outcomes in echo-tradeshow; whether new social features are useful. |

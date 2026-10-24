@@ -1,4 +1,4 @@
-# Running and using ECHO v22
+# Running and using echo-tradeshow
 
 The current prototype is in [`prototype/`](../prototype/). It contains two installations: [UQ Lakes](../prototype/ECHO-lakes/index.html) and [Great Court](../prototype/ECHO-court/index.html), with an [installation chooser](../prototype/index.html). Each installation opens its own landmark; the others remain in the mist.
 

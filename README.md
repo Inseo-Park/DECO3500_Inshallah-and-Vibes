@@ -1,61 +1,65 @@
-# ECHO — shared campus stories
+# ECHO: shared campus stories
 
 **DECO3500 · Social and Mobile Computing · The University of Queensland · 2026**
 
-**Team: Inshallah and Vibes — Ishan, Itisha, Keerthana and Inseo (Alex)**
+**Team: Inshallah and Vibes: Itisha, Keerthana, Ishan and Inseo (Alex)**
 
-ECHO is a proof-of-concept storytelling installation for discovering UQ history and leaving memories for other students. A book-like physical installation introduces a digital garden: contributions appear as flowers on participants' trees, with discovery, replies and live conversation connecting visitors at different campus locations.
+ECHO aims to help students learn about UQ’s history and feel more connected to campus. We designed a book-like installation where students can find stories about a place and leave their own memories. In the digital garden, each person has a tree, and their contributions appear as flowers. Visitors can reply to stories and talk to someone at another installation.
 
-## Run the current prototype
+Our research and testing helped us change the garden’s layout, how people find their contributions and how the two locations connect. This repository contains the current prototype, earlier builds and the work behind those decisions. The latest build still needs user testing.
 
-**[ECHO v22 source and location chooser](prototype/index.html)** is the current prototype. GitHub displays its source; download or clone the repository to run it.
+## Run the prototype
 
-With Node.js installed, run this command from the repository root:
+The current prototype is [echo-tradeshow](prototype/index.html), with UQ Lakes and Great Court locations. Download or clone the repository first. GitHub shows the source files; it does not run the prototype.
+
+With Node.js installed, run this from the repository root:
 
 ```sh
 node prototype/relay.js
 ```
 
-Open **http://localhost:8787/** and choose **UQ Lakes** or **Great Court**. There is no package install or build step. Leave the terminal open; press **Ctrl+C** to stop it.
+Open **http://localhost:8787/** and choose a location. No package installation or build step is needed. Keep the terminal open while using the prototype. Press **Ctrl+C** to stop it.
 
-There is no account or password. Create an ECHO ID, or choose **Show me a full profile** to explore the seeded `LAKEWALKER-07` profile. For a two-person demonstration, use different IDs and follow the [prototype guide](docs/prototype-guide.md), including the second device's network address.
+Create an ECHO ID, or choose **Show me a full profile** to try the example `LAKEWALKER-07` profile. No account or password is needed. For two people, use different IDs and follow the [prototype guide](docs/prototype-guide.md) to connect the second device.
 
-For a single-device offline preview, open [UQ Lakes](prototype/ECHO-lakes/index.html) or [Great Court](prototype/ECHO-court/index.html) directly in a browser. Microphone access depends on the browser and permissions.
+For an offline preview on one device, open [UQ Lakes](prototype/ECHO-lakes/index.html) or [Great Court](prototype/ECHO-court/index.html) in a browser. Voice recording depends on browser support and microphone permission.
 
-**Prototype limits:** posts and profiles use browser-local storage; this is not an account service. Live chat and walking presence use the optional relay, which stores nothing. Cross-device transmission of newly posted Echoes is not wired in the supplied v22 source. English is the implemented interface language. See the [guide's storage and simulation notes](docs/prototype-guide.md) before a demonstration.
+Posts and profiles stay in the browser where they were created. Live messages and movement work through the relay, but messages are not saved. New Echoes are not shared between devices yet. The interface currently works in English. The prototype guide explains these limits and the simulated content.
 
-## Explore the evidence
+## Project files
 
-**Exhibition materials:** [Final poster](docs/exhibition/poster.pdf) · [A4 brochure — sheet 1](docs/exhibition/brochure-a4-01.pdf) · [A4 brochure — sheet 2](docs/exhibition/brochure-a4-02.pdf)
-
-| Material | Where to start |
+| Material | Link |
 | --- | --- |
 | Research findings | [Research summary](docs/research-summary.md) |
-| Experience requirements and evidence | [Requirements](docs/requirements.md) |
-| What changed, why, and what remains unverified | [Iteration record](docs/process/iterations.md) |
-| Internal sessions, decisions and contributions | [Team decisions](docs/process/team-records.md) |
-| September evaluation | [Week 9 testing and interviews](docs/process/week-09/) |
-| October evaluation of realistic and voxel gardens | [Four-participant feedback](docs/evaluation/social-garden-feedback.md) |
+| Design requirements | [Requirements](docs/requirements.md) |
+| Design changes and testing still needed | [Iteration record](docs/process/iterations.md) |
+| Team sessions and decisions | [Team records](docs/process/team-records.md) |
+| September testing and interviews | [Week 9 records](docs/process/week-09/) |
+| October garden comparison | [Feedback from four participants](docs/evaluation/social-garden-feedback.md) |
+| Questionnaire | [Questionnaire](docs/evaluation/questionnaire/echo-questionnaire-v02/index.html) and [instructions](docs/evaluation/questionnaire/echo-questionnaire-v02/README.md) |
 | Early research and concepts | [Proposal materials](docs/proposal/) |
-| Physical form and unlock concepts | [Design artefacts](docs/design/) |
-| Poster and brochures | [Exhibition materials](docs/exhibition/) |
-| Assignment requirements | [Design-project brief](docs/assessment/design-project-brief.pdf) |
-| Earlier prototype versions | [Prototype archive](archive/prototypes/) |
+| Physical form and unlock concepts | [Design work](docs/design/) |
+| Exhibition poster | [Final poster](docs/exhibition/final-poster.pdf) |
+| A4 brochure | [Sheet 1](docs/exhibition/brochure-a4-01.pdf) and [sheet 2](docs/exhibition/brochure-a4-02.pdf) |
+| Assignment requirements | [Project brief](docs/assessment/design-project-brief.pdf) |
 
-## Repository layout
+## Earlier work
+
+These builds are kept in the archive. Download or clone the repository, then open their `index.html` files in a browser.
+
+| Build | Link |
+| --- | --- |
+| Week 9 stand-up prototype | [echo-standup](archive/prototypes/echo-standup/index.html) |
+| Realistic-tree garden | [echo-social](archive/prototypes/echo-social/index.html) |
+| Minecraft-style garden | [echo-social-minecraft](archive/prototypes/echo-social-minecraft/index.html) |
+
+The [Week 9 design process](archive/documentation/week-09-wiki-package/design-process-week9.md) and [ethical considerations](archive/documentation/week-09-wiki-package/ethical-considerations.md) are also kept in the archive.
+
+## Folders
 
 ```text
-prototype/                  Current ECHO v22, runnable source and bundled media
-docs/
-  assessment/               Design-project brief
-  design/                   Physical form and interaction concepts
-  evaluation/               October feedback and questionnaire package
-  exhibition/               Final poster and both A4 brochure sheets
-  process/                  Iterations, team records and Week 9 evidence
-  proposal/                 Original interviews, early concepts and feedback
-  team/                     Existing team-charter link
-archive/
-  prototypes/               Earlier builds, including both garden variants
-  documentation/            Existing Week 9 wiki export package
-scripts/                    Dependency-free repository verification
+prototype/       Current echo-tradeshow prototype and media
+docs/            Research, design work, testing and exhibition materials
+archive/         Earlier prototypes and Week 9 wiki materials
+scripts/         Checks for file integrity, links and JavaScript syntax
 ```

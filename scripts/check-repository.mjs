@@ -37,7 +37,9 @@ for (const archive of manifest) {
   }
 }
 
-const documents = [resolve(root, 'README.md'), ...walk(resolve(root, 'docs'))]
+const documents = [resolve(root, 'README.md'), ...walk(resolve(root, 'docs')),
+  ...walk(resolve(root, 'archive/prototypes/echo-standup')),
+  ...walk(resolve(root, 'archive/documentation/week-09-wiki-package'))]
   .filter(path => path.endsWith('.md'));
 let links = 0;
 for (const path of documents) {
@@ -58,8 +60,10 @@ for (const path of documents) {
 const htmlFiles = [resolve(root, 'prototype/index.html'),
   resolve(root, 'prototype/ECHO-lakes/index.html'),
   resolve(root, 'prototype/ECHO-court/index.html'),
+  resolve(root, 'archive/prototypes/echo-standup/index.html'),
+  resolve(root, 'docs/evaluation/questionnaire/echo-questionnaire-v02/index.html'),
   resolve(root, 'archive/prototypes/echo-social/index.html'),
-  resolve(root, 'archive/prototypes/echo-social-voxel/index.html')];
+  resolve(root, 'archive/prototypes/echo-social-minecraft/index.html')];
 let scripts = 0;
 let media = 0;
 for (const path of htmlFiles) {

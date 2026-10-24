@@ -7,7 +7,10 @@
 # Imported prototype snapshots retain the exact bytes supplied in the ZIPs.
 prototype/** -text
 archive/prototypes/echo-social/** -text
-archive/prototypes/echo-social-voxel/** -text
+archive/prototypes/echo-social-minecraft/** -text
+archive/prototypes/echo-standup/** -text
+archive/documentation/week-09-wiki-package/** -text
+docs/evaluation/questionnaire/echo-questionnaire-v02/** -text
 
 # Binary evidence and archives.
 *.zip -text

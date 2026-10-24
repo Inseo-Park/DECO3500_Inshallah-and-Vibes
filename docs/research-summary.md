@@ -1,6 +1,6 @@
 # Research and evaluation synthesis
 
-This page brings together ECHO's research and evaluation findings. Findings describe the tested versions and do not establish that every issue was resolved in ECHO v22.
+This page brings together ECHO's research and evaluation findings. Findings describe the tested versions and do not establish that every issue was resolved in echo-tradeshow.
 
 ## Opportunity and intended users
 
@@ -44,6 +44,6 @@ This gives a practical social/mobile interpretation: the campus place supplies c
 
 ## Evaluation gaps
 
-The evidence does not provide a controlled evaluation of ECHO v22, a longitudinal belonging/return-use measure, a complete participant/recruitment record, a complete literature bibliography, or a documented cultural-content review. The two original story-feed feedback documents contain participant names alongside consent wording promising anonymised responses. Review those originals and other identifiable research material before further public publication. These gaps are recorded without assuming that consent was absent or that testing did not occur.
+The evidence does not provide a controlled evaluation of echo-tradeshow, a longitudinal belonging/return-use measure, a complete participant/recruitment record, a complete literature bibliography, or a documented cultural-content review. The two original story-feed feedback documents contain participant names alongside consent wording promising anonymised responses. Review those originals and other identifiable research material before further public publication. These gaps are recorded without assuming that consent was absent or that testing did not occur.
 
 For the next evaluation, observe first-time users discovering a story, submitting a memory, finding their contribution and encountering another person's contribution. Record version, device, task outcomes, assistance and participant counts separately from session counts. Include media accessibility and garden navigation; use follow-up interviews to explain behaviours rather than interpreting elapsed time alone.

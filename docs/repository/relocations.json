@@ -19,14 +19,14 @@
   },
   {
     "old": "Design Project/Prototype/ECHO_1.zip",
-    "new": "archive/prototypes/echo-01.zip",
-    "action": "remove-identical-duplicate",
+    "new": null,
+    "action": "remove-prototype",
     "sha256": "991430678a8618db5f61531c6c08636b384a3717d050c05a40872796eff7ebe3"
   },
   {
     "old": "Design Project/Prototype/ECHO_5.zip",
-    "new": "archive/prototypes/echo-05.zip",
-    "action": "remove-identical-duplicate",
+    "new": null,
+    "action": "remove-prototype",
     "sha256": "b9db73fe743e97fe4fdbe8e60d2b29b5830097cab55abba77f8a2d0f87ba4513"
   },
   {
@@ -43,8 +43,8 @@
   },
   {
     "old": "Design Project/Week 9 Stand Up/ECHO-questionnaire_2.zip",
-    "new": "docs/evaluation/questionnaire/echo-questionnaire-v02.zip",
-    "action": "move",
+    "new": "docs/evaluation/questionnaire/echo-questionnaire-v02",
+    "action": "extract",
     "sha256": "c1b0e7af8af958ce455a6878dd0f3feedb7786fcce8df176c5d33cdef76e44be"
   },
   {
@@ -55,20 +55,20 @@
   },
   {
     "old": "Design Project/Week 9 Stand Up/ECHO_1.zip",
-    "new": "archive/prototypes/echo-01.zip",
-    "action": "move",
+    "new": null,
+    "action": "remove-prototype",
     "sha256": "991430678a8618db5f61531c6c08636b384a3717d050c05a40872796eff7ebe3"
   },
   {
     "old": "Design Project/Week 9 Stand Up/ECHO_5.zip",
-    "new": "archive/prototypes/echo-05.zip",
-    "action": "move",
+    "new": null,
+    "action": "remove-prototype",
     "sha256": "b9db73fe743e97fe4fdbe8e60d2b29b5830097cab55abba77f8a2d0f87ba4513"
   },
   {
     "old": "Design Project/Week 9 Stand Up/ECHO_7.zip",
-    "new": "archive/prototypes/echo-07.zip",
-    "action": "move",
+    "new": "archive/prototypes/echo-standup",
+    "action": "extract",
     "sha256": "a322ceac6fb7adb0d644559d9a502cdb37ed86f27d1cdfdaaa0900f9788ba968"
   },
   {
@@ -91,8 +91,8 @@
   },
   {
     "old": "Design Project/Week 9 Stand Up/ECHO_Wiki_Page_Final_With_Images.zip",
-    "new": "archive/documentation/week-09-wiki-package.zip",
-    "action": "move",
+    "new": "archive/documentation/week-09-wiki-package",
+    "action": "extract",
     "sha256": "5ce31dfdab0f6f8f731bab9333a1ac7bbe2be201ae6f25db1b16d1da49bec9b3"
   },
   {

@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Where Do You Disappear To</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;450;600&display=swap">
+
+<style>
+/* ECHO field questionnaire — dusk lake.
+   Palette read off the renders themselves: black-green water, bone, sodium lamp.
+   Committed single world; every colour painted explicitly. */
+:root{
+  --water:#0E1E1D;
+  --water-lift:#142826;
+  --surface:#182C2B;
+  --edge:#27403D;
+  --edge-soft:rgba(234,230,218,.13);
+  --bone:#EAE6DA;
+  --bone-dim:#93A29D;
+  --lamp:#E9A24A;
+  --lamp-deep:#C77F2D;
+  --serif:"Newsreader",Georgia,serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{background:var(--water)}
+body{
+  margin:0;color:var(--bone);font-family:var(--sans);
+  font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+::selection{background:var(--lamp);color:var(--water)}
+
+/* ---------- progress rail ---------- */
+#rail{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:40;
+  background:linear-gradient(180deg,var(--water) 62%,rgba(14,30,29,0));
+  padding:14px 0 18px;
+}
+#rail .inner{
+  width:min(640px,100% - 40px);margin:0 auto;
+  display:flex;align-items:center;gap:14px;
+}
+#bar{flex:1;height:2px;background:var(--edge);position:relative;overflow:hidden}
+#bar span{
+  position:absolute;inset:0 auto 0 0;width:0;background:var(--lamp);
+  transition:width 420ms cubic-bezier(.22,.61,.36,1);
+}
+#count{font-family:var(--mono);font-size:12px;color:var(--bone-dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ---------- shell ---------- */
+.wrap{width:min(640px,100% - 40px);margin:0 auto;padding-block:0 72px}
+
+header.top{padding-block:14px 46px}
+.kicker{
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--lamp);margin:0 0 20px;
+}
+h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(2.1rem,7vw,3.1rem);line-height:1.08;letter-spacing:-.02em;
+  margin:0 0 18px;text-wrap:balance;
+}
+h1 em{font-style:italic;color:var(--lamp)}
+.standfirst{margin:0;color:var(--bone-dim);max-width:52ch;font-size:1.05rem}
+.standfirst + .standfirst{margin-top:12px}
+
+/* ---------- question block ---------- */
+.q{padding-block:0 44px;scroll-margin-top:90px}
+.q .num{
+  font-family:var(--mono);font-size:12px;color:var(--lamp);
+  letter-spacing:.1em;display:block;margin-bottom:10px;
+}
+.q h2{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.35rem,4.2vw,1.72rem);line-height:1.24;letter-spacing:-.01em;
+  margin:0 0 6px;text-wrap:balance;
+}
+.q .hint{margin:0 0 20px;color:var(--bone-dim);font-size:.95rem}
+.q .hint.tight{margin-bottom:16px}
+
+/* ---------- option rows ---------- */
+.opts{display:flex;flex-direction:column;gap:2px}
+.opt{
+  position:relative;display:flex;align-items:center;gap:14px;
+  width:100%;min-height:58px;padding:14px 16px 14px 18px;
+  background:var(--water-lift);border:0;border-left:2px solid var(--edge);
+  color:var(--bone);font:inherit;text-align:left;cursor:pointer;
+  transition:background 140ms,border-color 140ms,color 140ms;
+}
+.opt:hover{background:var(--surface)}
+.opt:focus-visible{outline:2px solid var(--lamp);outline-offset:-2px}
+.opt .tick{
+  flex:0 0 auto;width:15px;height:15px;border:1.5px solid var(--edge);
+  position:relative;transition:border-color 140ms,background 140ms;
+}
+.opt.multi .tick{border-radius:2px}
+.opt:not(.multi) .tick{border-radius:50%}
+.opt[aria-pressed="true"]{background:var(--surface);border-left-color:var(--lamp)}
+.opt[aria-pressed="true"] .tick{border-color:var(--lamp);background:var(--lamp)}
+.opt[aria-pressed="true"] .tick::after{
+  content:"";position:absolute;inset:3px;background:var(--water);
+}
+.opt.multi[aria-pressed="true"] .tick::after{
+  inset:0;background:none;
+  border-left:1.5px solid var(--water);border-bottom:1.5px solid var(--water);
+  width:8px;height:5px;margin:3px auto auto 2.5px;transform:rotate(-45deg);
+}
+
+/* ---------- image options ---------- */
+/* The renders are reference, not the control: you look at all five, then answer
+   the two questions underneath. */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:10px}
+@media (max-width:420px){.tiles{grid-template-columns:1fr}}
+.tile{
+  position:relative;margin:0;border:1px solid var(--edge);background:var(--surface);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.tile img{aspect-ratio:4/5;object-fit:cover;width:100%}
+.tile .letter{
+  position:absolute;top:0;left:0;
+  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;
+  background:var(--lamp);color:var(--water);padding:6px 11px;
+}
+.tile .cap{display:block;flex:1;padding:11px 13px 13px;font-size:.87rem;line-height:1.35;color:var(--bone-dim)}
+
+/* the two questions that hang off the renders */
+.sub{margin-top:30px;padding-top:24px;border-top:1px solid var(--edge)}
+.sub h3{
+  font-family:var(--serif);font-weight:400;font-size:clamp(1.1rem,3.4vw,1.28rem);
+  line-height:1.3;margin:0 0 6px;color:var(--bone);text-wrap:balance;
+}
+.sub .hint{margin:0 0 15px}
+.opts.letters{flex-direction:row;flex-wrap:wrap;gap:8px}
+.opts.letters .opt{
+  width:auto;min-width:72px;flex:0 0 auto;justify-content:center;
+  padding:15px 20px;font-family:var(--mono);font-size:.95rem;letter-spacing:.06em;
+}
+.opts.letters .opt .tick{display:none}
+.opts.letters .opt:last-child{
+  flex:1 1 100%;justify-content:flex-start;font-family:var(--sans);letter-spacing:0;
+}
+.opts.letters .opt[aria-pressed="true"]{
+  background:var(--lamp);color:var(--water);border-left-color:var(--lamp);
+}
+
+/* ---------- other box ---------- */
+.otherrow{
+  display:flex;align-items:center;gap:12px;
+  background:var(--water-lift);border-left:2px solid var(--edge);
+  min-height:58px;padding:0 16px 0 18px;
+}
+.otherrow:focus-within{border-left-color:var(--lamp);background:var(--surface)}
+.otherrow .lbl{color:var(--bone-dim);font-size:.95rem;white-space:nowrap}
+.otherrow input{
+  flex:1;min-width:0;background:none;border:0;color:var(--bone);
+  font:inherit;padding:16px 0;
+}
+.otherrow input:focus{outline:0}
+.otherrow input::placeholder{color:#6E7D79}
+
+/* ---------- text ---------- */
+textarea{
+  width:100%;background:var(--water-lift);border:1px solid var(--edge);
+  color:var(--bone);font-family:var(--sans);font-size:1rem;line-height:1.5;
+  padding:14px 16px;resize:vertical;min-height:88px;border-radius:0;
+}
+.field input[type=text]{
+  width:100%;background:var(--water-lift);border:1px solid var(--edge);
+  color:var(--bone);font-family:var(--mono);font-size:1.25rem;letter-spacing:.08em;
+  padding:16px 18px;border-radius:0;
+}
+.field input[type=text]:focus{outline:0;border-color:var(--lamp);background:var(--surface)}
+#setup{padding-block:40px 90px}
+#setup .field{margin-top:34px}
+#setup .btn{margin-top:22px}
+.collectortag{
+  display:inline-flex;align-items:center;gap:10px;margin:0 0 24px;
+  font-family:var(--mono);font-size:12px;color:var(--bone-dim);
+}
+.collectortag b{color:var(--lamp);font-weight:500}
+.collectortag button{
+  background:none;border:1px solid var(--edge);color:var(--bone-dim);
+  font:inherit;padding:5px 10px;cursor:pointer;
+}
+.collectortag button:hover{border-color:var(--bone-dim);color:var(--bone)}
+textarea::placeholder{color:#6E7D79}
+textarea:focus{outline:0;border-color:var(--lamp);background:var(--surface)}
+
+/* ---------- submit ---------- */
+.send{padding-block:12px 0;border-top:1px solid var(--edge);margin-top:8px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:56px;padding:0 30px;margin-top:26px;
+  background:var(--lamp);color:#17201A;border:1px solid var(--lamp);
+  font-family:var(--sans);font-size:1rem;font-weight:600;letter-spacing:.02em;
+  cursor:pointer;transition:background 150ms,transform 120ms;
+}
+.btn:hover{background:#F2B463}
+.btn:active{transform:scale(.99)}
+.btn:focus-visible{outline:2px solid var(--bone);outline-offset:3px}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.btn.quiet{background:none;color:var(--bone);border-color:var(--edge)}
+.btn.quiet:hover{background:var(--surface)}
+.sendnote{margin:16px 0 0;font-size:.9rem;color:var(--bone-dim)}
+.sendnote.warn{color:var(--lamp)}
+
+/* ---------- done ---------- */
+#done{padding-block:70px 90px;text-align:left}
+#done h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,6vw,2.7rem);line-height:1.1;margin:0 0 18px}
+#done p{color:var(--bone-dim);max-width:46ch;margin:0 0 14px}
+
+/* ---------- summary (researcher) ---------- */
+#summary{padding-block:24px 80px}
+#summary h2{font-family:var(--serif);font-weight:400;font-size:2rem;margin:0 0 4px}
+#summary .meta{color:var(--bone-dim);font-family:var(--mono);font-size:12px;margin:0 0 20px}
+#summary .rbtns{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 34px}
+#summary .rbtns .btn{margin-top:0;min-height:50px;padding:0 22px;font-size:.95rem}
+#csvout{width:100%;margin-bottom:24px}
+.sblock{margin-bottom:34px}
+.sblock h3{font-size:.95rem;font-weight:600;margin:0 0 12px;color:var(--bone)}
+.sbar{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;margin-bottom:7px;font-size:.92rem}
+.sbar .track{position:relative;height:22px;background:var(--water-lift)}
+.sbar .track i{position:absolute;inset:0 auto 0 0;background:var(--lamp-deep);display:block}
+.sbar .track span{position:absolute;inset:0;display:flex;align-items:center;padding:0 10px;color:var(--bone);font-size:.88rem}
+.sbar .n{font-family:var(--mono);font-size:.85rem;color:var(--bone-dim);font-variant-numeric:tabular-nums}
+.quotes{display:flex;flex-direction:column;gap:10px}
+.quotes q{
+  display:block;background:var(--water-lift);border-left:2px solid var(--edge);
+  padding:12px 15px;font-family:var(--serif);font-size:1.02rem;quotes:none;
+}
+/* Invisible way in for whoever is running the session — top edge, centre, where
+   no control sits. Same gesture as the ECHO pod prototype. */
+#devhot{
+  position:fixed;left:50%;top:0;transform:translateX(-50%);
+  width:130px;height:46px;z-index:60;
+  background:none;border:0;opacity:0;cursor:default;
+}
+
+@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
+</style>
+</head>
+<body>
+
+<div id="rail"><div class="inner">
+  <div id="bar"><span></span></div>
+  <div id="count">0 / 8</div>
+</div></div>
+
+<main class="wrap">
+  <section id="setup" hidden>
+    <p class="kicker">Before you start</p>
+    <h1>Who's <em>collecting</em>?</h1>
+    <p class="standfirst">Your initials get attached to every response taken on this device, so the team can tell whose is whose once the files are merged.</p>
+    <p class="standfirst">You only do this once. Participants never see this screen.</p>
+    <div class="field">
+      <label for="collector">Your initials, or your name</label>
+      <input type="text" id="collector" placeholder="IS" maxlength="24" autocomplete="off" spellcheck="false">
+    </div>
+    <button class="btn" id="setupgo">Start collecting</button>
+  </section>
+
+  <div id="form">
+    <header class="top">
+      <p class="kicker">ECHO · A UQ project · 2 minutes</p>
+      <h1>Where do you <em>disappear to</em> on campus?</h1>
+      <p class="standfirst">We're designing something small and quiet to go where students already sit &mdash; the spots around UQ people head for when they want a bit of time to themselves. Somewhere you could sit, hear a story someone left behind, and maybe leave one yourself.</p>
+      <p class="standfirst">Before we build it we need to know where you actually spend your time at UQ, and what would make you stop. No right answers, and nothing here is graded.</p>
+    </header>
+    <div id="questions"></div>
+    <div class="send">
+      <button class="btn" id="submit">Send my answers</button>
+      <p class="sendnote" id="sendnote">Anonymous. Nothing you write is linked to your name.</p>
+    </div>
+  </div>
+
+  <section id="done" hidden>
+    <p class="kicker">Received</p>
+    <h2>Thank you — that's genuinely useful.</h2>
+    <p id="donetext">Every answer changes what gets built. If your secret spot turns out to be the right place for this, we'll keep it quiet anyway.</p>
+    <button class="btn quiet" id="again">Fill it in for someone else</button>
+  </section>
+
+  <section id="summary" hidden></section>
+</main>
+
+<script>
+const QUESTIONS = [
+  { id:"time", type:"multi", other:true,
+    q:"Where do you spend time at UQ when you're not in class?",
+    hint:"Anywhere you end up. Pick as many as are true.",
+    opts:["UQ Lakes","The Great Court","A library","My own faculty building",
+          "The gardens down by the river","A café — Wordsmiths, Merlo, wherever",
+          "The Union complex or the food court","The sport centre",
+          "I don't hang around — I come for class and leave"] },
+
+  { id:"alone", type:"text",
+    q:"And when you want to be on your own — where do you go?",
+    hint:"Even if it's an odd spot. It won't be named in anything public.",
+    placeholder:"The bench behind…" },
+
+  { id:"free", type:"multi", other:true,
+    q:"When do you feel like you've actually got free time on campus?",
+    hint:"Pick as many as are true.",
+    opts:["Between classes","Around lunch","Before my first class","After my last class",
+          "Waiting for someone","Whole gaps in the day with nothing in them",
+          "Evenings","Weekends","Rarely — I'm on campus and then I'm gone"] },
+
+  { id:"designs", type:"image",
+    q:"If one of these turned up somewhere you sit",
+    hint:"Five ideas for the same thing. Have a proper look, then answer both below.",
+    opts:[
+      {v:"A", img:"images/opt-a.jpg", cap:"A slim lit post beside the bench"},
+      {v:"B", img:"images/opt-b.jpg", cap:"A low plinth with a screen on an arm"},
+      {v:"C", img:"images/opt-c.jpg", cap:"A large sculpted ear with a screen set into it"},
+      {v:"D", img:"images/opt-d.jpg", cap:"An open book on a stone base"},
+      {v:"E", img:"images/opt-e.jpg", cap:"A bench under a curved timber hood, with the screen beside it"}
+    ],
+    subs:[
+      { id:"stop", q:"Which would actually make you stop?",
+        opts:["A","B","C","D","E","None would stop me"] },
+      { id:"prefer", q:"And which would you most want to be there?",
+        hint:"Not the same question — the thing that catches your eye isn't always the thing you'd want to sit next to every day.",
+        opts:["A","B","C","D","E","None of them"] }
+    ] },
+
+  { id:"why", type:"text",
+    q:"Why those ones?",
+    hint:"A sentence is plenty. This is the answer we learn most from.",
+    placeholder:"Because…" },
+
+  { id:"about", type:"multi", other:true,
+    q:"If it was going to tell you something about UQ, what would you want it to be about?",
+    hint:"Pick as many as are true.",
+    opts:["Something that happened on this exact spot",
+          "Students here decades ago",
+          "People going through what I'm going through now",
+          "Something the university doesn't advertise",
+          "Something funny",
+          "The lakes and the land itself",
+          "Honestly, I wouldn't want a story"] },
+
+  { id:"premise", type:"single",
+    q:"Now imagine it was left by another student, for whoever sat there next — not made by the university.",
+    hint:"Does that change anything?",
+    opts:["I'd be much more likely to listen",
+          "A bit more likely",
+          "Makes no difference to me",
+          "A bit less likely — I'd trust it more if it were official",
+          "It'd put me off"] },
+
+  { id:"headphones", type:"single",
+    q:"Would you put headphones on there, with people walking past?",
+    opts:["Yes, happily",
+          "Yes, but only my own headphones",
+          "Only if nobody was around",
+          "I'd rather it played out loud, softly",
+          "No"] },
+
+  { id:"leave", type:"single",
+    q:"Would you leave something behind for a stranger to find?",
+    hint:"A memory, a fact, a question — whatever you wanted.",
+    opts:["Yes, written","Yes, in my own voice","Only if it were completely anonymous","No"] },
+
+  { id:"offputting", type:"text",
+    q:"What would put you off using it?",
+    hint:"Optional, and the more blunt the better.",
+    placeholder:"Looking like an idiot in front of…" }
+];
+
+/* Every answerable field, flattened — the image block carries two of them. */
+const FIELDS = [];
+QUESTIONS.forEach(q => {
+  if(q.type === "image") q.subs.forEach(s => FIELDS.push({id:s.id, q:s.q, type:"single"}));
+  else FIELDS.push({id:q.id, q:q.q, type:q.type});
+});
+
+const REQUIRED = FIELDS.filter(f => f.type !== "text").map(f => f.id);
+const answers = {};     /* id -> array of chosen values */
+const others  = {};     /* id -> free text from an "Other" box */
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function optRow(qid, label, multi){
+  return '<button type="button" class="opt'+(multi?" multi":"")+'" data-q="'+qid+'" data-v="'+esc(label)+'"'+
+    (multi?' data-multi="1"':'')+' aria-pressed="false">'+
+    '<span class="tick"></span><span>'+esc(label)+'</span></button>';
+}
+function otherRow(qid){
+  return '<div class="otherrow"><span class="lbl">Somewhere else</span>'+
+    '<input type="text" id="o-'+qid+'" placeholder="tell us where" autocomplete="off"></div>';
+}
+
+/* ---------- render ---------- */
+document.getElementById("questions").innerHTML = QUESTIONS.map((q, i) => {
+  const n = String(i + 1).padStart(2, "0");
+  let body = "";
+
+  if(q.type === "text"){
+    body = '<textarea id="f-'+q.id+'" rows="3" placeholder="'+esc(q.placeholder||"")+'"></textarea>';
+
+  } else if(q.type === "image"){
+    body = '<div class="tiles">' + q.opts.map(o =>
+      '<figure class="tile">'+
+        '<img src="'+o.img+'" alt="Concept render: '+esc(o.cap)+'" loading="lazy">'+
+        '<span class="letter">'+o.v+'</span>'+
+        '<figcaption class="cap">'+esc(o.cap)+'</figcaption>'+
+      '</figure>').join("") + '</div>';
+
+    body += q.subs.map(s =>
+      '<div class="sub" id="q-'+s.id+'">'+
+        '<h3>'+esc(s.q)+'</h3>'+
+        (s.hint ? '<p class="hint">'+esc(s.hint)+'</p>' : "")+
+        '<div class="opts letters">'+ s.opts.map(o => optRow(s.id, o, false)).join("") +'</div>'+
+      '</div>').join("");
+
+  } else {
+    const multi = q.type === "multi";
+    body = '<div class="opts">' + q.opts.map(o => optRow(q.id, o, multi)).join("") +
+      (q.other ? otherRow(q.id) : "") + '</div>';
+  }
+
+  return '<section class="q" id="q-'+q.id+'">'+
+    '<span class="num">'+n+'</span>'+
+    '<h2>'+esc(q.q)+'</h2>'+
+    (q.hint ? '<p class="hint'+(q.type==="image"?" tight":"")+'">'+esc(q.hint)+'</p>' : "")+
+    body +
+  '</section>';
+}).join("");
+
+/* ---------- progress ---------- */
+const bar = document.querySelector("#bar span"), count = document.getElementById("count");
+const answered = id => (answers[id] && answers[id].length) || (others[id] && others[id].length);
+function progress(){
+  const done = REQUIRED.filter(answered).length;
+  bar.style.width = (done / REQUIRED.length * 100) + "%";
+  count.textContent = done + " / " + REQUIRED.length;
+}
+count.textContent = "0 / " + REQUIRED.length;
+
+/* ---------- interaction ---------- */
+document.getElementById("questions").addEventListener("click", e => {
+  const b = e.target.closest("button[data-q]");
+  if(!b) return;
+  const q = b.dataset.q, v = b.dataset.v, multi = !!b.dataset.multi;
+
+  if(multi){
+    const cur = answers[q] || [];
+    const i = cur.indexOf(v);
+    if(i >= 0) cur.splice(i, 1); else cur.push(v);
+    answers[q] = cur;
+    b.setAttribute("aria-pressed", i >= 0 ? "false" : "true");
+  } else {
+    answers[q] = [v];
+    document.querySelectorAll('[data-q="'+q+'"]').forEach(o =>
+      o.setAttribute("aria-pressed", o === b ? "true" : "false"));
+  }
+  progress();
+});
+
+QUESTIONS.forEach(q => {
+  if(q.type === "text"){
+    const el = document.getElementById("f-" + q.id);
+    el.addEventListener("input", () => { answers[q.id] = el.value.trim() ? [el.value.trim()] : []; });
+  }
+  if(q.other){
+    const el = document.getElementById("o-" + q.id);
+    el.addEventListener("input", () => { others[q.id] = el.value.trim(); progress(); });
+  }
+});
+
+/* ---------- send ---------- */
+/* OFFLINE BUILD. Responses are saved in this browser on this device — there is
+   no server. Export the CSV before clearing the browser's site data. */
+const STORE_KEY = "echo.survey.v1";
+const COLLECTOR_KEY = "echo.survey.collector";
+function getCollector(){ try{ return localStorage.getItem(COLLECTOR_KEY) || ""; }catch(e){ return ""; } }
+function setCollector(v){ try{ localStorage.setItem(COLLECTOR_KEY, v); }catch(e){} }
+const Store = {
+  mem: [],
+  read(){
+    try{ const raw = localStorage.getItem(STORE_KEY); if(raw) this.mem = JSON.parse(raw) || []; }
+    catch(e){}
+    return this.mem;
+  },
+  add(row){
+    this.read();
+    this.mem.push(row);
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(this.mem)); return true; }
+    catch(e){ return false; }
+  }
+};
+Store.read();
+
+function toCSV(){
+  const cols = ["collector","submitted"].concat(FIELDS.map(f => f.id));
+  const q = v => {
+    v = (v === null || v === undefined) ? "" : String(v);
+    return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+  };
+  return [cols.join(",")].concat(
+    Store.read().map(r => cols.map(c => q(r[c])).join(","))
+  ).join("\n");
+}
+
+function downloadCSV(){
+  const stamp = new Date().toISOString().slice(0,16).replace(/[:T]/g,"-");
+  try{
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([toCSV()], {type:"text/csv"}));
+    a.download = "echo-survey-" + stamp + ".csv";
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+  }catch(e){
+    const t = document.getElementById("csvout");
+    if(t){ t.hidden = false; t.value = toCSV(); t.select(); }
+  }
+}
+
+const submit = document.getElementById("submit"), sendnote = document.getElementById("sendnote");
+
+submit.addEventListener("click", () => {
+  const missing = REQUIRED.filter(id => !answered(id));
+  if(missing.length){
+    sendnote.className = "sendnote warn";
+    sendnote.textContent = missing.length + " question" + (missing.length === 1 ? "" : "s") +
+      " still to go — jumping you to the first.";
+    const el = document.getElementById("q-" + missing[0]);
+    if(el) el.scrollIntoView({behavior: "smooth", block: "center"});
+    return;
+  }
+
+  submit.disabled = true;
+  submit.textContent = "Sending…";
+
+  const body = {collector: getCollector(), submitted: new Date().toISOString()};
+  FIELDS.forEach(f => {
+    const picked = (answers[f.id] || []).slice();
+    if(others[f.id]) picked.push("Other: " + others[f.id]);
+    body[f.id] = picked.join(" | ");
+  });
+
+  const saved = Store.add(body);
+
+  document.getElementById("form").hidden = true;
+  document.getElementById("rail").hidden = true;
+  if(!saved){
+    document.getElementById("donetext").textContent =
+      "This browser wouldn't let the answers save — let whoever handed you this know, so they can take them down directly.";
+  }
+  document.getElementById("done").hidden = false;
+  window.scrollTo({top: 0, behavior: "smooth"});
+});
+
+document.getElementById("again").addEventListener("click", () => location.reload());
+
+/* ---------- researcher summary: add #results to the address ---------- */
+function showSummary(){
+  const el = document.getElementById("summary");
+  document.getElementById("form").hidden = true;
+  document.getElementById("done").hidden = true;
+  document.getElementById("rail").hidden = true;
+  el.hidden = false;
+  const rows = Store.read();
+
+  const blocks = FIELDS.map(f => {
+    if(f.type === "text"){
+      const qs = rows.map(r => r[f.id]).filter(Boolean);
+      if(!qs.length) return "";
+      return '<div class="sblock"><h3>'+esc(f.q)+'</h3><div class="quotes">'+
+        qs.map(t => '<q>'+esc(t)+'</q>').join("") + '</div></div>';
+    }
+    const tally = {};
+    rows.forEach(r => String(r[f.id] || "").split(" | ").filter(Boolean)
+      .forEach(v => tally[v] = (tally[v] || 0) + 1));
+    const entries = Object.entries(tally).sort((a,b) => b[1] - a[1]);
+    if(!entries.length) return "";
+    const max = entries[0][1];
+    return '<div class="sblock"><h3>'+esc(f.q)+'</h3>'+ entries.map(([v,n]) =>
+      '<div class="sbar"><div class="track"><i style="width:'+(n/max*100)+'%"></i><span>'+esc(v)+'</span></div>'+
+      '<div class="n">'+n+'</div></div>').join("") + '</div>';
+  }).join("");
+
+  el.innerHTML = '<h2>Responses</h2>'+
+    '<p class="meta">'+rows.length+' response'+(rows.length===1?"":"s")+' saved in this browser</p>'+
+    '<p class="collectortag">Collected by <b>'+esc(getCollector() || "nobody yet")+'</b>'+
+    '<button id="changewho">change</button></p>'+
+    '<div class="rbtns"><button class="btn" id="csvbtn">Download CSV</button>'+
+    '<button class="btn quiet" id="backbtn">Back to the questionnaire</button></div>'+
+    '<textarea id="csvout" hidden readonly rows="6"></textarea>'+
+    (rows.length ? blocks : '<p class="meta">Nothing yet.</p>');
+  document.getElementById("csvbtn").onclick = downloadCSV;
+  document.getElementById("changewho").onclick = () => {
+    const who = prompt("Whose initials should go on responses from now on?", getCollector());
+    if(who !== null && who.trim()){ setCollector(who.trim()); showSummary(); }
+  };
+  document.getElementById("backbtn").onclick = () => { location.hash = ""; location.reload(); };
+}
+
+const wantsSummary = () => /^#(results|responses|data)$/i.test(location.hash);
+if(wantsSummary()) showSummary();
+window.addEventListener("hashchange", () => { if(wantsSummary()) showSummary(); });
+
+/* Ask who's collecting before the first participant, once per device. */
+(function(){
+  if(wantsSummary()) return;
+  if(getCollector()) return;
+  const setup = document.getElementById("setup");
+  document.getElementById("form").hidden = true;
+  document.getElementById("rail").hidden = true;
+  setup.hidden = false;
+  const input = document.getElementById("collector"), go = document.getElementById("setupgo");
+  const start = () => {
+    const v = input.value.trim();
+    if(!v){ input.focus(); return; }
+    setCollector(v);
+    setup.hidden = true;
+    document.getElementById("form").hidden = false;
+    document.getElementById("rail").hidden = false;
+  };
+  go.addEventListener("click", start);
+  input.addEventListener("keydown", e => { if(e.key === "Enter") start(); });
+  setTimeout(() => input.focus(), 300);
+})();
+
+/* Three ways to the responses, matching the pod prototype:
+   1. add #results to the address  2. Ctrl/Cmd + Shift + D
+   3. triple-tap the middle of the very top edge */
+document.addEventListener("keydown", e => {
+  if((e.metaKey || e.ctrlKey) && e.shiftKey && (e.key === "D" || e.key === "d")){
+    e.preventDefault(); showSummary();
+  }
+});
+(function(){
+  const hot = document.createElement("button");
+  hot.id = "devhot"; hot.tabIndex = -1; hot.setAttribute("aria-hidden", "true");
+  document.body.appendChild(hot);
+  let taps = [], t0 = 0;
+  hot.addEventListener("click", () => {
+    const now = Date.now();
+    if(now - t0 > 1500) taps = [];
+    t0 = now; taps.push(now);
+    if(taps.length >= 3){ taps = []; showSummary(); }
+  });
+})();
+
+progress();
+</script>
+</body>
+</html>
