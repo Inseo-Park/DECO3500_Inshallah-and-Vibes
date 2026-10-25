@@ -32,7 +32,7 @@ Posts and profiles stay in the browser where they were created. Live messages an
 | --- | --- |
 | Research findings | [Research summary](docs/research-summary.md) |
 | Interview thematic analysis | [Thematic analysis board](docs/proposal/interviews/thematic-analysis-board.html) |
-| Secondary research | [Literature analysis](docs/secondary%20research/secondary-research.md) |
+| Secondary research | [Literature analysis](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/docs/Secondary%20Research/secondary-research.md) |
 | Design requirements | [Requirements](docs/requirements.md) |
 | Design changes and testing still needed | [Iteration record](docs/process/iterations.md) |
 | Team sessions and decisions | [Team records](docs/process/team-records.md) |
