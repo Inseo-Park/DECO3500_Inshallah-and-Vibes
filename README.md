@@ -6,7 +6,7 @@
 
 ECHO aims to help students learn about UQ’s history and feel more connected to campus. We designed a book-like installation where students can find stories about a place and leave their own memories. In the digital garden, each person has a tree, and their contributions appear as flowers. Visitors can reply to stories and talk to someone at another installation.
 
-Our research and testing helped us change the garden’s layout, how people find their contributions and how the two locations connect. This repository contains the current prototype, earlier builds and the work behind those decisions. The latest build still needs user testing.
+Our [secondary research](docs/secondary%20research/secondary-research.md) explores student belonging, campus heritage and connection to place. Our interviews and testing helped us change the garden’s layout, how people find their contributions and how the two locations connect. This repository contains the current prototype, earlier builds and the work behind those decisions. The latest build still needs user testing.
 
 ## Run the prototype
 
@@ -31,10 +31,12 @@ Posts and profiles stay in the browser where they were created. Live messages an
 | Material | Link |
 | --- | --- |
 | Research findings | [Research summary](docs/research-summary.md) |
+| Secondary research | [Literature analysis](docs/secondary%20research/secondary-research.md) |
 | Design requirements | [Requirements](docs/requirements.md) |
 | Design changes and testing still needed | [Iteration record](docs/process/iterations.md) |
 | Team sessions and decisions | [Team records](docs/process/team-records.md) |
 | September testing and interviews | [Week 9 records](docs/process/week-09/) |
+| Week 9 design process and ethics | [Design process](docs/process/week-09/wiki/design-process-week9.md) and [ethical considerations](docs/process/week-09/wiki/ethical-considerations.md) |
 | October garden comparison | [Feedback from four participants](docs/evaluation/social-garden-feedback.md) |
 | Questionnaire | [Questionnaire](docs/evaluation/questionnaire/echo-questionnaire-v02/index.html) and [instructions](docs/evaluation/questionnaire/echo-questionnaire-v02/README.md) |
 | Early research and concepts | [Proposal materials](docs/proposal/) |
@@ -53,13 +55,11 @@ These builds are kept in the archive. Download or clone the repository, then ope
 | Realistic-tree garden | [echo-social](archive/prototypes/echo-social/index.html) |
 | Minecraft-style garden | [echo-social-minecraft](archive/prototypes/echo-social-minecraft/index.html) |
 
-The [Week 9 design process](archive/documentation/week-09-wiki-package/design-process-week9.md) and [ethical considerations](archive/documentation/week-09-wiki-package/ethical-considerations.md) are also kept in the archive.
-
 ## Folders
 
 ```text
 prototype/       Current echo-tradeshow prototype and media
 docs/            Research, design work, testing and exhibition materials
-archive/         Earlier prototypes and Week 9 wiki materials
+archive/         Earlier prototype builds
 scripts/         Checks for file integrity, links and JavaScript syntax
 ```

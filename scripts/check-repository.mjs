@@ -38,8 +38,7 @@ for (const archive of manifest) {
 }
 
 const documents = [resolve(root, 'README.md'), ...walk(resolve(root, 'docs')),
-  ...walk(resolve(root, 'archive/prototypes/echo-standup')),
-  ...walk(resolve(root, 'archive/documentation/week-09-wiki-package'))]
+  ...walk(resolve(root, 'archive/prototypes/echo-standup'))]
   .filter(path => path.endsWith('.md'));
 let links = 0;
 for (const path of documents) {

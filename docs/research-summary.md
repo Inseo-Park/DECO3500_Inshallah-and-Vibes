@@ -12,6 +12,7 @@ Initial interviews suggest that connection already grows through familiar study 
 
 | Evidence | What is available | Interpretation limits |
 | --- | --- | --- |
+| Secondary research | [Literature analysis](secondary%20research/secondary-research.md) summarises five sources on student belonging, campus heritage, place attachment and historical trails. | Provides theoretical context for the design; it does not establish outcomes for ECHO or its participants. |
 | Proposal interviews | [Interview analysis](proposal/interviews/alex/interview-analysis.md), [transcript](proposal/interviews/alex/interview1-transcript.md), [transcript PDF](proposal/interviews/itisha/interview-transcript.pdf), recording links, and [AI-generated insights](proposal/interviews/ishan/interviews-insights.md). | No consolidated recruitment, sample or coding record. The generated insights are a secondary interpretation; quoted material should be checked against its source. |
 | Early story-feed feedback | Two written responses in [UQ Stories feedback](proposal/feedback/uq-stories/), dated around 7 September 2026. | Feedback-2 discusses Griffith's Gold Coast campus; both records cannot be presented as UQ-specific validation. Many advertised features were explicitly hard-coded. |
 | Early concept comparison | The [Weeks 6–8 iteration PDF](process/week-09/weeks-06-08-iterations.pdf) records board game, story feed, scavenger hunt and story-pod concepts and reasons for selecting ECHO. | Its general research/theory claims do not supply a complete bibliography. Concept feedback is not a controlled comparison. |
@@ -19,8 +20,6 @@ Initial interviews suggest that connection already grows through familiar study 
 | Four ECHO interview records | [Selected quotes](process/week-09/interview-quotes.md), [individual transcripts](process/week-09/interview-transcripts/) and the [compiled interview PDF](process/week-09/echo-user-testing-interviews.pdf). | Some records contain group interaction. Four records must not be treated as four confirmed individual participants or added to telemetry counts. Facilitators prompted and assisted users. |
 | Book / Wizard-of-Oz test | [Two narrated testing records](process/week-09/wizard-of-oz-transcripts.pdf) and a separate [seven-row interaction CSV](process/week-09/wizard-of-oz-statistics.csv); CSV timestamps cover 20–21 September 2026. | Do not merge this export with the 16 September dataset. The exact correspondence between the two interview records and seven logged sessions is not documented. |
 | Social-garden comparison, 11 October 2026 | [Feedback from four participants](evaluation/social-garden-feedback.md) on realistic-tree and voxel gardens. | No consistent task measures, test order or ratings. Feedback is grouped by participants P1–P4. Suggestions are ideas to test. |
-
-The [secondary-research file](proposal/secondary-research.md) is a SharePoint link, rather than a local literature review. External documents were not retrieved for this synthesis. The repository therefore retains a research lead, not a verified literature synthesis or complete reference list.
 
 ## Findings and design implications
 
@@ -44,6 +43,6 @@ This gives a practical social/mobile interpretation: the campus place supplies c
 
 ## Evaluation gaps
 
-The evidence does not provide a controlled evaluation of echo-tradeshow, a longitudinal belonging/return-use measure, a complete participant/recruitment record, a complete literature bibliography, or a documented cultural-content review. The two original story-feed feedback documents contain participant names alongside consent wording promising anonymised responses. Review those originals and other identifiable research material before further public publication. These gaps are recorded without assuming that consent was absent or that testing did not occur.
+The evidence does not provide a controlled evaluation of echo-tradeshow, a longitudinal belonging/return-use measure, a complete participant/recruitment record, or a documented cultural-content review. The two original story-feed feedback documents contain participant names alongside consent wording promising anonymised responses. Review those originals and other identifiable research material before further public publication. These gaps are recorded without assuming that consent was absent or that testing did not occur.
 
 For the next evaluation, observe first-time users discovering a story, submitting a memory, finding their contribution and encountering another person's contribution. Record version, device, task outcomes, assistance and participant counts separately from session counts. Include media accessibility and garden navigation; use follow-up interviews to explain behaviours rather than interpreting elapsed time alone.

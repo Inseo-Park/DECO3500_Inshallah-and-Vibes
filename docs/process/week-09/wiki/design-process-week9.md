@@ -3,7 +3,7 @@
 > **ECHO: Discover a story. Leave something behind.**  
 > **DECO3500 Social & Mobile Computing — Semester 2, 2026**
 
-This page records the project at Week 9. For the latest build and setup steps, see the [echo-tradeshow guide](../../../docs/prototype-guide.md).
+This page records the project at Week 9. For the latest build and setup steps, see the [echo-tradeshow guide](../../../prototype-guide.md).
 
 ECHO is an interactive storytelling experience designed to connect students with UQ’s history, campus spaces and student experiences. Students can discover stories through audio, video or text, and leave their own memories, facts, questions or moments for other people to discover.
 
@@ -13,13 +13,13 @@ Our design goal was to create an experience that fits naturally into students’
 
 ## Project Links
 
-Images on this page come from [the Week 9 images folder](../../../docs/process/week-09/images/).
+Images on this page come from [the Week 9 images folder](../images).
 
-- [Poster and promotional material](../../../docs/exhibition)
-- [Current prototype — echo-tradeshow](../../../prototype/index.html)
+- [Poster and promotional material](../../../exhibition)
+- [Current prototype — echo-tradeshow](../../../../prototype/index.html)
 - [GitHub repository](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes)
-- [Week 9 stand-up documentation](../../../docs/process/week-09)
-- [Week 9 interview findings](../../../docs/process/week-09/interview-quotes.md)
+- [Week 9 stand-up documentation](..)
+- [Week 9 interview findings](../interview-quotes.md)
 - [Ethical considerations](ethical-considerations.md)
 
 > **Prototype note:** The digital prototype is an early proof of concept. It is not a fully deployed product and some interactions are demonstrated through prototype screens or Wizard-of-Oz facilitation.
@@ -31,10 +31,10 @@ Images on this page come from [the Week 9 images folder](../../../docs/process/w
 ### Opening the Week 9 prototype
 
 1. Download or clone the repository to your computer.
-2. Open the [echo-standup folder](../../prototypes/echo-standup/).
+2. Open the [echo-standup folder](../../../../archive/prototypes/echo-standup).
 3. Open `index.html` in a browser. Keep the `media/` folder beside it so the recordings and pictures load.
 
-The prototype files are already extracted. The [stand-up README](../../prototypes/echo-standup/README.md) explains how to export session records and lists the build’s limits.
+The prototype files are already extracted. The [stand-up README](../../../../archive/prototypes/echo-standup/README.md) explains how to export session records and lists the build’s limits.
 
 ### Exploring the prototype
 
@@ -64,9 +64,9 @@ Instead of developing a conventional historical display, we explored a place-bas
 
 The concept of an “Echo” creates an asynchronous social connection: one person leaves something behind, and another person encounters it at a later time.
 
-![ECHO physical concept](../../../docs/process/week-09/images/screenshot-2026-09-20-125346.png)
+![Early ECHO concept-selection rationale](../images/concept-selection-rationale.png)
 
-*Figure 1. Early ECHO concept visualization showing the proposed interaction direction and campus setting.*
+*Figure 1. Early concept-selection rationale comparing ECHO with alternative ideas.*
 
 ---
 
@@ -101,7 +101,7 @@ The scavenger hunt used QR codes and physical movement around campus. Participan
 
 Story Pods proposed a quiet, semi-private listening and sharing space. Participants responded positively to the idea of discovering something left by another student and found audio combined with visuals engaging. However, a large enclosed structure could feel intimidating, leading to the decision to explore a smaller and more understated form.
 
-![Design decisions from research](../../../docs/process/week-09/images/02-design-decisions.png)
+![Design decisions from research](../images/research-design-decisions-infographic.png)
 
 *Figure 2. Summary of themes, evidence, insights and design decisions derived from student feedback.*
 
@@ -163,11 +163,11 @@ The physical form influenced comfort. A smaller, understated installation appear
 
 Location-based storytelling remained important. Connecting stories to specific campus spaces made the information feel more relevant and helped link historical content to students’ existing experiences.
 
-![User testing in a campus setting](../../../docs/process/week-09/images/user-testing-1.jpeg)
+![User testing in a campus setting](../images/campus-user-testing-tablet-on-lawn.jpeg)
 
 *Figure 3. User evaluation of the ECHO prototype in an outdoor campus setting.*
 
-![Additional user testing](../../../docs/process/week-09/images/user-testing-4.jpeg)
+![Additional user testing](../images/campus-user-testing-group-discussion.jpeg)
 
 *Figure 4. Students interacting with the prototype and discussing the experience.*
 
@@ -189,9 +189,9 @@ The design therefore moved towards:
 - Visibility of the surrounding environment.
 - A form that invites participation without forcing it.
 
-![Updated physical design direction](../../../docs/process/week-09/images/screenshot-2026-09-20-130013.png)
+![Research-to-design decision flowchart](../images/research-design-decisions-flowchart.png)
 
-*Figure 5. Updated ECHO design direction following testing and iteration.*
+*Figure 5. Flowchart connecting user research themes to design decisions.*
 
 ### Digital experience
 
@@ -222,11 +222,11 @@ The physical form is still a concept direction rather than a fully engineered pr
 
 The team also produced a low-fidelity physical prototype using cardboard and a tablet. This prototype was used to explore the scale, screen placement, viewing angle and relationship between the physical enclosure and the digital interface.
 
-![Physical prototype front view](../../../docs/process/week-09/images/whatsapp-image-2026-09-18-at-16.10.22.jpeg)
+![Physical prototype front view](../images/book-prototype-open-front.jpeg)
 
 *Figure 6. Low-fidelity physical prototype showing the tablet integrated into a cardboard enclosure.*
 
-![Physical prototype side view](../../../docs/process/week-09/images/whatsapp-image-2026-09-18-at-16.10.21.jpeg)
+![Physical prototype side view](../images/book-prototype-open-side.jpeg)
 
 *Figure 7. Side view of the physical prototype showing its structure, viewing angle and support.*
 
@@ -234,7 +234,7 @@ The team also produced a low-fidelity physical prototype using cardboard and a t
 
 The digital experience is the main storytelling interface. Users can listen to a story, watch a visual story, read supporting information, choose a story category, respond to an Echo and leave a memory, fact, question or moment for another user.
 
-![Prototype and installation relationship](../../../docs/process/week-09/images/chatgpt-image-sep-15-2026-10-05-30-pm.png)
+![Prototype and installation relationship](../images/book-installation-concept-render.png)
 
 *Figure 8. Current concept direction for the ECHO installation and its digital storytelling interface.*
 
@@ -325,15 +325,15 @@ The testing helped us examine whether the physical object communicated its purpo
 
 The prototype was tested as an early representation of the final installation rather than a fully functional automated system. The findings will inform future refinement of the physical structure, accessibility, interaction distance and planned hardware components.
 
-![User interacting with the ECHO physical prototype](../../../docs/process/week-09/images/screenshot-2026-09-22-044309.png)
+![User interacting with the ECHO physical prototype](../images/wizard-of-oz-testing.png)
 
 *Figure 9. User interacting with the ECHO Wizard-of-Oz prototype in an outdoor campus setting.*
 
-![Open ECHO physical prototype](../../../docs/process/week-09/images/whatsapp-image-2026-09-22-at-04.35.02-1-.jpeg)
+![Open ECHO physical prototype](../images/book-prototype-decorated-open.jpeg)
 
 *Figure 10. Open ECHO prototype showing the printed book cover, tablet interface and physical structure.*
 
-![Closed ECHO physical prototype](../../../docs/process/week-09/images/whatsapp-image-2026-09-22-at-04.35.02.jpeg)
+![Closed ECHO physical prototype](../images/book-prototype-decorated-closed.jpeg)
 
 *Figure 11. Closed ECHO prototype showing the book-inspired exterior and physical form.*
 

@@ -91,145 +91,145 @@
   },
   {
     "old": "Design Project/Week 9 Stand Up/ECHO_Wiki_Page_Final_With_Images.zip",
-    "new": "archive/documentation/week-09-wiki-package",
+    "new": "docs/process/week-09",
     "action": "extract",
     "sha256": "5ce31dfdab0f6f8f731bab9333a1ac7bbe2be201ae6f25db1b16d1da49bec9b3"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/01_existing_wiki_links.png",
-    "new": "docs/process/week-09/images/01-existing-wiki-links.png",
+    "new": "docs/process/week-09/images/wiki-design-process-screenshot.png",
     "action": "move",
     "sha256": "92911ef168333b77ff42e9984993c74608561a4cdb29a903f84970d5062368da"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/02_design_decisions.png",
-    "new": "docs/process/week-09/images/02-design-decisions.png",
+    "new": "docs/process/week-09/images/research-design-decisions-infographic.png",
     "action": "move",
     "sha256": "4c438cfb4a722c4c915bff89ffc1c9d0cf5582b102360e85e27eb417cc58337e"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/03_design_direction.png",
-    "new": "docs/process/week-09/images/03-design-direction.png",
+    "new": "docs/process/week-09/images/research-insights-design-decisions-chart.png",
     "action": "move",
     "sha256": "6d0afd141f49771c7d781e41965ea09247cac9ca85f30f9713a86132a49e328b"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/04_physical_concept.png",
-    "new": "docs/process/week-09/images/04-physical-concept.png",
+    "new": "docs/process/week-09/images/research-insights-design-decisions-chart-export.png",
     "action": "move",
     "sha256": "9da4869e51cdf6f008cf0fe67fce3fbd58964ce3506366e7f6fc4997645114e2"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/05_user_testing_01.jpeg",
-    "new": "docs/process/week-09/images/user-testing-3.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-two-participants.jpeg",
     "action": "remove-identical-duplicate",
     "sha256": "928ba41af06a8cc987a0413c452a86180452429c417705272f6e261958c8cbb2"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/06_user_testing_02.jpeg",
-    "new": "docs/process/week-09/images/user-testing-2.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-seated-participant.jpeg",
     "action": "remove-identical-duplicate",
     "sha256": "427b84739159757a912fdf04eea81bafa38e25c2484148e9164db23b548bfac8"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/ChatGPT Image Sep 15, 2026, 10_05_30 PM.png",
-    "new": "docs/process/week-09/images/chatgpt-image-sep-15-2026-10-05-30-pm.png",
+    "new": "docs/process/week-09/images/book-installation-concept-render.png",
     "action": "move",
     "sha256": "db8ceed55d02787d16ef013a9685613c8aa5e2c48718a8510fb4d45eea7e230c"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/Screenshot 2026-09-20 125346.png",
-    "new": "docs/process/week-09/images/screenshot-2026-09-20-125346.png",
+    "new": "docs/process/week-09/images/concept-selection-rationale.png",
     "action": "move",
     "sha256": "a6b582ce2c30c560ea4c53c2f630748576d0148e5c479a6b52a58e44d893181a"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/Screenshot 2026-09-20 130013.png",
-    "new": "docs/process/week-09/images/screenshot-2026-09-20-130013.png",
+    "new": "docs/process/week-09/images/research-design-decisions-flowchart.png",
     "action": "move",
     "sha256": "d467532ea99a4256e945fe94ef702e752c795a5738a8318a817f028bd8b61d41"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/Screenshot 2026-09-22 044301.png",
-    "new": "docs/process/week-09/images/screenshot-2026-09-22-044301.png",
+    "new": "docs/process/week-09/images/book-prototype-outdoor-testing-video-still-01.png",
     "action": "move",
     "sha256": "39bc65723e2fb81b4a85561f961ac7e1cbf68843e1ef01f1e057874761f5bda0"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/Screenshot 2026-09-22 044309.png",
-    "new": "docs/process/week-09/images/screenshot-2026-09-22-044309.png",
+    "new": "docs/process/week-09/images/book-prototype-outdoor-testing-video-still-02.png",
     "action": "move",
     "sha256": "c13efaa16cf2484cfd153c31355f9dc138082a4f173e92dbf809d3485b611583"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/user-testing-1.jpeg",
-    "new": "docs/process/week-09/images/user-testing-1.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-tablet-on-lawn.jpeg",
     "action": "move",
     "sha256": "c409bce5c1583f9a6a93cd7eae2030722435c6fcd100beba9b70ba2c2ca40217"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/user-testing-2.jpeg",
-    "new": "docs/process/week-09/images/user-testing-2.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-seated-participant.jpeg",
     "action": "move",
     "sha256": "427b84739159757a912fdf04eea81bafa38e25c2484148e9164db23b548bfac8"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/user-testing-3.jpeg",
-    "new": "docs/process/week-09/images/user-testing-3.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-two-participants.jpeg",
     "action": "move",
     "sha256": "928ba41af06a8cc987a0413c452a86180452429c417705272f6e261958c8cbb2"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/user-testing-4.jpeg",
-    "new": "docs/process/week-09/images/user-testing-4.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-group-discussion.jpeg",
     "action": "move",
     "sha256": "4af5cfc3d32cd9e48f0bb7ecf82efab76e5ee86499a1da010cce5f2707bdd7be"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-16 at 16.04.41.jpeg",
-    "new": "docs/process/week-09/images/user-testing-1.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-tablet-on-lawn.jpeg",
     "action": "remove-identical-duplicate",
     "sha256": "c409bce5c1583f9a6a93cd7eae2030722435c6fcd100beba9b70ba2c2ca40217"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-16 at 16.11.52.jpeg",
-    "new": "docs/process/week-09/images/user-testing-2.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-seated-participant.jpeg",
     "action": "remove-identical-duplicate",
     "sha256": "427b84739159757a912fdf04eea81bafa38e25c2484148e9164db23b548bfac8"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-16 at 16.11.54.jpeg",
-    "new": "docs/process/week-09/images/user-testing-3.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-two-participants.jpeg",
     "action": "remove-identical-duplicate",
     "sha256": "928ba41af06a8cc987a0413c452a86180452429c417705272f6e261958c8cbb2"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-16 at 16.11.55.jpeg",
-    "new": "docs/process/week-09/images/user-testing-4.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-group-discussion.jpeg",
     "action": "remove-identical-duplicate",
     "sha256": "4af5cfc3d32cd9e48f0bb7ecf82efab76e5ee86499a1da010cce5f2707bdd7be"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-18 at 16.10.21.jpeg",
-    "new": "docs/process/week-09/images/whatsapp-image-2026-09-18-at-16.10.21.jpeg",
+    "new": "docs/process/week-09/images/book-prototype-open-side.jpeg",
     "action": "move",
     "sha256": "c7b32adffe8e68b592b3bc3e3323c45deb252a9258d634590d77e440f6bb7170"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-18 at 16.10.22.jpeg",
-    "new": "docs/process/week-09/images/whatsapp-image-2026-09-18-at-16.10.22.jpeg",
+    "new": "docs/process/week-09/images/book-prototype-open-front.jpeg",
     "action": "move",
     "sha256": "86981b2959ab37541aff04f06ea46835d37a02528b4a7ab9d15bdd5d5fb67f99"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-22 at 04.35.02 (1).jpeg",
-    "new": "docs/process/week-09/images/whatsapp-image-2026-09-22-at-04.35.02-1-.jpeg",
+    "new": "docs/process/week-09/images/book-prototype-decorated-open.jpeg",
     "action": "move",
     "sha256": "6c0253daef87ad8b43a64b3ffaf6b807d54318e89eb59ed3d8dca6acf17a8a58"
   },
   {
     "old": "Design Project/Week 9 Stand Up/Images/WhatsApp Image 2026-09-22 at 04.35.02.jpeg",
-    "new": "docs/process/week-09/images/whatsapp-image-2026-09-22-at-04.35.02.jpeg",
+    "new": "docs/process/week-09/images/book-prototype-decorated-closed.jpeg",
     "action": "move",
     "sha256": "49cb0eb6dee6bb8afa7a667f4c7c8d8888cf194ec1f50c7c8d6effb4cade9f64"
   },
@@ -448,5 +448,327 @@
     "new": "docs/team/charter.md",
     "action": "move",
     "sha256": "904e7a673684009a7a659cca274664c41964e84155c76993d63fe8bf9d30d8a9"
+  },
+  {
+    "old": "archive/documentation/week-09-wiki-package/README.md",
+    "new": "docs/process/week-09/README.md",
+    "action": "move",
+    "sha256": "bcc5a3b1a780f4114021effc33c77f250997682a8519156c49be2ad6940c5002",
+    "bytes": 1113
+  },
+  {
+    "old": "archive/documentation/week-09-wiki-package/design-process-week9.md",
+    "new": "docs/process/week-09/wiki/design-process-week9.md",
+    "action": "move",
+    "sha256": "fd04554b5bab3e84868015282c7dc0f9c4f5fba7aadf9e6f2b5876064a9040a9",
+    "bytes": 25537
+  },
+  {
+    "old": "archive/documentation/week-09-wiki-package/ethical-considerations.md",
+    "new": "docs/process/week-09/wiki/ethical-considerations.md",
+    "action": "move",
+    "sha256": "cb5825c705ec7d6d60eab68c11d465607ebc1da811d2493e8e4abd366d3d4957",
+    "bytes": 24214
+  },
+  {
+    "old": "archive/documentation/week-09-wiki-package/ECHO_Wiki_Assets/01_existing_wiki_links.png",
+    "new": "docs/process/week-09/images/wiki-design-process-screenshot.png",
+    "action": "deduplicate",
+    "sha256": "92911ef168333b77ff42e9984993c74608561a4cdb29a903f84970d5062368da",
+    "bytes": 786618
+  },
+  {
+    "old": "archive/documentation/week-09-wiki-package/ECHO_Wiki_Assets/02_design_decisions.png",
+    "new": "docs/process/week-09/images/research-design-decisions-infographic.png",
+    "action": "deduplicate",
+    "sha256": "4c438cfb4a722c4c915bff89ffc1c9d0cf5582b102360e85e27eb417cc58337e",
+    "bytes": 2002706
+  },
+  {
+    "old": "archive/documentation/week-09-wiki-package/ECHO_Wiki_Assets/03_design_direction.png",
+    "new": "docs/process/week-09/images/research-insights-design-decisions-chart.png",
+    "action": "deduplicate",
+    "sha256": "6d0afd141f49771c7d781e41965ea09247cac9ca85f30f9713a86132a49e328b",
+    "bytes": 1789507
+  },
+  {
+    "old": "archive/documentation/week-09-wiki-package/ECHO_Wiki_Assets/04_physical_concept.png",
+    "new": "docs/process/week-09/images/research-insights-design-decisions-chart-export.png",
+    "action": "deduplicate",
+    "sha256": "9da4869e51cdf6f008cf0fe67fce3fbd58964ce3506366e7f6fc4997645114e2",
+    "bytes": 2633607
+  },
+  {
+    "old": "archive/documentation/week-09-wiki-package/ECHO_Wiki_Assets/05_user_testing_01.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-two-participants.jpeg",
+    "action": "deduplicate",
+    "sha256": "928ba41af06a8cc987a0413c452a86180452429c417705272f6e261958c8cbb2",
+    "bytes": 207729
+  },
+  {
+    "old": "archive/documentation/week-09-wiki-package/ECHO_Wiki_Assets/06_user_testing_02.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-seated-participant.jpeg",
+    "action": "deduplicate",
+    "sha256": "427b84739159757a912fdf04eea81bafa38e25c2484148e9164db23b548bfac8",
+    "bytes": 256135
+  },
+  {
+    "old": "docs/process/week-09/02-design-decisions.png",
+    "new": "docs/process/week-09/research-design-decisions-infographic.png",
+    "sha256": "4c438cfb4a722c4c915bff89ffc1c9d0cf5582b102360e85e27eb417cc58337e",
+    "bytes": 2002706,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/chatgpt-image-sep-15-2026-10-05-30-pm.png",
+    "new": "docs/process/week-09/sheltered-bench-installation-concept-render.png",
+    "sha256": "f96deabf4990b628ef090720b9336fd27286b1341e982c63f23cdc6423031e7c",
+    "bytes": 3638541,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/final-book-closed-exterior.jpeg",
+    "new": "docs/process/week-09/book-prototype-decorated-closed.jpeg",
+    "sha256": "49cb0eb6dee6bb8afa7a667f4c7c8d8888cf194ec1f50c7c8d6effb4cade9f64",
+    "bytes": 275497,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/final-book-open-interface.jpeg",
+    "new": "docs/process/week-09/book-prototype-decorated-open.jpeg",
+    "sha256": "6c0253daef87ad8b43a64b3ffaf6b807d54318e89eb59ed3d8dca6acf17a8a58",
+    "bytes": 193279,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/01-existing-wiki-links.png",
+    "new": "docs/process/week-09/images/wiki-design-process-screenshot.png",
+    "sha256": "92911ef168333b77ff42e9984993c74608561a4cdb29a903f84970d5062368da",
+    "bytes": 786618,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/02-design-decisions.png",
+    "new": "docs/process/week-09/images/research-design-decisions-infographic.png",
+    "sha256": "4c438cfb4a722c4c915bff89ffc1c9d0cf5582b102360e85e27eb417cc58337e",
+    "bytes": 2002706,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/03-design-direction.png",
+    "new": "docs/process/week-09/images/research-insights-design-decisions-chart.png",
+    "sha256": "6d0afd141f49771c7d781e41965ea09247cac9ca85f30f9713a86132a49e328b",
+    "bytes": 1789507,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/04-physical-concept.png",
+    "new": "docs/process/week-09/images/research-insights-design-decisions-chart-export.png",
+    "sha256": "9da4869e51cdf6f008cf0fe67fce3fbd58964ce3506366e7f6fc4997645114e2",
+    "bytes": 2633607,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/chatgpt-image-sep-15-2026-10-05-30-pm.png",
+    "new": "docs/process/week-09/images/book-installation-concept-render.png",
+    "sha256": "db8ceed55d02787d16ef013a9685613c8aa5e2c48718a8510fb4d45eea7e230c",
+    "bytes": 2452767,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/screenshot-2026-09-20-125346.png",
+    "new": "docs/process/week-09/images/concept-selection-rationale.png",
+    "sha256": "a6b582ce2c30c560ea4c53c2f630748576d0148e5c479a6b52a58e44d893181a",
+    "bytes": 302785,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/screenshot-2026-09-20-130013.png",
+    "new": "docs/process/week-09/images/research-design-decisions-flowchart.png",
+    "sha256": "d467532ea99a4256e945fe94ef702e752c795a5738a8318a817f028bd8b61d41",
+    "bytes": 174157,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/screenshot-2026-09-22-044301.png",
+    "new": "docs/process/week-09/images/book-prototype-outdoor-testing-video-still-01.png",
+    "sha256": "39bc65723e2fb81b4a85561f961ac7e1cbf68843e1ef01f1e057874761f5bda0",
+    "bytes": 680608,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/screenshot-2026-09-22-044309.png",
+    "new": "docs/process/week-09/images/book-prototype-outdoor-testing-video-still-02.png",
+    "sha256": "c13efaa16cf2484cfd153c31355f9dc138082a4f173e92dbf809d3485b611583",
+    "bytes": 713768,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/user-testing-1.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-tablet-on-lawn.jpeg",
+    "sha256": "c409bce5c1583f9a6a93cd7eae2030722435c6fcd100beba9b70ba2c2ca40217",
+    "bytes": 323054,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/user-testing-2.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-seated-participant.jpeg",
+    "sha256": "427b84739159757a912fdf04eea81bafa38e25c2484148e9164db23b548bfac8",
+    "bytes": 256135,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/user-testing-3.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-two-participants.jpeg",
+    "sha256": "928ba41af06a8cc987a0413c452a86180452429c417705272f6e261958c8cbb2",
+    "bytes": 207729,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/user-testing-4.jpeg",
+    "new": "docs/process/week-09/images/campus-user-testing-group-discussion.jpeg",
+    "sha256": "4af5cfc3d32cd9e48f0bb7ecf82efab76e5ee86499a1da010cce5f2707bdd7be",
+    "bytes": 142088,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/whatsapp-image-2026-09-18-at-16.10.21.jpeg",
+    "new": "docs/process/week-09/images/book-prototype-open-side.jpeg",
+    "sha256": "c7b32adffe8e68b592b3bc3e3323c45deb252a9258d634590d77e440f6bb7170",
+    "bytes": 199008,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/whatsapp-image-2026-09-18-at-16.10.22.jpeg",
+    "new": "docs/process/week-09/images/book-prototype-open-front.jpeg",
+    "sha256": "86981b2959ab37541aff04f06ea46835d37a02528b4a7ab9d15bdd5d5fb67f99",
+    "bytes": 166181,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/whatsapp-image-2026-09-22-at-04.35.02.jpeg",
+    "new": "docs/process/week-09/images/book-prototype-decorated-closed.jpeg",
+    "sha256": "49cb0eb6dee6bb8afa7a667f4c7c8d8888cf194ec1f50c7c8d6effb4cade9f64",
+    "bytes": 275497,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/images/whatsapp-image-2026-09-22-at-04.35.02-1-.jpeg",
+    "new": "docs/process/week-09/images/book-prototype-decorated-open.jpeg",
+    "sha256": "6c0253daef87ad8b43a64b3ffaf6b807d54318e89eb59ed3d8dca6acf17a8a58",
+    "bytes": 193279,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/round-3-social-garden-feedback-1.jpeg",
+    "new": "docs/process/week-09/social-garden-feedback-page-2.jpeg",
+    "sha256": "8548bcf048919634511de90a152170e6d6a30de7cbb4c59182ac3494df5d6cf1",
+    "bytes": 398295,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/round-3-social-garden-feedback-2.jpeg",
+    "new": "docs/process/week-09/social-garden-feedback-page-1.jpeg",
+    "sha256": "292e5aed6bc3fd14245d59722ea07b2c29d5d60293701027784c13b8c7250aae",
+    "bytes": 393325,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/screenshot-2026-09-20-125346.png",
+    "new": "docs/process/week-09/book-installation-concept-render.png",
+    "sha256": "1f434df413c2ec379e234ef1ce4a0c83b1a6da99c79f669f4ed9cea9d0284a61",
+    "bytes": 3348582,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/screenshot-2026-09-20-130013.png",
+    "new": "docs/process/week-09/research-insights-design-decisions-chart.png",
+    "sha256": "6d0afd141f49771c7d781e41965ea09247cac9ca85f30f9713a86132a49e328b",
+    "bytes": 1789507,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/screenshot-2026-09-22-044309.png",
+    "new": "docs/process/week-09/book-prototype-outdoor-testing-video-still-02.png",
+    "sha256": "c13efaa16cf2484cfd153c31355f9dc138082a4f173e92dbf809d3485b611583",
+    "bytes": 713768,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/user-testing-1.jpeg",
+    "new": "docs/process/week-09/campus-user-testing-two-participants.jpeg",
+    "sha256": "928ba41af06a8cc987a0413c452a86180452429c417705272f6e261958c8cbb2",
+    "bytes": 207729,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/user-testing-4.jpeg",
+    "new": "docs/process/week-09/campus-user-testing-seated-participant.jpeg",
+    "sha256": "427b84739159757a912fdf04eea81bafa38e25c2484148e9164db23b548bfac8",
+    "bytes": 256135,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/whatsapp-image-2026-09-18-at-16.10.21.jpeg",
+    "new": "docs/process/week-09/book-prototype-open-side.jpeg",
+    "sha256": "c7b32adffe8e68b592b3bc3e3323c45deb252a9258d634590d77e440f6bb7170",
+    "bytes": 199008,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/whatsapp-image-2026-09-18-at-16.10.22.jpeg",
+    "new": "docs/process/week-09/book-prototype-open-front.jpeg",
+    "sha256": "86981b2959ab37541aff04f06ea46835d37a02528b4a7ab9d15bdd5d5fb67f99",
+    "bytes": 166181,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/whatsapp-image-2026-09-22-at-04.35.02.jpeg",
+    "new": "docs/process/week-09/book-prototype-decorated-closed-copy.jpeg",
+    "sha256": "49cb0eb6dee6bb8afa7a667f4c7c8d8888cf194ec1f50c7c8d6effb4cade9f64",
+    "bytes": 275497,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/whatsapp-image-2026-09-22-at-04.35.02-1-.jpeg",
+    "new": "docs/process/week-09/book-prototype-decorated-open-copy.jpeg",
+    "sha256": "6c0253daef87ad8b43a64b3ffaf6b807d54318e89eb59ed3d8dca6acf17a8a58",
+    "bytes": 193279,
+    "action": "rename"
+  },
+  {
+    "old": "docs/process/week-09/Design-Process-Overview.md",
+    "new": "docs/process/week-09/wiki/Design-Process-Overview.md",
+    "sha256": "0e3f08b406ae385c955461ed798fe4bd5ee4192aacbab1444bc5cce7514f7d4b",
+    "bytes": 14636,
+    "action": "move"
+  },
+  {
+    "old": "docs/process/week-09/design-process-week9.md",
+    "new": "docs/process/week-09/wiki/design-process-week9.md",
+    "sha256": "af21d3bd5b582ab453fb2853fc16bd98d17306af0da337d1664d129f15ea90df",
+    "bytes": 25571,
+    "action": "move"
+  },
+  {
+    "old": "docs/process/week-09/ECHO_Design_Process_Overview_LOCAL.md",
+    "new": "docs/process/week-09/wiki/ECHO_Design_Process_Overview_LOCAL.md",
+    "sha256": "f094dff038c1f4437088ac5457e574fa52239a9dfcb7281a70fba54fae284bcb",
+    "bytes": 28589,
+    "action": "move"
+  },
+  {
+    "old": "docs/process/week-09/ECHO_Design_Process_Overview_UPDATED.md",
+    "new": "docs/process/week-09/wiki/ECHO_Design_Process_Overview_UPDATED.md",
+    "sha256": "884d343d496806e8752694395874b50e0628748c1c61d4ff12953ca7120ecf48",
+    "bytes": 30089,
+    "action": "move"
+  },
+  {
+    "old": "docs/process/week-09/ethical-considerations.md",
+    "new": "docs/process/week-09/wiki/ethical-considerations.md",
+    "sha256": "cb5825c705ec7d6d60eab68c11d465607ebc1da811d2493e8e4abd366d3d4957",
+    "bytes": 24214,
+    "action": "move"
   }
 ]

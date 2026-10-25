@@ -11,7 +11,7 @@ Our aim is to help students—especially new and international students, and peo
 
 ## Project Links
 
-> **Image note:** Existing image links in this page have been retained. Two images documenting the latest Social Garden feedback are included in the update package and should be uploaded to `docs/evaluation/images/` in the repository before the page is saved, so those new embeds display correctly.
+> **Image note:** Supporting images are stored in `docs/process/week-09/images/` and the Week 9 folder. This page links to the existing image files.
 
 - [Poster and promotional material](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/docs/exhibition)
 - [Digital prototype — ECHO](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/prototype)
@@ -52,9 +52,9 @@ UQ has a rich history, but many stories behind its places, people and events go 
 
 Students already have familiar places where they study, relax or spend time between classes. Instead of asking them to attend a separate event or complete a long resource, ECHO brings stories into those existing routines. It connects three things: **the place where a story belongs, the people who contribute to it, and the students who discover it later.**
 
-![ECHO physical concept](docs/process/week-09/images/screenshot-2026-09-20-125346.png)
+![Early ECHO concept-selection rationale](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/concept-selection-rationale.png)
 
-*Figure 1. Early ECHO concept visualisation showing the proposed interaction direction and campus setting.*
+*Figure 1. Early concept-selection rationale comparing ECHO with alternative ideas.*
 
 ---
 
@@ -86,7 +86,7 @@ During early concept exploration, the team considered four directions:
 
 The team selected ECHO because it could fit into an existing break, work for one person at a time, offer different levels of engagement and let a story continue after its original contributor had left. The first physical direction grew out of the Story Pod / listening-pod idea, but testing showed that the experience needed to feel smaller, more casual and easier to approach.
 
-![Design decisions from research](docs/process/week-09/images/02-design-decisions.png)
+![Design decisions from research](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/research-design-decisions-infographic.png)
 
 *Figure 2. Summary of themes, evidence and design decisions from early student feedback.*
 
@@ -111,27 +111,27 @@ Testing showed that a large, show-like installation could make users feel expose
 
 These findings drove the move from a larger pod to a **small book beside existing seating**. The book is closed when idle and opens when someone approaches; the screen inside becomes the main storytelling interface. The intended interaction is an invitation, not a public performance.
 
-![User testing in a campus setting](docs/process/week-09/images/user-testing-1.jpeg)
+![User testing in a campus setting](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/campus-user-testing-tablet-on-lawn.jpeg)
 
 *Figure 3. User evaluation of the ECHO prototype in an outdoor campus setting.*
 
-![Additional user testing](docs/process/week-09/images/user-testing-4.jpeg)
+![Additional user testing](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/campus-user-testing-group-discussion.jpeg)
 
 *Figure 4. Students interacting with the prototype and discussing the experience.*
 
-![Updated physical design direction](docs/process/week-09/images/screenshot-2026-09-20-130013.png)
+![Research-to-design decision flowchart](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/research-design-decisions-flowchart.png)
 
-*Figure 5. Updated ECHO design direction following the physical concept evaluation.*
+*Figure 5. Flowchart connecting user research themes to design decisions.*
 
-![User interacting with the ECHO physical prototype](docs/process/week-09/images/screenshot-2026-09-22-044309.png)
+![User interacting with the ECHO physical prototype](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/wizard-of-oz-testing.png)
 
 *Figure 6. User interacting with the ECHO Wizard-of-Oz prototype in an outdoor campus setting.*
 
-![Open ECHO physical prototype](docs/process/week-09/images/whatsapp-image-2026-09-22-at-04.35.02-1-.jpeg)
+![Open ECHO physical prototype](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/book-prototype-decorated-open.jpeg)
 
 *Figure 7. Open ECHO prototype showing the printed book cover, tablet interface and physical structure.*
 
-![Closed ECHO physical prototype](docs/process/week-09/images/whatsapp-image-2026-09-22-at-04.35.02.jpeg)
+![Closed ECHO physical prototype](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/book-prototype-decorated-closed.jpeg)
 
 *Figure 8. Closed ECHO prototype showing the book-inspired exterior and physical form.*
 
@@ -147,7 +147,7 @@ The early experience could let a student leave a contribution, but the team felt
 
 The concept also includes live avatars representing users at other ECHO locations, with options to visit trees, use quick actions and chat or form groups. These cross-location interactions are part of the intended social experience and require further implementation and evaluation before being treated as a validated outcome.
 
-![Prototype and installation relationship](docs/process/week-09/images/chatgpt-image-sep-15-2026-10-05-30-pm.png)
+![Prototype and installation relationship](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/book-installation-concept-render.png)
 
 *Figure 9. Concept direction showing the relationship between the physical installation and the digital storytelling experience.*
 
@@ -166,13 +166,13 @@ The feedback also surfaced practical issues and opportunities:
 
 This round strengthened the Minecraft-style Garden as the main direction and created a clearer refinement list. Navigation, location cues, interaction stability and contribution visibility were treated as immediate design priorities. Ideas such as polls, Q&A and more elaborate garden personalisation remain opportunities for continued iteration rather than being presented as validated final features.
 
-![Round 3 Social Garden feedback — prototype direction, navigation, map discoverability and interaction quality](docs/process/week-09/images/round-3-social-garden-feedback-1.jpeg)
+![Social Garden feedback, page 1 of 2: prototype direction, navigation, map discoverability and interaction quality](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/social-garden-feedback-page-1.jpeg)
 
-*Figure 10. Trade-show feedback from four participants, showing the preferred Garden direction and the main interface issues identified.*
+*Figure 10. Trade-show feedback, page 1 of 2: preferred Garden direction and interface issues identified by four participants.*
 
-![Round 3 Social Garden feedback — collaboration, world-building, accessibility and inclusion](docs/process/week-09/images/round-3-social-garden-feedback-2.jpeg)
+![Social Garden feedback, page 2 of 2: social interaction, world-building, accessibility and inclusion](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/social-garden-feedback-page-2.jpeg)
 
-*Figure 11. Further feedback themes and design recommendations from the same evaluation round.*
+*Figure 11. Trade-show feedback, page 2 of 2: social interaction, world-building, accessibility and inclusion recommendations.*
 
 ### Prototype 4 — connecting the physical book to the interaction (Week 11)
 
@@ -180,11 +180,11 @@ The team then developed the Arduino-based physical interaction. A proximity sens
 
 The work focused on getting the sensing and opening interaction to operate as part of the prototype and refining how the physical object, screen and user journey fit together. It is a working prototype interaction, not yet a weatherproof, permanent campus installation.
 
-![Physical prototype front view](docs/process/week-09/images/whatsapp-image-2026-09-18-at-16.10.22.jpeg)
+![Physical prototype front view](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/book-prototype-open-front.jpeg)
 
 *Figure 12. Book prototype with the tablet integrated into the physical enclosure.*
 
-![Physical prototype side view](docs/process/week-09/images/whatsapp-image-2026-09-18-at-16.10.21.jpeg)
+![Physical prototype side view](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/book-prototype-open-side.jpeg)
 
 *Figure 13. Side view showing the physical structure and viewing angle.*
 
@@ -192,13 +192,13 @@ The work focused on getting the sensing and opening interaction to operate as pa
 
 The final stage brought the physical book, digital experience, Social Garden direction and exhibition communication together. The A2 poster and exhibition pamphlet explain the problem, target audience, research insights, solutions, ethics and future opportunities as one design story. The photos below document the final book-style prototype as displayed for demonstration, including the closed exterior and the open interface. The prototype remains an evolving proof of concept; the wider network and some live social features need further testing and implementation.
 
-![Final ECHO book prototype displayed closed, showing the exterior cover](docs/process/week-09/images/final-book-closed-exterior.jpeg)
+![Decorated ECHO book prototype displayed closed](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/book-prototype-decorated-closed.jpeg)
 
-*Figure 14. Final book-style prototype in its closed display state.*
+*Figure 14. Decorated book prototype in its closed display state.*
 
-![Final ECHO book prototype displayed open, showing the tablet interface](docs/process/week-09/images/final-book-open-interface.jpeg)
+![Decorated ECHO book prototype displayed open with the tablet interface](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/book-prototype-decorated-open.jpeg)
 
-*Figure 15. Open prototype showing the digital interface integrated into the physical book.*
+*Figure 15. Decorated book prototype open with the tablet interface visible.*
 
 ---
 

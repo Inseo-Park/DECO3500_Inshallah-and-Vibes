@@ -12,7 +12,7 @@ ECHO developed from early campus-history concepts into a book-like storytelling 
 | Device checks and exhibit preparation, 16–20 October | The team reviewed promotional material, investigated iPad lag and missing flowers, configured the relay and checked live conversation. | Live conversation worked in a team check, while residual lag and a flower-refresh requirement remained. The [final poster and brochures](../exhibition/) support the exhibition presentation. |
 | Current prototype: echo-tradeshow | [echo-tradeshow](../../prototype/index.html) brings together the two campus-location variants and shared-garden interface. | Includes Lakes/Court variants and a dependency-free relay. [Current limitations](../prototype-guide.md) include browser-local persistence, English-only UI and unwired Echo transmission. Final user testing is still needed. |
 
-![Earlier prototype testing](week-09/images/user-testing-1.jpeg)
+![Earlier prototype testing](week-09/images/campus-user-testing-tablet-on-lawn.jpeg)
 
 *September prototype testing.*
 

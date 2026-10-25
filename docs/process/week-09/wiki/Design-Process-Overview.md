@@ -11,12 +11,12 @@ Our design goal was to create an experience that fits naturally into students’
 
 ## Project Links
 
-- [Poster and promotional material](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_Weeks6-8_Iterations_preview.pdf)
-- [Digital prototype — ECHO](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_1.zip)
+- [Poster and promotional material](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week 9 Stand Up/ECHO_Weeks6-8_Iterations_preview.pdf)
+- [Digital prototype — ECHO](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week 9 Stand Up/ECHO_1.zip)
 - [GitHub repository](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes)
-- [Week 9 stand-up documentation](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Week%209%20Stand%20Up)
-- [ECHO Wiki image assets](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Week%209%20Stand%20Up/ECHO_Wiki_Assets)
-- [User research and interview findings](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/echo-sessions%20(2).csv)
+- [Week 9 stand-up documentation](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/Week 9 Stand Up)
+- [ECHO Wiki image assets](../images)
+- [User research and interview findings](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week 9 Stand Up/echo-sessions (2).csv)
 
 > **Prototype note:** The digital prototype is an early proof of concept. It is not a fully deployed product and some interactions are demonstrated through prototype screens or Wizard-of-Oz facilitation.
 
@@ -26,7 +26,7 @@ Our design goal was to create an experience that fits naturally into students’
 
 ### Downloading the digital prototype
 
-1. Open the [ECHO prototype ZIP file](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week%209%20Stand%20Up/ECHO_1.zip).
+1. Open the [ECHO prototype ZIP file](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/Week 9 Stand Up/ECHO_1.zip).
 2. Select **Download raw** or download the ZIP file from GitHub.
 3. Extract the ZIP file on your computer.
 4. Open the extracted folder.
@@ -62,9 +62,9 @@ Instead of developing a conventional historical display, we explored a place-bas
 
 The concept of an “Echo” creates an asynchronous social connection: one person leaves something behind, and another person encounters it at a later time.
 
-![ECHO physical concept](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/Week%209%20Stand%20Up/ECHO_Wiki_Assets/04_physical_concept.png)
+![Research insights and design decisions](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/research-insights-design-decisions-chart.png)
 
-*Figure 1. Concept visualisation of the ECHO installation in a campus lakeside setting. This image represents the proposed direction rather than a completed installation.*
+*Figure 1. Summary linking student feedback, research insights and decisions about content, place and physical interaction.*
 
 ---
 
@@ -99,7 +99,7 @@ The scavenger hunt used QR codes and physical movement around campus. Participan
 
 Story Pods proposed a quiet, semi-private listening and sharing space. Participants responded positively to the idea of discovering something left by another student and found audio combined with visuals engaging. However, a large enclosed structure could feel intimidating, leading to the decision to explore a smaller and more understated form.
 
-![Design decisions from research](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/Week%209%20Stand%20Up/ECHO_Wiki_Assets/02_design_decisions.png)
+![Design decisions from research](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/research-design-decisions-infographic.png)
 
 *Figure 2. Summary of themes, evidence, insights and design decisions derived from student feedback.*
 
@@ -161,11 +161,11 @@ The physical form influenced comfort. A smaller, understated installation appear
 
 Location-based storytelling remained important. Connecting stories to specific campus spaces made the information feel more relevant and helped link historical content to students’ existing experiences.
 
-![User testing in a campus setting](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/Week%209%20Stand%20Up/ECHO_Wiki_Assets/05_user_testing_01.jpeg)
+![User testing in a campus setting](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/campus-user-testing-two-participants.jpeg)
 
 *Figure 3. User evaluation of the ECHO prototype in an outdoor campus setting.*
 
-![Additional user testing](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/Week%209%20Stand%20Up/ECHO_Wiki_Assets/06_user_testing_02.jpeg)
+![Additional user testing](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/campus-user-testing-seated-participant.jpeg)
 
 *Figure 4. Students interacting with the prototype and discussing the experience.*
 
@@ -187,9 +187,9 @@ The design therefore moved towards:
 - Visibility of the surrounding environment.
 - A form that invites participation without forcing it.
 
-![Updated physical design direction](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/Week%209%20Stand%20Up/ECHO_Wiki_Assets/03_design_direction.png)
+![Research insights and design decisions](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/research-insights-design-decisions-chart.png)
 
-*Figure 5. Updated design direction showing the relationship between place, content, time and physical comfort.*
+*Figure 5. Summary linking student feedback, research insights and decisions about content, place and physical interaction.*
 
 ### Digital experience
 
@@ -222,9 +222,9 @@ The physical form is still a concept direction rather than a fully engineered pr
 
 The digital experience is the main storytelling interface. Users can listen to a story, watch a visual story, read supporting information, choose a story category, respond to an Echo and leave a memory, fact, question or moment for another user.
 
-![Prototype and installation relationship](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/Week%209%20Stand%20Up/ECHO_Wiki_Assets/04_physical_concept.png)
+![Research insights and design decisions](https://raw.githubusercontent.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/main/docs/process/week-09/images/research-insights-design-decisions-chart.png)
 
-*Figure 6. Proposed relationship between the physical installation and the digital storytelling experience.*
+*Figure 6. Summary linking student feedback, research insights and decisions about content, place and physical interaction.*
 
 ---
 

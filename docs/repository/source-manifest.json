@@ -633,49 +633,49 @@
   {
     "archive": "week-09-wiki-package.zip",
     "sha256": "5ce31dfdab0f6f8f731bab9333a1ac7bbe2be201ae6f25db1b16d1da49bec9b3",
-    "destination": "archive/documentation/week-09-wiki-package",
+    "destination": "docs/process/week-09",
     "files": [
       {
-        "path": "archive/documentation/week-09-wiki-package/README_ASSET_UPLOAD_INSTRUCTIONS.md",
-        "sha256": "f766eb8aedf3449af277aa4f7381abd8eb81f27d0ff0cf6e7e17a24a3663e424",
-        "bytes": 609,
+        "path": "docs/process/week-09/README.md",
+        "sha256": "757015d9454c131277ba228357f17133eadbc4ca65b425cb261f48bf4138416f",
+        "bytes": 1480,
         "originalSha256": "d282e91a146414c9ca4ff85e8f34fcbc4bac5a6e5b173e9731a9006ae7ece4af",
         "originalBytes": 1351
       },
       {
-        "path": "archive/documentation/week-09-wiki-package/design-process-week9.md",
-        "sha256": "9d777d9d504e6e9c6253114ac62a6e67cd0e210c7a486314b00b4906243614fe",
-        "bytes": 25913,
+        "path": "docs/process/week-09/wiki/design-process-week9.md",
+        "sha256": "22dbd68b4480af7ca2f2c9f33d7135dbb1b556b8440a9ff421ec2dccd380f2bd",
+        "bytes": 25563,
         "originalSha256": "b4664221c96cd1cb520360cc2c32a737b2b03524d3da75987afcefa2f5e77a8a",
         "originalBytes": 14531
       },
       {
-        "path": "archive/documentation/week-09-wiki-package/ECHO_Wiki_Assets/06_user_testing_02.jpeg",
+        "path": "docs/process/week-09/images/campus-user-testing-seated-participant.jpeg",
         "sha256": "427b84739159757a912fdf04eea81bafa38e25c2484148e9164db23b548bfac8",
         "bytes": 256135
       },
       {
-        "path": "archive/documentation/week-09-wiki-package/ECHO_Wiki_Assets/04_physical_concept.png",
+        "path": "docs/process/week-09/images/research-insights-design-decisions-chart-export.png",
         "sha256": "9da4869e51cdf6f008cf0fe67fce3fbd58964ce3506366e7f6fc4997645114e2",
         "bytes": 2633607
       },
       {
-        "path": "archive/documentation/week-09-wiki-package/ECHO_Wiki_Assets/05_user_testing_01.jpeg",
+        "path": "docs/process/week-09/images/campus-user-testing-two-participants.jpeg",
         "sha256": "928ba41af06a8cc987a0413c452a86180452429c417705272f6e261958c8cbb2",
         "bytes": 207729
       },
       {
-        "path": "archive/documentation/week-09-wiki-package/ECHO_Wiki_Assets/01_existing_wiki_links.png",
+        "path": "docs/process/week-09/images/wiki-design-process-screenshot.png",
         "sha256": "92911ef168333b77ff42e9984993c74608561a4cdb29a903f84970d5062368da",
         "bytes": 786618
       },
       {
-        "path": "archive/documentation/week-09-wiki-package/ECHO_Wiki_Assets/02_design_decisions.png",
+        "path": "docs/process/week-09/images/research-design-decisions-infographic.png",
         "sha256": "4c438cfb4a722c4c915bff89ffc1c9d0cf5582b102360e85e27eb417cc58337e",
         "bytes": 2002706
       },
       {
-        "path": "archive/documentation/week-09-wiki-package/ECHO_Wiki_Assets/03_design_direction.png",
+        "path": "docs/process/week-09/images/research-insights-design-decisions-chart.png",
         "sha256": "6d0afd141f49771c7d781e41965ea09247cac9ca85f30f9713a86132a49e328b",
         "bytes": 1789507
       }
@@ -862,8 +862,8 @@
       },
       {
         "path": "docs/evaluation/questionnaire/echo-questionnaire-v02/README.md",
-        "sha256": "0db7c8b69e6ded91d9f8aec992434b3a33ace8988f291f252aac2ed6496f0cef",
-        "bytes": 1620,
+        "sha256": "ab92d8ff83534e8bed49a346c9ff935832ab37483db63a882a9c6c4e5286bcad",
+        "bytes": 551,
         "originalSha256": "6a8cca3122cef003ba2c72a47982076bfa960a7ba2baf045cae8712d621570c5",
         "originalBytes": 3866
       }
