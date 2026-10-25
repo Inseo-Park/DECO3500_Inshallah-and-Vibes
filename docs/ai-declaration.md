@@ -39,4 +39,15 @@
 
 # AI Declaration - Inseo Park
 
-- 
+* **Resource used:** Google Gemini, OpenAI ChatGPT
+* **Source:** [Gemini](https://gemini.google.com), [ChatGPT](https://chatgpt.com)
+* **How it was used:**
+  * Cleaned up interview transcripts from audio recordings.
+  * Extracted key points and patterns from participant answers.
+  * Brainstormed layout and visual ideas for the poster based on the Simon Says game.
+  * Drafted text and headings for the concept poster.
+  * Grouped tradeshow user feedback and identified ethical concerns.
+* **Project areas affected:** Interview transcription, user research analysis, concept poster design, and ethical analysis.
+* **Human contribution:** I recorded the interviews, gathered the tradeshow feedback, and selected the ethical priorities. I also chose the Simon Says theme, made the final design decisions, and built the poster layout. After finishing these tasks, I worked with my teammates to create a physical prototype using cardboards and tested our digital prototype on my tablet.
+* **Modifications and review:** I checked the summaries against the original audio files and tradeshow notes to avoid errors. I also selected only the relevant suggestions for the poster and ethical analysis.
+* **Status:** Conducting interviews, physical prototyping, and gathering feedback from the tradeshow have been completed by me, with Gemini and ChatGPT as supporting tools.
