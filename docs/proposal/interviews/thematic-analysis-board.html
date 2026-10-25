@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ECHO – Thematic Analysis Board</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f4ef;--tx:#1f1d1a;--mut:#6b665e;--card:#fffdf8;--nl:90%;--ns:75%;--nt:#1f1d1a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#181714;--tx:#ece8df;--mut:#a39d91;--card:#23211d;--nl:24%;--ns:32%;--nt:#f0ece3}}
+:root[data-theme="dark"]{--bg:#181714;--tx:#ece8df;--mut:#a39d91;--card:#23211d;--nl:24%;--ns:32%;--nt:#f0ece3}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:20px}
+h1{margin:0 0 4px;font-size:22px}
+.sub{color:var(--mut);max-width:820px;margin:0 0 14px}
+.key{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--mut);margin-bottom:10px}
+.pill{display:inline-block;padding:1px 8px;border-radius:99px;border:1px solid var(--mut);font-size:12px;margin:2px 4px 2px 0}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 18px}
+button{font:inherit;font-size:13px;border:1px solid var(--mut);background:var(--card);color:var(--tx);border-radius:99px;padding:3px 11px;cursor:pointer}
+button.on{background:var(--tx);color:var(--bg)}
+.theme{margin:0 0 26px;padding-bottom:6px}
+.theme h2{font-size:17px;margin:0 0 2px}
+.theme .code{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--mut)}
+.ins{margin:4px 0 10px;padding:8px 12px;border-left:4px solid hsl(var(--h) 60% 50%);background:var(--card);border-radius:4px;font-size:14px}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px}
+.note{background:hsl(var(--h) var(--ns) var(--nl));color:var(--nt);padding:11px 12px 10px;border-radius:3px;box-shadow:2px 3px 7px rgba(0,0,0,.18);transform:rotate(var(--r,0deg))}
+.note:nth-child(3n){--r:1.2deg}.note:nth-child(3n+1){--r:-1deg}.note:nth-child(3n+2){--r:.4deg}
+.note .c{font-family:ui-monospace,Menlo,monospace;font-size:11px;font-weight:700;letter-spacing:.3px}
+.note .p{float:right;font-size:11px;font-weight:700;opacity:.75}
+.note q{display:block;margin:5px 0;font-size:14px;font-style:italic;quotes:"“" "”"}
+.note .e{font-size:12px;opacity:.85;border-top:1px dashed currentColor;padding-top:4px;margin-top:4px}
+.foot{font-size:13px;color:var(--mut);max-width:860px;margin-top:10px}
+.stepper{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}.stepper button{font-weight:600}.sd{margin:0 0 14px;padding:8px 12px;background:var(--card);border-radius:6px;font-size:14px}.grp{border:2px dashed hsl(var(--h) 60% 50%);border-radius:10px;padding:8px 12px;margin-bottom:12px;background:var(--card)}.grp .pill{background:hsl(var(--h) var(--ns) var(--nl));color:var(--nt);border-color:transparent;font-family:ui-monospace,Menlo,monospace}.note .m{margin:5px 0;font-size:14px}
+</style></head><body>
+<h1>ECHO – Thematic Analysis Board</h1>
+<p class="sub">Inductive coding of 6 interview transcripts. Each sticky note = one code, with a short quote and the delivery/emotion read from <i>how</i> it was said (hedges, fillers, repetition, humour, tone words).</p>
+<div class="stepper" id="st"></div><div class="sd" id="sd"></div>
+<div class="filters" id="f"></div>
+<div id="board"></div>
+<p class="foot"><b>Method:</b> familiarisation → open coding of quotes → grouping codes into themes → naming themes and design insights. <b>Caveat:</b> delivery and emotion are inferred from transcript text only (no audio), so treat them as interpretations. Two interviews appear to describe another university (one mentions QUT and says it is “not as old as UQ”), so use them as comparative evidence, not UQ-specific. Small, qualitative sample, so themes are indicative, not generalisable.</p>
+<script>
+const T=[
+{n:"1. History is present but easy to miss",k:"HIST-BUSY",h:38,i:"Curiosity exists but loses to time pressure and routine. Put short, location-linked stories where students already are, with depth by choice.",N:[
+["BUSY-GUILT","P6","I do look up and think about the history, but I’m usually too busy.","Apologetic, guilty, resigned. Self-correcting (“as much as I should”)."],
+["BG-SCENERY","P6","I probably don’t pay as much attention as I should… a bit dirty.","Casual, slightly dismissive. Landmark treated as background."],
+["NO-EXPOSURE","P6","I don’t think we’ve really learned about anything on campus.","Flat, short, closes topic. Low awareness, no frustration."],
+["KNOW-LITTLE","P3","I would love to know more, but I really don’t know that much.","Wistful, honest. “Very honestly” signals mild embarrassment."],
+["ROUTINE-BLIND","P1","I have the same schedule every time there, so that’s probably why.","Matter-of-fact. Routine explains why places feel unremarkable."]]},
+{n:"2. Stories make a place feel like home",k:"STORY-BELONG",h:150,i:"Knowing a place’s story is tied to emotional attachment. Link stories to feelings of home, not just facts.",N:[
+["STORY-HOME","P3","It gives you a sense of home and comfort in it.","Warm, convinced, reflective. Said after a long, considered answer."],
+["PRESERVE-AWE","P3","they’ve put effort into preserving what was already there","Surprised, appreciative. Heritage care builds trust in the institution."],
+["PLACE-MEMORY","P5","Whenever I go to that place… I go back in time.","Fond, nostalgic. A project made a place personal."],
+["PROTECT-PAST","P5","so that we don’t destroy a really important piece of past","Earnest, a little protective. Said as an aside, not rehearsed."],
+["UNI-POWER","P4","it shows that the university has some stakes… some power","Intrigued, quietly proud. Interest in political identity of UQ."]]},
+{n:"3. Belonging comes from private spots and people",k:"SPACE-PEOPLE",h:200,i:"Belonging is built from comfortable, low-pressure spots and relationships. Benches and seating nooks suit ECHO’s small book form.",N:[
+["QUIET-SPOT","P5","There’s no disturbance there, so I love that area.","Relieved, content. Turning lights off = control over environment."],
+["CALM-ESCAPE","P1","a sense of calmness away from the rest of the campus","Reflective, soft pace. Bridge as a place to decompress."],
+["BUSY-NO-HOME","P2","it’s very difficult at times to nab down a single spot","Mildly frustrated, hedged (“I guess”, “at times”)."],
+["TRADITION","P2","free cheese toasties on Thursdays","Warm, fond, quick pace. Belonging through ritual and a named person (the chaplain)."],
+["PEOPLE-FIRST","P5","the communication with tutors, professor, and my friends","Quietly sincere. Belonging = relationships; limited time (works)."]]},
+{n:"4. Newcomer disorientation and low attachment",k:"LOST-DETACHED",h:12,i:"New students may feel lost or detached. A visible, friendly entry point can ease first-week navigation.",N:[
+["LOST","P5","I was completely lost like a puppy","Self-deprecating humour masking vulnerability. Vivid memory, long answer."],
+["MINIMAL-CAMPUS","P2","I don’t spend a lot of time on campus if I don’t have to.","Detached, matter-of-fact. Campus = utility."],
+["WORK-BARRIER","P5","I don’t get much time to be on campus when I’m not studying.","Apologetic, tired. Time scarcity limits belonging."],
+["ASSIGNMENT-LOAD","P5","I’m always doing an assignment","Weary humour. Pressure dominates the student voice."]]},
+{n:"5. Architecture sets mood and sparks curiosity",k:"ARCH-VIBE",h:270,i:"Visual and spatial features are the hook. Anchor stories to buildings and objects people already notice.",N:[
+["ARCH-MOOD","P5","It sets the mood for me.","Enthusiastic but struggling for words (“I don’t know how to describe it”)."],
+["WINDOW-INSPIRE","P1","every time I go to the library, I see it and I think about it, man","Emphatic repetition (“Literally, literally”). Place carries personal aspiration."],
+["ARCH-CONTRAST","P2","It’d be interesting to understand the stories behind how architects… have adapted","Curious, thoughtful, long flowing sentences."],
+["SANDSTONE","P4","I know it’s not really that old, but it looks good.","Sheepish yet affectionate. Aesthetic pride beats historical accuracy."]]},
+{n:"6. Interactive and tangible formats win",k:"INTERACT-FORMAT",h:320,i:"Students want touch, sound and physical models, not text. Supports ECHO’s book and audio/video options.",N:[
+["BUTTON-SPEAKS","P6","press a button and it speaks to you","Brightens, offers an idea unprompted. Lowest-effort learning."],
+["PHYSICAL-MODEL","P4","very immersive — not in terms of a screen, but physically","Delighted, detailed recall. Emphasis on physical over digital."],
+["3D-VIDEO","P2","maybe you could have videos… a 3D sort of thing, model","Open, building on the interviewer’s prompt. Variety fights repetition."],
+["TELL-NOT-READ","P1","I wasn’t just staring at a PDF document.","Relieved, pleased. Explaining to others made it “feel right”."],
+["AUDIO-GUIDE","P3","you could get earphones… and listen to it while you walked around","Matter-of-fact recall. Audio walking guide seen as natural."]]},
+{n:"7. Layered, concise and optional content",k:"CONCISE-LAYER",h:60,i:"Summary first, depth on demand, no ads, no forced content. Matches discovery-first, contribution-optional.",N:[
+["NO-OVERLOAD","P2","you don’t wanna be overrun with information","Firm, repeated for emphasis. Strong negative reaction to clutter and ads."],
+["SUMMARY-THEN-MORE","P2","Give you the key points in a quick summary, and then have additional information","Confident, gives a clear model (news app). A design spec in his words."],
+["TOO-MUCH-READING","P3","Yeah, because there was a lot of reading.","Flat, matter-of-fact. Length killed completion of an optional course."],
+["FORCED-BACKLASH","P3","Sometimes enforcing it on people might have a negative impact.","Hedged, careful (“might”). Voluntary choice matters."],
+["STAGED-CURIOSITY","P4","it would open up a potential wormhole to explore more","Amused, self-aware. Quick search first, depth only if hooked."]]},
+{n:"8. Authentic voices make history credible",k:"HUMAN-VOICE",h:100,i:"Passion and lived voices beat plaques. Support user stories and audio so threads carry real people.",N:[
+["LOCAL-STORY","P3","they’re the ones who know the story of the place","Confident, bonding tone (shared with dad). Locals = authenticity."],
+["PASSION","P2","it’s really good when people have a true passion","Warm, approving. Delivery quality shapes memory."],
+["PROF-STORY","P4","It wasn’t just a quick reading. He took a moment","Appreciative. Context turned a ritual into meaning."],
+["ASK-QUESTIONS","P2","the best way to get the information you want is to ask questions","Practical, assured. Dialogue beats broadcast; supports comments."]]},
+{n:"9. Indigenous culture: respect, distance, wariness of tokenism",k:"INDIG-RESPECT",h:25,i:"Interest and respect, but little direct contact and scepticism about performativity. Co-design with knowledge holders, avoid forcing.",N:[
+["PERFORMATIVE","P4","I don’t know how people actually live up to that.","Sceptical, candid. Initial “a bit funny” softened after reflection."],
+["AWARE-NOT-VISITED","P5","I’ve never been there to be honest.","Slightly embarrassed, deflects (“can’t say much”). Gap, not hostility."],
+["OPTIONAL-COURSE","P3","I personally did it because I thought it was compulsory.","Wry, honest. Most students skip it (low engagement, not low interest)."],
+["EMBRACE","P2","it is good to see that the uni’s embracing these… forms of artwork","Positive, approving. Art spaces read as welcoming for internationals."]]},
+{n:"10. Campus is shared through photos and achievements",k:"SHARE-HOME",h:180,i:"Students share looks, wins and people, not history. A shareable moment (a photo, a flower on a tree) could carry stories home.",N:[
+["PHOTO-HOME","P4","I’ve sent my family back home some nice pictures","Pleased, proud. Heritage-style beauty valued."],
+["FIRST-PHOTO","P5","I clicked a picture… the first picture","Nostalgic. The photo marks the arrival moment at the lake."],
+["GROUP-PROUD","P1","everybody got to talk about how they contributed","Proud, pleased. Home sees only “studying”, so campus life gets shared."],
+["LAST-CLASS","P6","Probably just talking about my last class","Short, low effort, shrugging. Little to say about campus itself."]]}
+];
+const f=document.getElementById('f'),b=document.getElementById('board');
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function draw(sel){b.innerHTML=T.map((t,ti)=>(sel!==null&&sel!==ti)?'':
+`<section class="theme" style="--h:${t.h}"><h2>${esc(t.n)}</h2><div class="code">THEME CODE: ${t.k} · ${t.N.length} codes</div><div class="ins"><b>Design insight:</b> ${esc(t.i)}</div><div class="wall">${t.N.map(n=>`<div class="note"><span class="c">${n[0]}</span><q>${esc(n[2])}</q><div class="e"><b>Delivery / emotion:</b> ${esc(n[3])}</div></div>`).join('')}</div></section>`).join('');
+[...f.children].forEach((x,i)=>x.classList.toggle('on',(sel===null&&i===0)||sel===i-1))}
+f.innerHTML='<button>All themes</button>'+T.map(t=>`<button>${t.n.split('.')[0]}. ${t.k}</button>`).join('');
+[...f.children].forEach((x,i)=>x.onclick=()=>draw(i===0?null:i-1));
+draw(null);
+const S=[["1","Familiarisation","Read every transcript closely (twice), jotting first impressions, tone and surprises in the margin. No codes yet."],["2","Open coding","Tag each meaningful quote with a short code, plus how it was said and the feeling behind it. Raw and unordered, nothing grouped yet."],["3","Grouping codes","Cluster codes that share a pattern into provisional groups. Groups only have working labels at this point."],["4","Naming themes and design insights","Name each group as a theme, check it against the quotes, and state what it means for ECHO."]];
+const M=["Tone matters: lots of hedges (“I guess”, “to be honest”), self-deprecating humour and emphatic repetition (“Literally, literally”).","Everyone shows curiosity about history, but answers about UQ specifically are short and vague.","The richest, most detailed stories come from travel, museums and tours, not from campus.","Architecture, calm spots and routines come up far more than “history”.","Strong negative reactions to ads, clutter, long reading and anything forced.","Indigenous topics: respectful but brief and hedged. Distance, not hostility.","Sharing campus with family means photos and achievements, not heritage.","Flag: two transcripts seem to be from another university. One participant asked to pause before the final question."];
+const st=document.getElementById('st'),sd=document.getElementById('sd');
+st.innerHTML=S.map(s=>`<button>${s[0]}. ${s[1]}</button>`).join('');
+[...st.children].forEach((x,i)=>x.onclick=()=>stage(i));
+function stage(i){
+[...st.children].forEach((x,j)=>x.classList.toggle('on',j===i));
+sd.innerHTML=`<b>Stage ${S[i][0]}: ${S[i][1]}.</b> ${S[i][2]}`;
+f.style.display=i===3?'flex':'none';
+if(i===0)b.innerHTML=`<div class="wall">${M.map(m=>`<div class="note" style="--h:55"><span class="c">MARGIN MEMO</span><div class="m">${esc(m)}</div></div>`).join('')}</div>`;
+if(i===1){const a=T.flatMap(t=>t.N).sort((x,y)=>(x[0].length*7%11)-(y[0].length*7%11));b.innerHTML=`<p class="sub">${a.length} raw codes, in no particular order.</p><div class="wall">${a.map(n=>`<div class="note" style="--h:55"><span class="c">CODE: ${n[0]}</span><q>${esc(n[2])}</q><div class="e"><b>Delivery / emotion:</b> ${esc(n[3])}</div></div>`).join('')}</div>`}
+if(i===2)b.innerHTML=T.map(t=>`<div class="grp" style="--h:${t.h}"><div class="code">PROVISIONAL GROUP: ${t.k}</div>${t.N.map(n=>`<span class="pill">${n[0]}</span>`).join('')}</div>`).join('');
+if(i===3)draw(null);
+}
+stage(0);
+</script></body></html>
