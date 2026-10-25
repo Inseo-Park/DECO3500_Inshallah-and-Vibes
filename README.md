@@ -10,21 +10,16 @@ Our [secondary research](docs/secondary%20research/secondary-research.md) explor
 
 ## Run the prototype
 
-The current prototype is [echo-tradeshow](prototype/index.html), with UQ Lakes and Great Court locations. Download or clone the repository first. GitHub shows the source files; it does not run the prototype.
+1. Clone this GitHub repository to your computer.
+2. Open the `prototype` folder, then double-click `index.html` to open it in your browser.
+3. The page displays two installations: **The UQ Lakes** and **The Great Court**. Click whichever location you want to try.
+4. In that location's folder (`ECHO-lakes` or `ECHO-court`), click `index.html` to open the prototype for that location.
 
-With Node.js installed, run this from the repository root:
+No installation or terminal commands are needed. If choosing a location opens its prototype directly, you can skip the last step.
 
-```sh
-node prototype/relay.js
-```
+Create an ECHO ID, or choose **Show me a full profile** to try the example `LAKEWALKER-07` profile. No account or password is needed.
 
-Open **http://localhost:8787/** and choose a location. No package installation or build step is needed. Keep the terminal open while using the prototype. Press **Ctrl+C** to stop it.
-
-Create an ECHO ID, or choose **Show me a full profile** to try the example `LAKEWALKER-07` profile. No account or password is needed. For two people, use different IDs and follow the [prototype guide](docs/prototype-guide.md) to connect the second device.
-
-For an offline preview on one device, open [UQ Lakes](prototype/ECHO-lakes/index.html) or [Great Court](prototype/ECHO-court/index.html) in a browser. Voice recording depends on browser support and microphone permission.
-
-Posts and profiles stay in the browser where they were created. Live messages and movement work through the relay, but messages are not saved. New Echoes are not shared between devices yet. The interface currently works in English. The prototype guide explains these limits and the simulated content.
+For optional live linking between two devices and further usage details, see the [prototype guide](docs/prototype-guide.md).
 
 ## Project files
 

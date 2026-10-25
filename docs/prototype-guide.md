@@ -4,7 +4,16 @@ The current prototype is in [`prototype/`](../prototype/). It contains two insta
 
 ## Start on one laptop
 
-For the most repeatable setup, run this command **from the repository root**:
+1. Clone this GitHub repository to your computer.
+2. Open the `prototype` folder, then double-click `index.html` to open the installation chooser in your browser.
+3. Click **The UQ Lakes** or **The Great Court**.
+4. In the selected location's folder (`ECHO-lakes` or `ECHO-court`), click `index.html` to launch that prototype. If the prototype opens directly, skip this step.
+
+No installation or terminal commands are needed for this local preview.
+
+## Optional: link two installations
+
+To connect visitors through live messages and movement, use the relay. With Node.js installed, run this command **from the repository root**:
 
 ```powershell
 node prototype/relay.js
@@ -21,7 +30,7 @@ node prototype/relay.js
 
 Use the new port in the browser address. To rehearse with two visitors, open the chooser in two windows, choose a different installation in each and enter a different ECHO ID in each window.
 
-For a single offline demonstration without Node.js, open `prototype/ECHO-lakes/index.html` or `prototype/ECHO-court/index.html` directly in a browser. File-based two-window linking depends on browser storage behavior; use the relay for a repeatable linked demonstration.
+File-based two-window linking depends on browser storage behavior; use the relay for a repeatable linked demonstration.
 
 ## Connect a second laptop or iPad
 
