@@ -26,6 +26,7 @@ For optional live linking between two devices and further usage details, see the
 | Material | Link |
 | --- | --- |
 | Design process overview | [Summary, process and team contributions](docs/design-process-overview.md) |
+| Ethical considerations | [Ethical considerations](docs/ethical-considerations.md) |
 | Research findings | [Research summary](docs/research-summary.md) |
 | Interview thematic analysis | [Thematic analysis board](docs/proposal/interviews/thematic-analysis-board.html) |
 | Secondary research | [Literature analysis](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/docs/Secondary%20Research) |
