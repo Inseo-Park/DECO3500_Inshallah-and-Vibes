@@ -1,18 +1,23 @@
 # AI Declaration - Ishandeep Singh
 
-* **Resource used:** OpenAI Codex
-* **Source:** [Codex](https://chatgpt.com/codex)
+* **Resource used:** OpenAI Codex.
+* **Source:** [Codex](https://chatgpt.com/codex).
 * **How it was used:**
   * Helped reconfigure the GitHub repository to align with the project brief, organise folders, standardise filenames and remove duplicate files and unnecessary READMEs.
   * Helped organise the current echo-tradeshow prototype, archive earlier builds and replace ZIP archives with directly accessible prototype, questionnaire and documentation files.
   * Helped organise exhibition materials, including the poster and brochures, and update links to them.
   * Helped summarise existing research, participant feedback, team decisions and design iterations into project documentation.
   * Helped revise the main README, prototype instructions and local Week 9 wiki documents, standardise dates and fix broken links.
+  * Expanded the [secondary literature analysis](Secondary%20Research/secondary-research.md), analysing the five sources' arguments, methods, findings and limitations, comparing their implications for ECHO, and drafting the synthesis.
   * Helped configure repository file handling and validation scripts, and check file integrity, links, JavaScript syntax and the local relay.
-* **Project areas affected:** Repository structure and configuration, README files, prototype packaging and archives, questionnaire files, research and evaluation summaries, team and iteration records, exhibition materials and repository validation.
-* **Human contribution:** Ishan set the reorganisation requirements, selected the project materials, directed changes to the repository structure and documentation, and reviewed the updates against project requirements and existing team records.
-* **Modifications and review:** Suggestions were revised through follow-up requests to match project requirements and Ishan's review. Existing materials were used as the basis for documentation summaries. The prototype's application code was unchanged during this repository reconfiguration, and no new research findings or participant feedback were created. Changes to Week 9 wiki documents were made locally; no live GitHub Wiki pages were edited.
-* **Status:** The repository updates and reconfiguration were led and reviewed by Ishan, with OpenAI Codex used as a supporting tool.
+* **Project areas affected:** Secondary research and academic referencing, repository structure and configuration, README files, prototype packaging and archives, questionnaire files, research and evaluation summaries, team and iteration records, exhibition material organisation, repository validation and this AI declaration.
+* **Human contribution:** As described in my [detailed contribution statement](process/team-contributions.md#ishandeep-singh):
+  * **Research and ideation:** I helped prepare the initial interview questions, created the low-fidelity UQ Stories prototype and tested it with three students, documenting their feedback. I contributed to comparing the initial concepts and selecting ECHO. I also raised concerns about concepts that could still be completed individually and explored a two-person painting and memory-sharing concept with shared contributions and commenting.
+  * **Evaluation and refinement:** I gathered and analysed feedback from four participants comparing the realistic-tree and Minecraft-style Social Gardens. I documented usability issues and suggestions concerning onboarding, navigation, finding previous contributions, maps, notifications and social interaction, and shared these findings with the team. I suggested a tutorial explaining interaction across book locations, reviewed later digital versions, investigated missing contribution flowers and checked live conversation between locations.
+  * **Physical prototyping and exhibition:** I helped construct and test the physical book prototype, reviewed and helped update the exhibition poster, and organised supporting materials. Itisha led and built the main digital ECHO prototype, my prototyping contributions included UQ Stories, concept exploration, physical construction and testing.
+  * **Coordination and documentation:** I maintained the repository, brought together research and testing evidence, updated access instructions and links, and created and managed GitHub issues to assign tasks and track progress. I coordinated with teammates in studio and through Whatsapp. I set the requirements for the repository reorganisation, selected the materials, directed documentation changes and requested the expanded literature analysis and APA referencing.
+* **Modifications and review:** AI-assisted documentation was revised through my follow up requests and the review described above, using existing project materials as its basis. Codex drafted the expanded literature analysis and synthesis, checked source content and verified publication details. No new participant responses, research sessions or evaluation results were generated for these documentation updates. Changes to Week 9 wiki documents were made locally and that work did not edit GitHub Wiki pages. I thoroughly went through and checked each individual change against requirements before committing to the repo and kept the team updated throughout the semester on changes made.
+* **Status:** The research, concept development, evaluation, physical prototyping, coordination and repository contributions were completed by Ishan, with Codex used as a supporting tool.
 
 # AI Declaration - Itisha Srivastava
 
