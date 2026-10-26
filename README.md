@@ -29,7 +29,7 @@ For optional live linking between two devices and further usage details, see the
 | Ethical considerations | [Ethical considerations](docs/ethical-considerations.md) |
 | Research findings | [Research summary](docs/research-summary.md) |
 | Interview thematic analysis | [Thematic analysis board](docs/proposal/interviews/thematic-analysis-board.html) |
-| Secondary research | [Literature analysis]([https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/docs/Secondary%20Research](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/docs/Secondary%20Research/secondary-research.md)) |
+| Secondary research | [Literature analysis](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/blob/main/docs/Secondary%20Research/secondary-research.md) |
 | Design requirements | [Requirements](docs/requirements.md) |
 | Design changes and testing still needed | [Iteration record](docs/process/iterations.md) |
 | Team sessions and decisions | [Team records](docs/process/team-records.md) |
