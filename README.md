@@ -6,7 +6,7 @@
 
 ECHO aims to help students learn about UQ’s history and feel more connected to campus. We designed a book-like installation where students can find stories about a place and leave their own memories. In the digital garden, each person has a tree, and their contributions appear as flowers. Visitors can reply to stories and talk to someone at another installation.
 
-Our [secondary research](docs/secondary%20research/secondary-research.md) explores student belonging, campus heritage and connection to place. Our interviews and testing helped us change the garden’s layout, how people find their contributions and how the two locations connect. This repository contains the current prototype, earlier builds and the work behind those decisions. The latest build still needs user testing.
+Our [secondary research](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/docs/Secondary%20Research) explores student belonging, campus heritage and connection to place. Our interviews and testing helped us change the garden’s layout, how people find their contributions and how the two locations connect. This repository contains the current prototype, earlier builds and the work behind those decisions. The latest build still needs user testing.
 
 ## Run the prototype
 
@@ -28,7 +28,7 @@ For optional live linking between two devices and further usage details, see the
 | Design process overview | [Summary, process and team contributions](docs/design-process-overview.md) |
 | Research findings | [Research summary](docs/research-summary.md) |
 | Interview thematic analysis | [Thematic analysis board](docs/proposal/interviews/thematic-analysis-board.html) |
-| Secondary research | [Literature analysis](docs/secondary%20research/secondary-research.md) |
+| Secondary research | [Literature analysis](https://github.com/Inseo-Park/DECO3500_Inshallah-and-Vibes/tree/main/docs/Secondary%20Research) |
 | Design requirements | [Requirements](docs/requirements.md) |
 | Design changes and testing still needed | [Iteration record](docs/process/iterations.md) |
 | Team sessions and decisions | [Team records](docs/process/team-records.md) |
